@@ -1,0 +1,159 @@
+*{
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+.comunidadeh1{
+  color:var(--bg_light_purple);
+  text-align: center;
+}
+
+body {
+  background-color: #000;
+  margin: 0
+}
+
+form{
+  background: var(--bg_dark);
+  width: 90%;           
+  max-width: 800px;    
+  margin: 5% auto;     
+  padding: 5%;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+form label {
+  color: var(--light_text_color);
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 14px;
+  background: #5F5570; 
+  border: none;
+  border-radius: 8px;
+  color: var(--light_text_color);
+  font-size: 16px;
+}
+
+
+input:invalid {
+    border: 2px solid red;
+}
+input:focus {
+    border: 2px solid blue;
+    color:white
+}
+
+form select {
+  width: 100%;
+  padding: 14px;
+  background: #5F5570; 
+  border: none;
+  border-radius: 8px;
+  color: var(--light_text_color);
+  font-size: 16px;
+}
+
+button{
+  width: 40%;
+  background: var(--bg_light_purple); 
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--light_text_color);
+  font-size: 20px;
+  align-self: center;
+  text-align: center;
+}
+
+.botaoFormulario{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.botaoFormularioVoltar{
+  background-color: var(--bg_dark);
+  border: 1px solid var(--bg_light_purple);
+  text-decoration: none;
+  width: 40%;
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--light_text_color);
+  font-size: 20px;
+  align-self: center;
+  text-align: center;
+}
+
+.botaoFormularioVoltar:hover{
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+button:hover{
+  opacity: 0.7;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.sucesso{
+  background: var(--bg_dark);
+  width: 90%;           
+  max-width: 800px;    
+  margin: 5% auto;     
+  padding: 5%;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  color: var(--light_text_color);
+}
+.sucessoImagem{
+  width: 12%;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.sucesso h1{
+  color: var(--light_text_color);
+  margin: auto;
+  font-weight: 300;
+}
+
+.sucesso h2{
+  margin: auto;
+  font-weight: 200;
+  font-size: 25px;
+  color:var(--dark_text_color)
+}
+
+.sucesso h3{
+  margin: auto;
+  font-weight: 200;
+  font-size: 15px;
+  color: var(--dark_text_color);
+}
+
+.botaoSucesso{
+  width: 40%;
+  background: var(--bg_light_purple); 
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--light_text_color);
+  font-size: 20px;
+  align-self: center;
+  text-align: center;
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+.sucessoPinguim{
+  width: 15%;
+  margin: auto;
+}
+
