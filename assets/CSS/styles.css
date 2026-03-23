@@ -4,12 +4,14 @@
 }
 
 .comunidadeh1{
-  color:var(--bg_light_purple);
+  color: var(--light_text_color);
   text-align: center;
+  font-size: 48px;
+  margin-bottom: 10px;
 }
 
 body {
-  background-color: #000;
+  background-color: var(--bg_dark);
   margin: 0
 }
 
@@ -42,11 +44,11 @@ form input {
 
 
 input:invalid {
-    border: 2px solid red;
+    border: 2px solid var(--error_color);
 }
 input:focus {
-    border: 2px solid blue;
-    color:white
+    border: 2px solid var(--focus_color);
+    color: var(--light_text_color)
 }
 
 form select {
@@ -157,3 +159,171 @@ button:hover{
   margin: auto;
 }
 
+
+.cabecalho {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-color: var(--bg_black);
+}
+
+.cabecalho h1 {
+    color: var(--light_text_color);
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.cabecalho p {
+    color: var(--light_text_color);
+    font-size: 18px;
+    margin: 0;
+}
+
+.estatisticas {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    padding: 30px 20px;
+    border-radius: 12px;
+    min-width: 250px;
+    max-width: 280px;
+    flex: 1;
+}
+
+.card h2 {
+    font-size: 32px;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.card-destaque {
+    background-color: var(--bg_light_purple);
+    color: var(--light_text_color);
+}
+
+.card-escuro {
+    background-color: var(--bg_darker);
+    border: 1px solid var(--border_dark);
+    color: var(--light_text_color);
+}
+
+.missao {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--bg_black);
+}
+
+.missao p {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    color: var(--light_text_color);
+}
+
+.missao h2 {
+    font-size: 42px;
+    margin: 0;
+    color: var(--light_text_color);
+    font-weight: bold;
+}
+
+.benchmark {
+    background-color: var(--bg_darker);
+    border: 1px solid var(--border_dark);
+    border-radius: 12px;
+    padding: 40px;
+    margin: 40px auto 80px;
+    max-width: 1200px;
+    width: 90%;
+}
+
+.benchmark h2 {
+    font-size: 36px;
+    margin: 0 0 15px 0;
+    color: var(--light_text_color);
+}
+
+.benchmark-descricao {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: var(--light_text_color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    border-bottom: 1px solid var(--dark_text_color);
+}
+
+th {
+    text-align: left;
+    padding: 15px 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--light_text_color);
+}
+
+td {
+    padding: 20px 10px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--dark_text_color);
+    color: var(--light_text_color);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media (max-width: 779px) {
+    .cabecalho h1 {
+        font-size: 32px;
+    }
+
+    .cabecalho p {
+        font-size: 16px;
+    }
+
+    .estatisticas {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        max-width: 100%;
+        width: 90%;
+    }
+
+    .missao h2 {
+        font-size: 32px;
+    }
+
+    .benchmark {
+        padding: 20px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 10px 5px;
+    }
+
+    .benchmark {
+        overflow-x: auto;
+    }
+}
