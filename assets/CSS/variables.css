@@ -8,4 +8,11 @@
     --light_text_color: white;
     --error_color: red;
     --focus_color: blue;
+    --transition: .5s;
+    --light_blue_text_color: #A0A0FE;
+}
+
+:root {
+    --color-ligth-purple-2: #9c88ff;
+
 }

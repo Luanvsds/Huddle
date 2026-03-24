@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html class="sobre_html" lang="pt-BR">
+
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Huddle</title>
-
-    <link rel="stylesheet" href="./assets/css/sobre.css">
+    <link rel="stylesheet" href="assets/CSS/styles.css">
+    <link rel="stylesheet" href="assets/CSS/header.css">
+    <link rel="stylesheet" href="assets/CSS/footer.css">
+    <link rel="stylesheet" href="assets/CSS/variables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+
+<body id="topo" class="flex_body">
     <header>
         <a href="home.html" class="logo">
-            <img src="./assets/image/pinguim.png" alt="Logo Huddle">
+            <img src="assets/Images/header-pinguim.png" alt="Logo Huddle">
         </a>
         <nav class="menu">
             <a href="home.html">Início</a>
@@ -23,68 +30,80 @@
     </header>
 
     <main>
-        
-        <section class="introducao">
-                <h1>Sobre Huddle</h1>
-                <p>Conecte-se com jogadores que compartilham seus interesses.<br>
-                    Monte equipes, faça amizades e domine juntos.
-                </p>
-        </section>
 
+        <section class="introducao">
+            <h1>Sobre o Huddle</h1>
+            <p>Conecte-se com jogadores que compartilham seus interesses.<br>
+                Monte equipes, faça amizades e domine juntos.
+            </p>
+        </section>
+        <div>
+            <h2 class="missao">Nossa Missão</h2>
+        </div>
         <section class="bloco">
             <div class="texto">
-                <h2>Nossa Missão</h2>
-                <p>O processo de encontrar jogadores compatíveis ainda é pouco eficiente, já que em grande parte dos casos, não há controle sobre com quem se joga, resultando em interações aleatórias. Embora isso não seja necessariamente negativo, dificulta a formação de grupos consistentes, o desenvolvimento de conexões e a identificação de jogadores com interesses semelhantes</p>
+                <p>O processo de encontrar jogadores compatíveis ainda é pouco eficiente, não há controle sobre com quem
+                    se joga, resultando em interações aleatórias. Embora isso não seja necessariamente negativo,
+                    dificulta a formação de grupos consistentes, o desenvolvimento de conexões e a identificação de
+                    jogadores com interesses semelhantes</p>
             </div>
-
             <div class="imagem">
-                <img src="./image/pexels-cottonbro-4842562.jpg" alt="Controle sozinho">
+              
+                <img src="assets/Images/sobre-image.jpg" alt="Console antigo com pessoa de All Star sentada perto">
             </div>
         </section>
 
         <section class="bloco">
-
-            <div class="imagem">
-                <img src="./image/pexels-a-darmel-7862413.jpg" alt="grupo de pessoas jogando">
+            <div class="video">
+                <video class="sobre_video" src="assets/Images/Video_tela_sobre.mp4" alt="Vídeo de duas pessoas jogando"
+                    loop autoplay>
             </div>
 
             <div class="texto">
                 <p>
-                    Diante desse cenário, surge a proposta da nossa plataforma: conectar pessoas parecidas, com os mesmos gostos, interesses e estilos de jogo, seja por preferência por competitivo, RPG, jogos casuais, etc. O objetivo é criar conexões baseadas em afinidade.
+                    Diante desse cenário, surge a proposta da nossa plataforma: conectar pessoas parecidas, com os
+                    mesmos gostos, interesses e estilos de jogo, seja por preferência por competitivo, RPG, jogos
+                    casuais, etc. O objetivo é criar conexões baseadas em afinidade.
                 </p>
             </div>
         </section>
 
-        <section class="time">
+        <div class="time">
             <h2>Conheça o time!</h2>
-            <p>As pessoas que fizeram esse projeto acontecer!!</p>
+            <p>As pessoas incríveis que fizeram esse projeto acontecer!</p>
 
             <div class="membros">
-                <div class="card">
-                    <img src="./image/biancaa.png" alt="Foto de uma menina chamada bianca">
+                <div class="membros_card">
+                    <img src="./assets/Images/Bianca.png" alt="Foto de uma menina desenvolvedora">
                     <h3>Bianca</h3>
-                    <p>CEO</p>
-                </div>
-                
-                <div class="card">
-                    <img src="./image/carlosss.png" alt="Foto de um menino chamado carlos">\
-                    <h3>Carlos</h3>
+                    <a class="icons linkedin_icon" href="https://www.linkedin.com/in/bianca-veloso-65a381276/" target="_blank"><i
+                    class="fa-brands fa-linkedin icons"></i></a>
                     <p>CEO</p>
                 </div>
 
-                <div class="card">
-                    <img src="./image/luann.png" alt="Foto de um menino chamado luan">
-                    <h3>Luan</h3>
+                <div class="membros_card">
+                    <img src="assets/Images/carlos.png" alt="Foto de um menino desenvolvedor">
+                    <h3>Carlos</h3>
+                    <a class="icons linkedin_icon" href="https://www.linkedin.com/in/carlos-vasconcelos-pereira/" target="_blank"><i
+                    class="fa-brands fa-linkedin icons"></i></a>
                     <p>CEO</p>
-                </img>
+                </div>
+
+                <div class="membros_card">
+                    <img src="assets/Images/Luan.png" alt="Foto de um menino desenvolvedor">
+                    <h3>Luan</h3>
+                    <a class="icons linkedin_icon" href="https://www.linkedin.com/" target="_blank"><i
+                    class="fa-brands fa-linkedin icons"></i></a>
+                    <p>CEO</p>
+                    </img>
+                </div>
             </div>
-        </section>
 
     </main>
 
     <footer>
         <div class="sobre">
-            <h3>Sobre</h3>
+            <h3>Detalhe</h3>
             <details>
                 <p>Nossa ideia surgiu de uma necessidade que nós, como gamers, vivenciamos.</p>
                 <p>Precisamos de mais amizades verdadeiras, e uma comunidade mais unida.</p>
@@ -93,7 +112,7 @@
         <div class="Idealizadores">
             <h3>Idealizadores</h3>
             <ul>
-                <li>Bianca Veloso</li>
+                <li>Bianca Veloso</li> 
                 <li>Carlos Vasconcelos</li>
                 <li>Luan Silveira</li>
             </ul>
@@ -109,11 +128,12 @@
                         class="fa-brands fa-youtube icons"></i></a>
             </nav>
         </div>
-        © 2026 -Huddle inc. Todos os direitos reservados.
+        © 2026 -Huddle Todos os direitos reservados.
 
         <a href="#topo" class="voltar-topo">Voltar ao topo ↑</a>
 
     </footer>
 
 </body>
+
 </html>

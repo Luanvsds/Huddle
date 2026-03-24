@@ -5,6 +5,7 @@
 
 footer {
   bottom: 0;
+  min-width: 100%;
   background: #0a0a12;
   display: flex;
   justify-content: space-between;
@@ -13,11 +14,12 @@ footer {
   margin: 0;
   padding: 0 3%;
   flex-wrap: wrap;
+  font-size: 2vw;
 }
 
 footer h3{
   margin-bottom: 1%;
-  font-size: 15px;
+  font-size: 2vw;
 }
 footer a{
   display: flex;
@@ -36,12 +38,13 @@ footer details p{
 
 footer p{
   display: inline;
-  font-size: 15px
+  font-size: 1vw
 }
 
 footer ul {
   list-style-type: none;
   padding-left: 0 ;
+  font-size: 1.3vw;
 }
 
 footer a:hover{
@@ -51,7 +54,7 @@ footer a:hover{
 }
 
 .icons{
-  font-size: 20px;
+  font-size: 1.7vw;
 }
 
 .linkIcon{
