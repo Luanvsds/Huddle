@@ -7,21 +7,22 @@
 
 html{
     min-height: 100dvh;
+    overflow-x: hidden;
 }
 
 body{
-        min-height: 100dvh;
-
+    min-height: 100dvh;
+    overflow-x: hidden;
 }
 .botao_roxo {
-    padding: 1vw 5vw;
+    padding: 0.75rem 2rem;
     border-radius: 0.5rem;
     font-weight: 500;
     align-self: center;
     text-align: center;
     border: 2px solid var(--bg_light_purple);
     transition: var(--transition);
-    font-size: 1.5rem;
+    font-size: 1rem;
     background: var(--bg_light_purple);
     color: var(--light_text_color)
 }
@@ -35,13 +36,13 @@ body{
     text-align: center;
     background-color: transparent;
     border: 2px solid var(--bg_light_purple);
-    padding: 1vw 5vw;
+    padding: 0.75rem 2rem;
     border-radius: 0.5rem;
     color: var(--light_text_color);
     transition: var(--transition);
-    margin: 0 1.5rem;
-    font-size: 1.5rem;
-    width: 100%;
+    margin: 0 1rem;
+    font-size: 1rem;
+    width: auto;
     align-self: center;
     text-decoration: none;
     color: var(--light_text_color);
@@ -55,16 +56,37 @@ body{
     border: 2px solid var(--bg_light_purple)
 }
 
-.comunidadeh1 {
-    color: var(--light_text_color);
-    text-align: center;
-    font-size: 48px;
-    margin-bottom: 10px;
-}
-
 body {
     background-color: var(--bg_black);
     margin: 0;
+}
+
+.page-title {
+    color: var(--bg_light_purple);
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 3rem auto 0.5rem;
+    padding: 0 1rem;
+    font-weight: 600;
+    max-width: 1200px;
+}
+
+.page-subtitle {
+    color: var(--dark_text_color);
+    text-align: center;
+    font-size: 1.125rem;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.introducao .page-title {
+    margin: 0 auto 1.5rem;
+}
+
+.sucesso .page-title {
+    margin: 1rem auto;
 }
 
 form {
@@ -108,7 +130,7 @@ form input {
   border-radius: 8px;
   padding: 10px;
   color: var(--light_text_color);
-  font-size: 1.7vw;
+  font-size: 1rem;
   align-self: center;
   text-align: center;
 }
@@ -128,7 +150,7 @@ button{
   border: 2px solid var(--bg_light_purple);
   padding: 10px;
   color: var(--light_text_color);
-  font-size: 1.6vw;
+  font-size: 1rem;
   align-self: center;
   text-align: center;
 }
@@ -161,10 +183,11 @@ form select {
 
 .sucesso {
     background: var(--bg_dark);
-    width: 70dvw;
-    max-width: 1000px;
+    width: 90%;
+    max-width: 800px;
     margin: 5% auto;
-    border-radius: 3%;
+    padding: 2rem;
+    border-radius: 1.5rem;
     display: flex;
     flex-direction: column;
     color: var(--light_text_color);
@@ -172,31 +195,23 @@ form select {
 }
 
 .sucessoImagem {
-    width: 9vw;
+    width: 80px;
     margin: auto;
     margin-bottom: 15px;
-}
-
-.sucesso h1 {
-    color: var(--light_text_color);
-    margin: auto;
-    text-align: center;
-    font-weight: 300;
-    font-size: 3vw;
 }
 
 .sucesso h2 {
     margin: auto;
     text-align: center;
     font-weight: 200;
-    font-size: 3vw;
+    font-size: 1.8rem;
     color: var(--dark_text_color)
 }
 
 .sucesso h3 {
     margin: auto;
     font-weight: 200;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     color: var(--dark_text_color);
 }
 
@@ -204,7 +219,7 @@ form select {
     color: var(--light_text_color);
     margin-top: 15px;
     text-decoration: none;
-    padding: 1vw 5vw;
+    padding: 0.75rem 2rem;
     border-radius: 0.5rem;
     font-weight: 500;
     border-color: blue;
@@ -223,27 +238,22 @@ form select {
 
 
 .sucessoPinguim {
-    width: 10vw;
+    width: 100px;
     margin: auto;
 }
 
 
 .cabecalho {
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 3rem 1rem 2rem;
     background-color: var(--bg_black);
-}
-
-.cabecalho h1 {
-    color: var(--light_text_color);
-    font-size: 48px;
-    margin-bottom: 10px;
 }
 
 .cabecalho p {
     color: var(--light_text_color);
-    font-size: 18px;
-    margin: 0;
+    font-size: 1.125rem;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
 .estatisticas {
@@ -265,13 +275,13 @@ form select {
 }
 
 .card h2 {
-    font-size: 2.5vw;
+    font-size: 2rem;
     margin: 0 0 15px 0;
     font-weight: bold;
 }
 
 .card p {
-    font-size: 14px;
+    font-size: 1rem;
     line-height: 1.5;
     margin: 0;
 }
@@ -298,13 +308,13 @@ form select {
 }
 
 .benchmark h2 {
-    font-size: 36px;
+    font-size: 2rem;
     margin: 0 0 15px 0;
     color: var(--light_text_color);
 }
 
 .benchmark-descricao {
-    font-size: 14px;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 30px;
     color: var(--light_text_color);
@@ -324,7 +334,7 @@ th {
     text-align: left;
     padding: 15px 10px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1rem;
     color: var(--light_text_color);
 }
 
@@ -333,137 +343,176 @@ td {
     vertical-align: top;
     border-bottom: 1px solid var(--dark_text_color);
     color: var(--light_text_color);
-    font-size: 14px;
+    font-size: 0.9rem;
     line-height: 1.5;
 }
 
-/* sobre css */
-
-
 .main {
     width: 90%;
-    max-width: 120rem;
+    max-width: 1200px;
     color: var(--light_text_color);
     margin: 0 auto;
-    padding: 6rem 0;
+    padding: 4rem 2rem;
 }
 
 .introducao {
     text-align: center;
-    margin-bottom: 6rem;
-    margin-top: 2vw;
+    margin-bottom: 4rem;
+    margin-top: 0;
+    padding: 0 1rem;
     color: var(--light_text_color)
 }
 
-.introducao h1 {
-    color: var(--color-ligth-purple-2);
-    font-size: 3vw;
-    margin-bottom: 3rem;
-}
-
 .introducao p {
-    font-size: 2vw;
-    color: var(--dark_text_color)
+    font-size: 1.125rem;
+    color: var(--dark_text_color);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .bloco {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3vw;
-    margin-bottom: 10vw;
-    color: var(--light_text_color)
+    gap: 3rem;
+    margin-bottom: 5rem;
+    color: var(--light_text_color);
+    padding: 0 1rem;
+}
+
+.bloco .texto {
+    flex: 1;
+    max-width: 550px;
+}
+
+.bloco .imagem,
+.bloco .video {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .missao {
     color: var(--bg_light_purple);
     text-align: center;
-    font-size: 4vw;
-    margin-bottom: 1vw;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 600;
 }
 
 .bloco h2 {
-    font-size: 3.5vw;
-    text-align: end;
-    margin-bottom: 2.5vw;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    color: var(--light_text_color);
 }
 
 .bloco p {
-    font-size: 2vw;
-    line-height: 1.7;
+    font-size: 1.05rem;
+    line-height: 1.8;
     color: var(--dark_text_color);
+    text-align: justify;
 }
 
 .bloco img {
-    width: 40vw;
-    height: 23vw;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
     object-fit: cover;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     display: block;
+    box-shadow: 0 4px 12px rgba(147, 89, 255, 0.2);
 }
 
 .sobre_video {
-    width: 40vw;
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(147, 89, 255, 0.2);
+}
 
-    border-radius: 20px;
+.time {
+    margin-top: 5rem;
+    padding: 0 1rem;
+    text-align: center;
 }
 
 .time h2 {
-    font-size: 3vw;
-    margin-bottom: 1.5rem;
-    color: var(--light_text_color)
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--light_text_color);
+    font-weight: 600;
 }
 
 .time>p {
-    font-size: 1.5vw;
+    font-size: 1.125rem;
     color: var(--dark_text_color);
+    margin-bottom: 3rem;
 }
 
 .membros {
     display: flex;
-    justify-content: space-between;
-    gap: 2rem;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
 }
 
 .membros_card {
     width: 100%;
-    display: inline;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .membros_card img {
-    width: 25vw;
-    height: 25vw;
-    object-fit: contain;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
     border-radius: 1rem;
-    display: flex;
-    margin-top: 1.5rem;
-    box-shadow: 1px 1px 1px 5px;
-    align-items: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(147, 89, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.membros_card img:hover {
+    transform: scale(1.05);
 }
 
 .membros_card h3 {
-    font-size: 2.5vw;
+    font-size: 1.5rem;
     color: var(--light_text_color);
-    width: 50%;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .membros_card p {
     color: var(--bg_light_purple);
-    font-size: 2.5vw;
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
 }
 
 .linkedin_icon {
-    display: inline;
-    color: blue;
-    font-size: 1.7vw;
+    display: inline-flex;
+    color: #0077b5;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    margin: 0.5rem 0;
 }
 
 .linkedin_icon:hover {
     transition: var(--transition);
-    opacity: 0.5;
+    opacity: 0.7;
+    transform: translateY(-2px);
 }
-
-/*  css home*/
 
 .flex_body {
     display: flex;
@@ -471,11 +520,11 @@ td {
 }
 
 .hero {
-    width: 100vw;
+    width: 100%;
     flex-grow: 1;
     max-width: 100%;
-    height: 38vw;
-    min-height: auto;
+    min-height: 500px;
+    height: 60vh;
     max-height: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(4, 9, 30, 0.45)),
         url(../Images/home-backimage.jpg);
@@ -484,42 +533,59 @@ td {
     background-repeat: no-repeat;
     align-items: center;
     justify-content: center;
+    display: flex;
 }
 
 .hero-content {
     flex-grow: 1;
     color: var(--light_text_color);
     text-align: center;
+    padding: 2rem;
 }
 
 .hero-content a {
     text-decoration: none;
-    width: 100%;
     color: var(--light_text_color);
     font-weight: 700;
     transition: var(--transition);
 }
 
 .hero-content h1 {
-    font-size: 6vw;
-    margin-bottom: 5vw;
+    font-size: 3rem;
+    margin-bottom: 2rem;
     color: var(--light_blue_text_color);
 }
 
 .hero-content p {
     font-weight: 100;
-    margin-bottom: 8rem;
-    line-height: 5rem;
-    font-size: 3vw;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+    font-size: 1.25rem;
+}
+
+.hero-content .botao_roxo,
+.hero-content .botao_transparente {
+    display: inline-block;
+    margin: 0.5rem;
 }
 
 @media (max-width: 779px) {
-    .cabecalho h1 {
-        font-size: 32px;
+    .page-title {
+        font-size: 1.75rem;
+        margin: 2rem auto 0.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+        margin: 0 auto 1.5rem;
+    }
+
+    .cabecalho {
+        padding: 2rem 1rem 1.5rem;
     }
 
     .cabecalho p {
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     .estatisticas {
@@ -532,8 +598,12 @@ td {
         width: 90%;
     }
 
+    .card h2 {
+        font-size: 1.75rem;
+    }
+
     .missao {
-        font-size: 32px;
+        font-size: 1.75rem;
     }
 
     .benchmark {
@@ -541,12 +611,13 @@ td {
     }
 
     table {
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 
     th,
     td {
         padding: 10px 5px;
+        font-size: 0.75rem;
     }
 
     .benchmark {
@@ -555,21 +626,108 @@ td {
 
     .sucesso{
         max-height: 700px;
+        width: 95%;
     }
 
-    .sucesso h1 {
-        font-size: 10vw;
-    }
     .sucesso h3 {
-        font-size: 5vw;
+        font-size: 1rem;
     }
 
     .sucessoImagem{
-        width: 30vw;
+        width: 60px;
     }
 
     .sucessoPinguim{
-        width: 30vw;
+        width: 80px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+    }
+
+    .introducao p {
+        font-size: 1rem;
+    }
+
+    .bloco {
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .bloco .texto {
+        max-width: 100%;
+    }
+
+    .bloco h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .bloco p {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .bloco img {
+        max-width: 100%;
+    }
+
+    .sobre_video {
+        max-width: 100%;
+    }
+
+    .missao {
+        font-size: 1.75rem;
+    }
+
+    .time {
+        margin-top: 3rem;
+    }
+
+    .time h2 {
+        font-size: 1.75rem;
+    }
+
+    .time>p {
+        font-size: 1rem;
+    }
+
+    .membros {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    .membros_card {
+        max-width: 100%;
+    }
+
+    .membros_card img {
+        max-width: 200px;
+    }
+
+    .membros_card h3 {
+        font-size: 1.5rem;
+    }
+
+    .membros_card p {
+        font-size: 1.125rem;
+    }
+
+    .linkedin_icon {
+        font-size: 1.25rem;
+    }
+
+    .botao_formulario_voltar,
+    button {
+        font-size: 0.9rem;
+        width: 45%;
     }
 }
-

@@ -17,17 +17,18 @@ header {
 }
 
 header img {
-  width: 2vw;
-  min-width:50px;
+  width: 50px;
+  min-width: 40px;
+  max-width: 60px;
   display: block;
   padding-left: 10%;
 }
 
 header nav{
   display: flex;
-  font-size:3dvw;
+  font-size: 1rem;
   max-width: 100%;
-  gap:50px;
+  gap: 2rem;
   padding-right: 5%
 }
 
@@ -42,8 +43,14 @@ header nav a:hover{
   color: #9359FF
 }
 
-@media (min-width: 700px) {
+@media (max-width: 779px) {
   header nav{
-    font-size: 1.5vw
+    font-size: 0.85rem;
+    gap: 1rem;
+  }
+
+  header img {
+    width: 40px;
+    min-width: 35px;
   }
 }
