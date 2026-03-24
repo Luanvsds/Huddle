@@ -327,3 +327,207 @@ td {
         overflow-x: auto;
     }
 }
+
+/* sobre css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    
+}
+
+:root {
+    --color-light: #ffffff;
+    --color-purple: #9359ff;
+    --color-ligth-purple: #a0a0fe;
+    --color-ligth-purple-2: #9c88ff;
+    --color-gray: #ddd
+    --transition: .5s;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+
+.main {
+    width: 90%;
+    max-width: 120rem;
+    color: var(--color-light);
+    margin: 0 auto;
+    padding: 6rem 0;
+}
+
+.introducao {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.introducao h1 {
+    color: var(--color-ligth-purple-2);
+    font-size: 4vmin;
+    margin-bottom: 3rem;
+}
+
+.introducao p {
+    font-size: 3rem;
+    color: var(--color-gray)
+}
+
+.bloco {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: 6rem;
+}
+
+.bloco h2 {
+    font-size: 3vmin;
+    margin-bottom: 2.5rem;
+}
+
+.bloco div {
+    width: 48%;
+}
+
+.bloco p {
+    font-size: 4rem;
+    line-height: 1.7;
+}
+
+.bloco img {
+    width: 100%;
+    height: 70rem;
+    object-fit: cover;
+    border-radius: 1.5rem;
+    display: block;
+}
+
+.time h2 {
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.time > p {
+    font-size: 2rem;
+    color: var(--color-gray);
+    margin-bottom: 3rem;
+}
+
+.membros {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.card {
+    width: 30%;
+}
+
+.card img {
+    width: 100;
+    height: 50rem;
+    object-fit: contain;
+    border-radius: 1rem;
+    display: flex;
+    margin-bottom: 1.5rem;
+    box-shadow: 1px 1px 1px 5px;
+    justify-content: space-around;
+}
+
+.card h3 {
+    font-size: 3vmin;
+    margin-bottom: 0.8rem;
+}
+
+.card p {
+    color: var(--color-purple);
+    font-size: 3rem;
+}
+
+
+
+/*  css home*/
+
+.hero-content a {
+    text-decoration: none;
+    color: var(--color-light);
+    font-weight: 900;
+    transition: var(--transition);
+}
+
+.hero {
+    width: 100%;
+    min-height: calc(100vh - 10rem);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(4, 9, 30, 0.45)), 
+    url(/MeuProjeto/assets/image/pexels-lulizler-3165335.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.hero-content {
+    width: 60%;
+    padding: 5rem;
+    color: var(--color-light);
+    text-align: center;
+    transform: translateY(-10rem);
+}
+
+.hero-content h1 {
+    font-size: 6vmin;
+    margin-bottom: 3rem;
+    color: var(--color-ligth-purple);
+}
+.hero-content p {
+    font-weight: 600;
+    margin-bottom: 8rem;
+    line-height: 5rem;
+    font-size: 2rem;
+    
+}
+
+img {
+    max-width: 100%;
+}
+
+.btn {
+    background-color: var(--color-purple);
+    border: 2px solid var(--color-purple);
+    padding: 1.5rem 3.6rem;
+    border-radius: 0.5rem;
+    color: var(--color-light);
+    transition: var(--transition);
+    margin: 0 1.5rem;
+    font-size: 1.5rem;
+}
+
+.btn-1 {
+    background-color: transparent;
+    border: 2px solid var(--color-purple);
+    padding: 1.5rem 3.6rem;
+    border-radius: 0.5rem;
+    color: var(--color-light);
+    transition: var(--transition);
+    margin: 0 1.5rem;
+    font-size: 1.5rem;
+}
+
+.btn:hover {
+    background-color: var(--color-ligth-purple);
+    font-width: 500;
+}
+
+.btn-1:hover {
+    background-color: var(--color-purple);
+}
