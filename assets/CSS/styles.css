@@ -5,15 +5,16 @@
     font-family: "Lato", sans-serif;
 }
 
-html{
+html {
     min-height: 100dvh;
     overflow-x: hidden;
 }
 
-body{
+body {
     min-height: 100dvh;
     overflow-x: hidden;
 }
+
 .botao_roxo {
     padding: 0.75rem 2rem;
     border-radius: 0.5rem;
@@ -117,45 +118,45 @@ form input {
 }
 
 .botao_formulario {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
-.botao_formulario_voltar{
-  background-color: var(--bg_dark);
-  border: 1px solid var(--bg_light_purple);
-  text-decoration: none;
-  width: 40%;
-  border-radius: 8px;
-  padding: 10px;
-  color: var(--light_text_color);
-  font-size: 1rem;
-  align-self: center;
-  text-align: center;
+.botao_formulario_voltar {
+    background-color: var(--bg_dark);
+    border: 1px solid var(--bg_light_purple);
+    text-decoration: none;
+    width: 40%;
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--light_text_color);
+    font-size: 1rem;
+    align-self: center;
+    text-align: center;
 }
 
-.botao_formulario_voltar:hover{
+.botao_formulario_voltar:hover {
     background-color: var(--bg_light_purple);
     font-weight: 500;
     border: 2px solid var(--bg_light_purple);
     transition: var(--transition);
 }
 
-button{
-  width: 40%;
-  background: var(--bg_light_purple); 
-  border: none;
-  border-radius: 8px;
-  border: 2px solid var(--bg_light_purple);
-  padding: 10px;
-  color: var(--light_text_color);
-  font-size: 1rem;
-  align-self: center;
-  text-align: center;
+button {
+    width: 40%;
+    background: var(--bg_light_purple);
+    border: none;
+    border-radius: 8px;
+    border: 2px solid var(--bg_light_purple);
+    padding: 10px;
+    color: var(--light_text_color);
+    font-size: 1rem;
+    align-self: center;
+    text-align: center;
 }
 
-button:hover{
+button:hover {
     background-color: transparent;
     font-weight: 500;
     transition: var(--transition);
@@ -624,7 +625,7 @@ td {
         overflow-x: auto;
     }
 
-    .sucesso{
+    .sucesso {
         max-height: 700px;
         width: 95%;
     }
@@ -633,11 +634,11 @@ td {
         font-size: 1rem;
     }
 
-    .sucessoImagem{
+    .sucessoImagem {
         width: 60px;
     }
 
-    .sucessoPinguim{
+    .sucessoPinguim {
         width: 80px;
     }
 
