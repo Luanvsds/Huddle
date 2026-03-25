@@ -12,25 +12,28 @@ header {
   justify-content: space-between;
   align-items: center;
   color: white;
+  max-width: 100dvw;
   margin:0;
 }
 
 header img {
-  width: 11%;
-  min-width:50px;
+  width: 50px;
+  min-width: 40px;
+  max-width: 60px;
   display: block;
   padding-left: 10%;
 }
 
 header nav{
   display: flex;
-  gap:50px;
+  font-size: 1rem;
+  max-width: 100%;
+  gap: 2rem;
   padding-right: 5%
 }
 
 header nav a{
   text-decoration: none;
-  font-size:small;
   color:white;
 }
 
@@ -38,4 +41,16 @@ header nav a:hover{
   opacity: 0.7;
   transition: 0.2s;
   color: #9359FF
+}
+
+@media (max-width: 779px) {
+  header nav{
+    font-size: 0.85rem;
+    gap: 1rem;
+  }
+
+  header img {
+    width: 40px;
+    min-width: 35px;
+  }
 }
