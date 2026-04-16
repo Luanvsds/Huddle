@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/CSS/bootstrap.min.css">
     <link rel="stylesheet" href="assets/CSS/variables.css">
     <link rel="stylesheet" href="assets/CSS/header.css">
     <link rel="stylesheet" href="assets/CSS/footer.css">
@@ -17,23 +18,42 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body id="topo">
-    <header>
-        <a href="index.html" class="logo">
-            <img src="assets/Images/header-pinguim.png" alt="Logo Huddle">
-        </a>
-        <nav class="menu">
-            <a href="index.html">Início</a>
-            <a href="formulario.html">Cadastro</a>
-            <a href="sobre.html">Sobre</a>
-            <a href="pesquisas.html">Pesquisas</a>
-        </nav>
-    </header>
+<body id="topo" class="flex_body">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/Images/header-pinguim.png" alt="Logo" width="30"
+                    class="d-inline-block align-text-center">
+                Huddle
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="formulario.html">Conecte-se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Dados</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </nav>
 
     <main>
         <section class="cabecalho">
             <h1 class="page-title">Pesquisas</h1>
-            <p>Conheça os dados e estatísticas sobre o comportamento dos gamers.</p>
+            <p>Conheça alguns dados e estatísticas sobre o comportamento dos gamers.</p>
         </section>
 
         <section class="estatisticas">
@@ -117,7 +137,7 @@
         <div class="Idealizadores">
             <h3>Idealizadores</h3>
             <ul>
-                <li>Bianca Veloso</li>
+                <li>Giovanna Sophia</li>
                 <li>Carlos Vasconcelos</li>
                 <li>Luan Silveira</li>
             </ul>
@@ -138,5 +158,7 @@
         <a href="#topo" class="voltar-topo">Voltar ao topo ↑</a>
 
     </footer>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
