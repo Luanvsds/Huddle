@@ -3,6 +3,7 @@
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body id="topo" class="flex_body">
+<body id="topo" class="flex_body pagina-sobre">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -51,79 +52,110 @@
 
     <main class="main">
 
-        <section class="introducao">
-            <h1 class="page-title">Sobre o Huddle</h1>
-            <p>Conecte-se com jogadores que compartilham seus interesses.<br>
-                Monte equipes, faça amizades e domine juntos.
-            </p>
+        <section class="sobre-hero d-flex align-items-start pt-5 text-center">
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10">
+                        
+                        <h1 class="sobre-title titulo-destaque"> A GENTE SÓ<br>QUERIA PARAR DE<br>JOGAR SOZINHO</h1>
+                        
+                        <p class="sobre-subtitle mx-auto mb-4">E foi assim que o Huddle nasceu.<br>Um espaço pra encontrar pessoas que fazem sentido — dentro e fora do jogo.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
         </section>
 
-        <h2 class="missao">Nossa Missão</h2>
+        <section class="sobre-blocao">
+            <div class="container">
+                <div class="sobre-bloco">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-6">
+                            <h2 class="title-bloco">ENCONTRE<br>SEU SQUAD</h2>
 
-        <section class="bloco">
-            <div class="texto">
-                <p>O processo de encontrar jogadores compatíveis ainda é pouco eficiente, não há controle sobre com quem
-                    se joga, resultando em interações aleatórias. Embora isso não seja necessariamente negativo,
-                    dificulta a formação de grupos consistentes, o desenvolvimento de conexões e a identificação de
-                    jogadores com interesses semelhantes.</p>
-            </div>
-            <div class="imagem">
-                <img src="assets/Images/sobre-image.jpg" alt="Console antigo com pessoa de All Star sentada perto">
-            </div>
-        </section>
+                            <p class="text-bloco">Chega de cair com gente aleatória.  
+                        No Huddle, você encontra jogadores que realmente combinam com você.
+                        Mesmo estilo, mesma vibe, mesmo objetivo.</p>
+                        </div>
 
-        <section class="bloco">
-            <div class="video">
-                <video class="sobre_video" src="assets/Images/Video_tela_sobre.mp4" alt="Vídeo de duas pessoas jogando"
-                    loop autoplay muted>
-                </video>
-            </div>
-
-            <div class="texto">
-                <p>
-                    Diante desse cenário, surge a proposta da nossa plataforma: conectar pessoas parecidas, com os
-                    mesmos gostos, interesses e estilos de jogo, seja por preferência por competitivo, RPG, jogos
-                    casuais, etc. O objetivo é criar conexões baseadas em afinidade.
-                </p>
-            </div>
-        </section>
-
-        <section class="time">
-            <h2>Conheça o time!</h2>
-            <p>As pessoas incríveis que fizeram esse projeto acontecer!</p>
-
-            <div class="membros">
-                <div class="membros_card">
-                    <img src="./assets/Images/Sophia.png" alt="Foto de uma menina desenvolvedora">
-                    <h3>Giovanna</h3>
-                    <a class="icons linkedin_icon" href="https://www.linkedin.com/in/giovanna-sophia-gomes-6136a23b7/"
-                        target="_blank">
-                        <i class="fa-brands fa-linkedin icons"></i>
-                    </a>
-                    <p>CEO</p>
+                        <div class="col-12 col-lg-6 text-center">
+                            <div class="midia-bloco">
+                                <img class="imagem-bloco" src="./assets/Images/sobre-image.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="membros_card">
-                    <img src="assets/Images/carlos.png" alt="Foto de um menino desenvolvedor">
-                    <h3>Carlos</h3>
-                    <a class="icons linkedin_icon" href="https://www.linkedin.com/in/carlos-vasconcelos-pereira/"
-                        target="_blank">
-                        <i class="fa-brands fa-linkedin icons"></i>
-                    </a>
-                    <p>CEO</p>
-                </div>
+                <div class="sobre-bloco">
+                    <div class="row align-items-center flex-lg-row-reverse">
+                        <div class="col-12 col-lg-6">
+                            <h2 class="title-bloco">MATCH<br>DE VERDADE</h2>
 
-                <div class="membros_card">
-                    <img src="assets/Images/Luan.png" alt="Foto de um menino desenvolvedor">
-                    <h3>Luan</h3>
-                    <a class="icons linkedin_icon" href="https://www.linkedin.com/in/luan-silva-8ba26921a/"
-                        target="_blank">
-                        <i class="fa-brands fa-linkedin icons"></i>
-                    </a>
-                    <p>CEO</p>
+                            <p class="text-bloco">  Aqui não é só adicionar amigo.  
+                                                    É criar conexão.  
+                                                    Você entra pra jogar uma partida… e fica pela parceria.
+                            </p>
+                        </div>
+
+                        <div class="col-12 col-lg-6 text-center">
+                            <div class="midia-bloco">
+                                <video class="sobre-video" loop autoplay muted playsinline preload="metadata">
+                                <source src="assets/Images/Video_tela_sobre.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+    <section class="container my-5">
+        <h4 class="my-title text-center my-mt">Conheça o time!</h4>
+        <h3 class="text-center my-title mb-4">As pessoas incríveis que fizeram esse projeto acontecer!</h3>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-lg-4 my-2">
+                <div class="card h-100">
+                    <img src="./assets/Images/Sophia.png" class="card-img-top" alt="Giovanna">
+                    <div class="card-body">
+                        <h5 class="card-title">Giovanna</h5>
+                        <p class="card-text">
+                            CEO
+                        </p>
+                        <a class="icons linkedin_icon" href="https://www.linkedin.com/in/giovanna-sophia-gomes-6136a23b7/"target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 my-2">
+                <div class="card h-100">
+                    <img src="./assets/Images/carlos.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Carlos</h5>
+                        <p class="card-text">
+                            CEO
+                        </p>
+                        <a class="icons linkedin_icon" href="https://www.linkedin.com/in/carlos-vasconcelos-pereira/"target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4 my-2">
+                <div class="card h-100">
+                    <img src="./assets/Images/Luan.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Luan</h5>
+                        <p class="card-text">
+                            CEO
+                        </p>
+                        <a class="icons linkedin_icon" href="https://www.linkedin.com/in/luan-silva-8ba26921a/"target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     </main>
 
