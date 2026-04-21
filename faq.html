@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Cadastro - Huddle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/CSS/styles.css">
+    <link rel="stylesheet" href="assets/CSS/header.css">
+    <link rel="stylesheet" href="assets/CSS/footer.css">
+    <link rel="stylesheet" href="assets/CSS/variables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body id="topo" class="flex_body">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/Images/header-pinguim.png" alt="Logo" width="30"
+                    class="d-inline-block align-text-center">
+                Huddle
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Conecte-se</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sobre.html">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pesquisas.html">Dados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#" href="faq.html">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Esqueci minha senha, como prosseguir?
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body"> É super fácil! <br>
+                        Na tela de login, toque em “Esqueci minha senha” e informe o e‑mail cadastrado.
+                        Você receberá um link para criar uma nova senha em poucos minutos, caso
+                        não encontre o e‑mail, não esqueça de dar uma olhadinha no spam.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Conheci alguém tóxico. Como posso denunciar?
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Sentimos muito por essa experiência. <br>
+                        Para denunciar, acesse o perfil da pessoa ou a conversa, toque nos três pontinhos (⋯) e
+                        selecione “Denunciar”. Nossa equipe analisa todos os relatos com atenção e sigilo para manter o
+                        Huddle seguro para todo mundo..</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Não consigo fazer login, como resolver?
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Confira primeiro se seu e‑mail e senha estão corretos.
+                        Se ainda assim não funcionar:
+                        <ul->
+                            <li>Verifique sua conexão com a internet</li>
+                            <li>Tente redefinir sua senha</li>
+                            <li>Atualize o aplicativo para a versão mais recente</li>
+                        </ul->
+                        Se o problema continuar, fale com a gente pelo email de suporte: <address>
+                            huddle.support@huddle.com</address>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                        Como alterar as minhas informações pessoais?
+                    </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">É bem simples,
+                        vá até Perfil > Editar Perfil. <br>
+                        Exemplo: Alterando sua foto: <br>
+                        Toque na sua foto e escolha uma nova imagem da galeria ou da câmera. Depois é só salvar.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                        Onde posso alterar minhas preferências?
+                    </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Assim como as informações pessoais as preferências também ficam no seu
+                        perfil: Perfil > Editar Perfil. <br>
+                        Lá você pode atualizar bio, interesses, horário de preferência para jogar e outras informações
+                        para deixar seu perfil
+                        ainda mais com a sua cara!
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                        Preciso bloquear um usuário, como posso fazer isso?
+                    </button>
+                </h2>
+                <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Para bloquear um usuário:
+
+                        <ol>
+                            <li>Abra o perfil da pessoa</li>
+                            <li>Toque nos três pontinhos (⋯)</li>
+                            <li>Selecione “Bloquear”</li>
+                        </ol>
+                        A partir daí vocês não vão mais conseguir se comunicar pelo Huddle.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                        Como posso me tornar VIP no Huddle?
+                    </button>
+                </h2>
+                <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Para turbinar sua experiência no Huddle, você só precisa acessar Perfil
+                        -> Me tornar membro VIP. <br>
+                        Sendo VIP, você ganha benefícios exclusivos como mais visibilidade, recursos extras para
+                        personalização e prioridade em novidades.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+                        Tenho uma sugestão de melhoria, como posso enviar para a equipe Huddle?
+                    </button>
+                </h2>
+                <div id="flush-collapseEight" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Muito obrigado por querer ajudar nossa plataforma a crescer! <br>
+                        Envie sua sugestão pelo menu Configurações > Enviar feedback ou pelo nosso canal de suporte.
+                        <br>
+                        Sua ideia vai ser encaminhada a área responsável, e se utilizada, te daremos os créditos!
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                        Como funciona o sistema de match do Huddle?
+                    </button>
+                </h2>
+                <div id="flush-collapseNine" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">O sistema de match do Huddle usa seus interesses, preferências e
+                        horário de preferência para jogar, assim sugerindo pessoas com maior chance de conexão real e
+                        mais adaptadas ao seu perfil. <br>
+                        Quanto mais completo seu perfil, melhores serão os matches!
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+                        Vai existir um chat de voz pelo Huddle?
+                    </button>
+                </h2>
+                <div id="flush-collapseTen" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body"> Inicialmente todos os esforços do Huddle são para criar a melhor
+                        experiência de conexão de usuários.<br>
+                        Levando isso em conta, não planejamos inicialmente adicionar um chat de voz.<br>
+                        Mas claro, se for um pedido da nossa comunidade, implementaremos no futuro!
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseEleven" aria-expanded="false"
+                        aria-controls="flush-collapseEleven">
+                        Quero excluir minha conta, como prosseguir?
+                    </button>
+                </h2>
+                <div id="flush-collapseEleven" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Que pena que queira excluir sua conta, pedimos que preencha o formulário
+                        final indicando melhorias pra gente! <br>
+                        Acesse Configurações > Conta > Excluir conta e siga as instruções. <br>
+                        <strong>Importante: essa ação é permanente e não pode ser desfeita.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="idealizadores">
+            <h3>Idealizadores</h3>
+            <ul>
+                <li>Giovanna Sophia</li>
+                <li>Carlos Vasconcelos</li>
+                <li>Luan Silveira</li>
+            </ul>
+        </div>
+        <div class="redes">
+            <h3>Redes sociais</h3>
+            <nav>
+                <a class="linkIcon" href="https://www.instagram.com/huddlefiap/" target="_blank"><i
+                        class="fa-brands fa-instagram icons"></i></a>
+                <a class="linkIcon" href="https://www.linkedin.com/in/huddle-fiap/" target="_blank"><i
+                        class="fa-brands fa-linkedin icons"></i></a>
+                <a class="linkIcon" href="https://www.youtube.com/channel/UCPoUceXScfawWwhPvWdZ0zw" target="_blank"><i
+                        class="fa-brands fa-youtube icons"></i></a>
+            </nav>
+        </div>
+        © 2026 -Huddle Todos os direitos reservados.
+
+        <ul class="navbar-nav  mb-lg-0">
+            <li>
+                Explorar
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="formulario.html">Conecte-se</a>
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="sobre.html">Sobre Nós</a>
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="faq.html">Perguntas frequentes</a>
+            </li>
+        </ul>
+        <a href="#topo" class="voltar-topo">Voltar ao topo ↑</a>
+
+    </footer>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

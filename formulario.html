@@ -44,63 +44,114 @@
                     <li class="nav-item">
                         <a class="nav-link" href="pesquisas.html">Dados</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.html">FAQ</a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </nav>
     </nav>
 
     <h1 class="page-title">Venha fazer parte da nossa comunidade!</h1>
     <p class="page-subtitle">Preencha os dados abaixo e comece a encontrar seu squad perfeito.</p>
 
-    <form action="sucesso.html" method="get">
-        <label>Email</label>
-        <input required type="email">
+    <div class="container meu-form">
+        <form action="sucesso.html" method="get" novalidate id="meu-form">
 
-        <label>Apelido</label>
-        <input required type="text">
+            <div class="form-floating mb-5">
+                <input class="form-control meu-form-input" id="email" placeholder="name@example.com" required>
+                <label for="email">Email address</label>
 
-        <label>Data de Nascimento</label>
-        <input class="dateInput" required type="date" placeholder="teste" min="1900-01-01">
+                <div class="invalid-feedback">Digite um email válido Ex: huddle@huddle.com.</div>
 
-        <label>Senha</label>
-        <input required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{20,}$"
-            title="Deve conter no mínimo 20 caracteres, com maiúscula, minúscula, número e caractere especial" minlength=20
-            type="password">
+            </div>
+            <div class="form-floating mb-5 position-relative">
 
-        <label>Horário que costuma jogar</label>
-        <select>
-            <option value="0"></option>
-            <option value="1">Manhã</option>
-            <option value="2">Tarde</option>
-            <option value="3">Noite</option>
-            <option value="4">Fins de semana</option>
-        </select>
+                <input type="password" class="form-control meu-form-input pe-5" id="senha" placeholder="Password"
+                    required>
 
-        <label>Tipo de gameplay</label>
-        <select>
-            <option value="0"></option>
-            <option value="1">Casual</option>
-            <option value="2">Normal</option>
-            <option value="3">Hardcore</option>
-        </select>
+                <label for="senha">Password</label>
 
-        <div class="botao_formulario">
-            <button button type="submit" class="botao_criado">Cadastrar</button>
-            <a href="index.html" class="botao_formulario_voltar"> Voltar ao início</a>
-        </div>
+                <button type="button" id="toggleSenha" class="meu-form-botao-icone" aria-label="Mostrar senha">
+                    <i class="fa-solid fa-eye meu-form-icone"></i>
+                </button>
 
-    </form>
+            </div>
+
+            <ul class="mt-2 list-unstyled" id="requisitosSenha">
+                <li id="reqTamanho" class="text-danger">✖ Mínimo de 12 caracteres</li>
+                <li id="reqMaiuscula" class="text-danger">✖ Letra maiúscula</li>
+                <li id="reqMinuscula" class="text-danger">✖ Letra minúscula</li>
+                <li id="reqNumero" class="text-danger">✖ Número</li>
+                <li id="reqEspecial" class="text-danger">✖ Caractere especial</li>
+            </ul>
+
+
+
+            <div class="mb-5 form-floating ">
+                <input type="date" class="form-control meu-form-input" id="dataNascimento" required>
+                <label class="form-label">Data de nascimento</label>
+
+                <div class="invalid-feedback">Somente são aceitas pessoas maiores de 16 anos.</div>
+
+            </div>
+
+            <div class="form-floating mb-5">
+                <input type="text" class="form-control meu-form-input" id="apelido" placeholder="Apelido">
+                <label for="apelido">Apelido</label>
+            </div>
+
+            <div class="form-floating mb-5">
+                <select class="form-select meu-form-input" id="tipoGameplay">
+                    <option value="1">Casual</option>
+                    <option value="2">Gamer</option>
+                    <option value="3">Tryhard</option>
+                </select>
+                <label for="tipoGameplay">Tipo de gameplay</label>
+            </div>
+
+            <div class="meu-form-check-label">
+                <p class="mb-2">Horários que costuma jogar:</p>
+
+                <div class="form-check">
+                    <input class="form-check-input meu-form-check" type="checkbox" id="manha">
+                    <label class="form-check-label" for="manha">Manhã</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input meu-form-check" type="checkbox" id="tarde">
+                    <label class="form-check-label" for="tarde">Tarde</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input meu-form-check" type="checkbox" id="noite">
+                    <label class="form-check-label" for="noite">Noite</label>
+                </div>
+
+                <div class="form-check mb-5">
+                    <input class="form-check-input meu-form-check" type="checkbox" id="fimSemana">
+                    <label class="form-check-label" for="fimSemana">Fins de semana</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="d-flex gap-3">
+                    <div class="col-6">
+                        <button class="btn botao-formulario w-100" type="submit">
+                            Participar
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn botao-formulario w-100" href="index.html" role="button">
+                            Voltar ao início
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <footer>
-        <div class="sobre">
-            <h3>Sobre</h3>
-            <details>
-                <p>Nossa ideia surgiu de uma necessidade que nós, como gamers, vivenciamos.</p>
-                <p>Precisamos de mais amizades verdadeiras, e uma comunidade mais unida.</p>
-            </details>
-        </div>
-        <div class="Idealizadores">
+        <div class="idealizadores">
             <h3>Idealizadores</h3>
             <ul>
                 <li>Giovanna Sophia</li>
@@ -115,16 +166,32 @@
                         class="fa-brands fa-instagram icons"></i></a>
                 <a class="linkIcon" href="https://www.linkedin.com/in/huddle-fiap/" target="_blank"><i
                         class="fa-brands fa-linkedin icons"></i></a>
-                <a class="linkIcon" href=" https://www.youtube.com/channel/UCPoUceXScfawWwhPvWdZ0zw" target="_blank"><i
+                <a class="linkIcon" href="https://www.youtube.com/channel/UCPoUceXScfawWwhPvWdZ0zw" target="_blank"><i
                         class="fa-brands fa-youtube icons"></i></a>
             </nav>
         </div>
         © 2026 -Huddle Todos os direitos reservados.
 
+        <ul class="navbar-nav  mb-lg-0">
+            <li>
+                Explorar
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="formulario.html">Conecte-se</a>
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="sobre.html">Sobre Nós</a>
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="faq.html">Perguntas frequentes</a>
+            </li>
+        </ul>
         <a href="#topo" class="voltar-topo">Voltar ao topo ↑</a>
 
     </footer>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/validacao_formulario.js"></script>
+    <script src="assets/js/senha_visivel.js"></script>
 
 </body>
 

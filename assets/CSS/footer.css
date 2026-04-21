@@ -6,7 +6,7 @@
 footer {
   bottom: 0;
   min-width: 100%;
-  background: black;
+  background: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -52,6 +52,18 @@ footer a:hover {
   opacity: 0.7;
   transition: 0.2s;
   color: #9359FF
+}
+
+.idealizadores{
+  margin-top: 10px
+}
+
+.footer-nav-item  a{
+  font-size: 1rem;
+  font-weight: 900;
+}
+.footer-nav-item  a:hover{
+  text-decoration: underline;
 }
 
 .icons {

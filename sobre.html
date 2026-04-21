@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - Huddle</title>
     <link rel="stylesheet" href="assets/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/CSS/styles.css">
     <link rel="stylesheet" href="assets/CSS/header.css">
     <link rel="stylesheet" href="assets/CSS/footer.css">
@@ -22,8 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="assets/Images/header-pinguim.png" alt="Logo" width="30"
-                    class="d-inline-block align-text-center">
+                <img src="assets/Images/header-pinguim.png" alt="Logo" class="d-inline-block align-text-center">
                 Huddle
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -44,10 +44,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="pesquisas.html">Dados</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.html">FAQ</a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </nav>
     </nav>
 
     <main class="main">
@@ -57,11 +59,12 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-10">
-                        
-                        <h1 class="sobre-title titulo-destaque"> A GENTE SÓ<br>QUERIA PARAR DE<br>JOGAR SOZINHO</h1>
-                        
-                        <p class="sobre-subtitle mx-auto mb-4">E foi assim que o Huddle nasceu.<br>Um espaço pra encontrar pessoas que fazem sentido — dentro e fora do jogo.</p>
-                        
+
+                        <h1 class="sobre-title titulo-destaque"> NINGUÉM<br>GOSTA DE<br>JOGAR SOZINHO</h1>
+
+                        <p class="sobre-subtitle mx-auto mb-4">E por isso o Huddle nasceu.<br>Para ser um espaço onde
+                            fugir do ambiente tóxico e encontrar gente boa de verdade não é sonho, é realidade.</p>
+
                     </div>
                 </div>
             </div>
@@ -70,14 +73,14 @@
 
         <section class="sobre-blocao">
             <div class="container">
-                <div class="sobre-bloco">
+                <div class="sobre-bloco" data-aos="fade-top" data-aos-duration="1500" data-aos-offset=400>
                     <div class="row align-items-center">
                         <div class="col-12 col-lg-6">
                             <h2 class="title-bloco">ENCONTRE<br>SEU SQUAD</h2>
 
-                            <p class="text-bloco">Chega de cair com gente aleatória.  
-                        No Huddle, você encontra jogadores que realmente combinam com você.
-                        Mesmo estilo, mesma vibe, mesmo objetivo.</p>
+                            <p class="text-bloco">Chega de cair com gente tóxica!<br>
+                                No Huddle, você encontra jogadores que realmente combinam com você.
+                                Mesmo estilo, mesma vibe, mesmo objetivo.</p>
                         </div>
 
                         <div class="col-12 col-lg-6 text-center">
@@ -88,21 +91,21 @@
                     </div>
                 </div>
 
-                <div class="sobre-bloco">
+                <div class="sobre-bloco" data-aos="fade-top" data-aos-duration="1500" data-aos-offset=500>
                     <div class="row align-items-center flex-lg-row-reverse">
                         <div class="col-12 col-lg-6">
                             <h2 class="title-bloco">MATCH<br>DE VERDADE</h2>
 
-                            <p class="text-bloco">  Aqui não é só adicionar amigo.  
-                                                    É criar conexão.  
-                                                    Você entra pra jogar uma partida… e fica pela parceria.
+                            <p class="text-bloco"> Aqui não é só jogar.
+                                É criar conexão. Se divertir de verdade.<br>
+                                Você entra pelo game e fica pela parceria!
                             </p>
                         </div>
 
                         <div class="col-12 col-lg-6 text-center">
                             <div class="midia-bloco">
                                 <video class="sobre-video" loop autoplay muted playsinline preload="metadata">
-                                <source src="assets/Images/Video_tela_sobre.mp4" type="video/mp4">
+                                    <source src="assets/Images/Video_tela_sobre.mp4" type="video/mp4">
                                 </video>
                             </div>
                         </div>
@@ -111,63 +114,61 @@
             </div>
         </section>
 
-    <section class="container my-5">
-        <h4 class="my-title text-center my-mt">Conheça o time!</h4>
-        <h3 class="text-center my-title mb-4">As pessoas incríveis que fizeram esse projeto acontecer!</h3>
+        <section class="container my-5">
+            <h4 class="my-title text-center my-mt">Conheça o time!</h4>
+            <h3 class="text-center my-title mb-4">As pessoas incríveis que fizeram esse projeto acontecer!</h3>
 
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-6 col-lg-4 my-2">
-                <div class="card h-100">
-                    <img src="./assets/Images/Sophia.png" class="card-img-top" alt="Giovanna">
-                    <div class="card-body">
-                        <h5 class="card-title">Giovanna</h5>
-                        <p class="card-text">
-                            CEO
-                        </p>
-                        <a class="icons linkedin_icon" href="https://www.linkedin.com/in/giovanna-sophia-gomes-6136a23b7/"target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-lg-4 my-2">
+                    <div class="card h-100">
+                        <img src="./assets/Images/Sophia.png" class="card-img-top" alt="Giovanna">
+                        <div class="card-body">
+                            <h5 class="card-title">Giovanna</h5>
+                            <p class="card-text">
+                                CEO
+                            </p>
+                            <a class="icons linkedin_icon"
+                                href="https://www.linkedin.com/in/giovanna-sophia-gomes-6136a23b7/" target="_blank"><i
+                                    class="fa-brands fa-linkedin icons"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 my-2">
+                    <div class="card h-100">
+                        <img src="./assets/Images/carlos.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Carlos</h5>
+                            <p class="card-text">
+                                CEO
+                            </p>
+                            <a class="icons linkedin_icon"
+                                href="https://www.linkedin.com/in/carlos-vasconcelos-pereira/" target="_blank"><i
+                                    class="fa-brands fa-linkedin icons"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 my-2">
+                    <div class="card h-100">
+                        <img src="./assets/Images/Luan.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Luan</h5>
+                            <p class="card-text">
+                                CEO
+                            </p>
+                            <a class="icons linkedin_icon" href="https://www.linkedin.com/in/luan-silva-8ba26921a/"
+                                target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-12 col-sm-6 col-lg-4 my-2">
-                <div class="card h-100">
-                    <img src="./assets/Images/carlos.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Carlos</h5>
-                        <p class="card-text">
-                            CEO
-                        </p>
-                        <a class="icons linkedin_icon" href="https://www.linkedin.com/in/carlos-vasconcelos-pereira/"target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-lg-4 my-2">
-                <div class="card h-100">
-                    <img src="./assets/Images/Luan.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Luan</h5>
-                        <p class="card-text">
-                            CEO
-                        </p>
-                        <a class="icons linkedin_icon" href="https://www.linkedin.com/in/luan-silva-8ba26921a/"target="_blank"><i class="fa-brands fa-linkedin icons"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
     </main>
 
     <footer>
-        <div class="sobre">
-            <h3>Detalhe</h3>
-            <details>
-                <p>Nossa ideia surgiu de uma necessidade que nós, como gamers, vivenciamos.</p>
-                <p>Precisamos de mais amizades verdadeiras, e uma comunidade mais unida.</p>
-            </details>
-        </div>
-        <div class="Idealizadores">
+        <div class="idealizadores">
             <h3>Idealizadores</h3>
             <ul>
                 <li>Giovanna Sophia</li>
@@ -188,11 +189,28 @@
         </div>
         © 2026 -Huddle Todos os direitos reservados.
 
+        <ul class="navbar-nav  mb-lg-0">
+            <li>
+                Explorar
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="formulario.html">Conecte-se</a>
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="sobre.html">Sobre Nós</a>
+            </li>
+            <li class="nav-item footer-nav-item">
+                <a class="nav-link" href="faq.html">Perguntas frequentes</a>
+            </li>
+        </ul>
         <a href="#topo" class="voltar-topo">Voltar ao topo ↑</a>
 
     </footer>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

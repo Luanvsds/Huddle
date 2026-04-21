@@ -5,10 +5,12 @@
 
 .navbar-nav a{
   color:var(gray);
+  font-size:1.5rem;
 }
 
 .navbar-nav a:hover {
-    color:var(--bg_light_purple)
+    color:var(--bg_light_purple);
+    text-decoration: overline;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
@@ -17,4 +19,10 @@
 
 .navbar-dark .navbar-brand {
   color: var(--light_blue_text_color);
+  font-size: 2rem;
+}
+
+.navbar-dark .navbar-brand img {
+ width: 40px;
+ margin-bottom: 30px;
 }

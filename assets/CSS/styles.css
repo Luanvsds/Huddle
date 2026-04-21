@@ -58,7 +58,7 @@ body {
 }
 
 body {
-    background-color: var(--bg_black);
+    background: linear-gradient(to bottom, var(--bg_dark_purple) 0%, var(--bg_dark) 45%, var(--bg_dark_purple) 100%);
     margin: 0;
 }
 
@@ -73,7 +73,7 @@ body {
 }
 
 .page-subtitle {
-    color: var(--dark_text_color);
+    color: var(--light_text_color);
     text-align: center;
     font-size: 1.125rem;
     margin: 0 auto 2rem;
@@ -90,7 +90,7 @@ body {
     margin: 1rem auto;
 }
 
-form {
+.meu-form {
     background: var(--bg_dark);
     width: 90%;
     max-width: 800px;
@@ -102,28 +102,80 @@ form {
     gap: 20px;
 }
 
-form label {
-    color: var(--light_text_color);
-    font-weight: bold;
+.meu-form-input {
+    background-color: var(--light_blue_text_color);
+    border: 0;
 }
 
-form input {
-    width: 100%;
-    padding: 14px;
-    background: #5F5570;
+.meu-form-input:focus {
+    background-color: var(--bg_light_purple);
+    border: 0;
+    box-shadow: none;
+}
+
+.meu-form-botao-icone {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+
+    background: none;
     border: none;
-    border-radius: 8px;
-    color: var(--light_text_color);
-    font-size: 16px;
+    padding: 0;
+
+    color: #6c757d;
+    cursor: pointer;
+    z-index: 5;
 }
 
-.botao_formulario {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+.meu-form-botao-icone:hover {
+    color: #212529;
 }
 
-.botao_formulario_voltar {
+.meu-form-botao-icone:focus {
+    outline: none;
+}
+
+/* Garante que o texto não bate no ícone */
+.meu-form-input {
+    padding-right: 3rem;
+}
+
+.meu-form-check {
+    color: white
+}
+
+.form-check-input {
+    accent-color: white;
+}
+
+.meu-form-check:focus {
+    border: 0;
+    box-shadow: none;
+}
+
+.meu-form-check-label {
+    color: white
+}
+
+.meu-form-select-label {
+    color: gray
+}
+
+.meu-form-botoes {
+    display: flexbox;
+    width: 100%;
+}
+
+.botao-formulario {
+    background-color: var(--bg_dark_purple);
+}
+
+.botao-formulario:hover {
+    background-color: var(--bg_light_purple);
+}
+
+.botao-formulario-voltar {
     background-color: var(--bg_dark);
     border: 1px solid var(--bg_light_purple);
     text-decoration: none;
@@ -136,31 +188,11 @@ form input {
     text-align: center;
 }
 
-.botao_formulario_voltar:hover {
+.botao-formulario-voltar:hover {
     background-color: var(--bg_light_purple);
     font-weight: 500;
     border: 2px solid var(--bg_light_purple);
     transition: var(--transition);
-}
-
-.botao_formulario button {
-    width: 40%;
-    background: var(--bg_light_purple);
-    border: none;
-    border-radius: 8px;
-    border: 2px solid var(--bg_light_purple);
-    padding: 10px;
-    color: var(--light_text_color);
-    font-size: 1rem;
-    align-self: center;
-    text-align: center;
-}
-
-.botao_formulario button:hover {
-    background-color: transparent;
-    font-weight: 500;
-    transition: var(--transition);
-    cursor: pointer;
 }
 
 input:invalid {
@@ -170,16 +202,6 @@ input:invalid {
 input:focus {
     border: 2px solid var(--focus_color);
     color: var(--light_text_color)
-}
-
-form select {
-    width: 100%;
-    padding: 14px;
-    background: #5F5570;
-    border: none;
-    border-radius: 8px;
-    color: var(--light_text_color);
-    font-size: 16px;
 }
 
 .sucesso {
@@ -249,8 +271,8 @@ form select {
     padding: 8rem 2rem 4rem;
     color: var(--light_text_color);
 }
+
 .title-dados {
-    font-family: 'Poppins', sans-serif;
     font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.05;
@@ -265,10 +287,12 @@ form select {
     line-height: 1.6;
     color: var(--light_text_color);
 }
+
 .carousel-dados {
     padding: 4rem 2rem;
 }
-#carouselExampleIndicators {
+
+#HuddleCarrossel {
     max-width: 500px;
     margin: 0 auto;
 }
@@ -277,23 +301,31 @@ form select {
     border-radius: 2rem;
     overflow: hidden;
 }
+
+.carousel-item {
+    transition: transform 3s ease, .5s ease-out;
+}
+
 .carousel-item img {
     width: 100%;
     height: 550px;
     object-fit: cover;
 }
+
 .missao {
     text-align: center;
     padding: 8rem 2rem;
     color: var(--light_text_color);
 }
+
 .missao p {
-    font-size: 1.2rem;
+    font-size: 3rem;
+    color: var(--bg_dark_purple);
+    font-weight: 900;
     margin-bottom: 0.8rem;
-    color: var(--light_text_color)
 }
+
 .missao h2 {
-    font-family: 'Poppins', sans-serif;
     font-size: 3rem;
     font-weight: 800;
     line-height: 1.1;
@@ -352,14 +384,11 @@ td {
     line-height: 1.5;
 }
 
-.pagina-sobre {
-    margin: 0;
-    background: linear-gradient( to bottom, #4b4fd8 0%, #1c1f5a 45%, #000000 100%);
-}
 .titulo-destaque {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
 }
+
 .main {
     width: 90%;
     max-width: 1200px;
@@ -369,7 +398,7 @@ td {
 }
 
 .sobre-hero {
-    min-height: 90vh;
+    min-height: 30;
     padding: 60px 15px;
 }
 
@@ -379,9 +408,9 @@ td {
     font-weight: 900;
     line-height: 0.95;
     margin-bottom: 30px;
-    }
+}
 
-.sobre-subtitle{
+.sobre-subtitle {
     font-size: 24px;
     line-height: 1.4;
     color: var(--light_text_color);
@@ -393,11 +422,12 @@ td {
 }
 
 .sobre-bloco {
-    background: linear-gradient(180deg, #5a63ff 0%, #2f36a3 100%);
+    background: linear-gradient(180deg, var(--bg_light_purple) 0%, var(--bg_dark_purple) 100%);
     border-radius: 5rem;
     padding: 4rem;
     margin-bottom: 2rem;
 }
+
 .title-bloco {
     font-family: 'Poppins', sans-serif;
     font-size: 3rem;
@@ -406,11 +436,13 @@ td {
     text-transform: uppercase;
     margin-bottom: 2rem;
 }
+
 .text-bloco {
     font-size: 1.2rem;
     line-height: 1.5;
     max-width: 32rem;
 }
+
 .midia-bloco {
     width: 100%;
     max-width: 32rem;
@@ -420,17 +452,29 @@ td {
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(147, 89, 255, 0.2);
 }
+
 .imagem-bloco {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
+
 .sobre-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+.card {
+    background-color: var(--bg_dark_purple);
+}
+
+.card-body {
+    color: var(--light_text_color);
+    background-color: var(--bg_dark);
+    border-color: var(--bg_dark_purple);
 }
 
 .linkedin_icon {
@@ -457,7 +501,7 @@ td {
     flex-grow: 1;
     max-width: 100%;
     min-height: 500px;
-    height: 60vh;
+    height: 100vh;
     max-height: 100%;
     background-position: center;
     background-size: cover;
@@ -476,7 +520,7 @@ td {
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    }
+}
 
 .hero::before {
     content: "";
@@ -484,7 +528,8 @@ td {
     inset: 0;
     background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(4, 9, 30, 0.45));
     z-index: 1;
-    }
+}
+
 .hero-content {
     flex-grow: 1;
     color: var(--light_text_color);
@@ -518,6 +563,42 @@ td {
 .hero-content .botao_transparente {
     display: inline-block;
     margin: 0.5rem;
+}
+
+.accordion {
+    --bs-accordion-active-color: white;
+    --bs-accordion-active-bg: var(--bg_dark_purple);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0, 0, 0, .125);
+}
+
+.accordion-item {
+    background-color: var(--bg_light_purple);
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.accordion-body {
+    margin-left: 1rem;
+}
+
+.accordion-header {
+    color: var(--bg_light_purple);
+    background-color: blue;
+    background: black;
+}
+
+.accordion-button {
+    color: var(--light_blue_text_color);
+    background: black;
+}
+
+.accordion-button.collapsed {
+    background-color: var(black);
+    color: white;
 }
 
 @media (max-width: 779px) {
@@ -586,16 +667,14 @@ td {
         font-size: 0.9rem;
         width: 45%;
     }
-    .sobre-hero {
-        min-height: auto;
-        padding: 8rem 2rem;
-    }
+
     .sobre-title {
         font-size: 3.8rem;
         line-height: 1.05;
         margin-bottom: 2rem;
     }
-    .sobre-subtitle{
+
+    .sobre-subtitle {
         font-size: 1.8rem;
         line-height: 1.5;
         max-width: 100%;
@@ -605,14 +684,18 @@ td {
         padding: 2rem;
         border-radius: 2rem;
     }
+
     .title-bloco {
         font-size: 2rem;
         line-height: 1.1;
         margin-top: 1.5;
     }
-    .text-bloco-midia {  font-size: 1rem;
+
+    .text-bloco-midia {
+        font-size: 1rem;
         margin-bottom: 1.5rem;
     }
+
     .midia-bloco {
         max-width: 100%;
         border-radius: 2rem;
