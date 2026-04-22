@@ -3,54 +3,26 @@
   font-family: "Lato", sans-serif;
 }
 
-header {
-  position: sticky;
-  top: 0;
-  background: #0a0a12;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  max-width: 100dvw;
-  margin: 0;
+.navbar-nav a{
+  color:var(gray);
+  font-size:1.5rem;
 }
 
-header img {
-  width: 50px;
-  min-width: 40px;
-  max-width: 60px;
-  display: block;
-  padding-left: 10%;
+.navbar-nav a:hover {
+    color:var(--bg_light_purple);
+    text-decoration: overline;
 }
 
-header nav {
-  display: flex;
-  font-size: 1rem;
-  max-width: 100%;
-  gap: 2rem;
-  padding-right: 5%
+.navbar-dark .navbar-nav .nav-link.active {
+  color: var(--light_blue_text_color);
 }
 
-header nav a {
-  text-decoration: none;
-  color: white;
+.navbar-dark .navbar-brand {
+  color: var(--light_blue_text_color);
+  font-size: 2rem;
 }
 
-header nav a:hover {
-  opacity: 0.7;
-  transition: 0.2s;
-  color: #9359FF
-}
-
-@media (max-width: 779px) {
-  header nav {
-    font-size: 0.85rem;
-    gap: 1rem;
-  }
-
-  header img {
-    width: 40px;
-    min-width: 35px;
-  }
+.navbar-dark .navbar-brand img {
+ width: 40px;
+ margin-bottom: 30px;
 }
