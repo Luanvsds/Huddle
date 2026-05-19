@@ -4,17 +4,17 @@
 }
 
 .navbar-nav a{
-  color:var(gray);
+  color:rgba(255,255,255,0.75);
   font-size:1.5rem;
 }
 
 .navbar-nav a:hover {
-    color:var(--bg_light_purple);
+    color:black;
     text-decoration: overline;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
-  color: var(--light_blue_text_color);
+  color: var(#FFFFFF);
 }
 
 .navbar-dark .navbar-brand {
