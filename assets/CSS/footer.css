@@ -49,9 +49,10 @@ footer ul {
 }
 
 footer a:hover {
+  text-decoration: underline;
   opacity: 0.7;
   transition: 0.2s;
-  color: #9359FF
+  color: black;
 }
 
 .idealizadores{
@@ -60,10 +61,13 @@ footer a:hover {
 
 .footer-nav-item  a{
   font-size: 1rem;
-  font-weight: 900;
+  font-weight: 500;
+  color: white
 }
 .footer-nav-item  a:hover{
   text-decoration: underline;
+  transition: 0.2s;
+  color: black;
 }
 
 .icons {
