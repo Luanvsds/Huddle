@@ -115,7 +115,7 @@ function validarIdade() {
         idade--;
     }
 
-    if (idade < 16) {
+    if (idade < 18) {
         dataNascimento.classList.add("is-invalid");
         return false;
     }
