@@ -18,7 +18,7 @@
 }
 
 .navbar-dark .navbar-brand {
-  color: var(--light_blue_text_color);
+  color: rgba(0, 0, 0, 0.63);
   font-size: 2rem;
 }
 

@@ -21,15 +21,16 @@ body {
     font-weight: 500;
     align-self: center;
     text-align: center;
-    border: 2px solid var(--bg_light_purple);
+    border: 2px solid white;
     transition: var(--transition);
     font-size: 1rem;
-    background: var(--bg_light_purple);
-    color: var(--light_text_color)
+    background: var(--bg_dark_purple);
+    color: black
 }
 
 .botao_roxo:hover {
     background-color: transparent;
+    border: 2px solid var(--bg_light_purple);
     font-weight: 500;
 }
 
@@ -46,15 +47,13 @@ body {
     width: auto;
     align-self: center;
     text-decoration: none;
-    color: var(--light_text_color);
     font-weight: 500;
-    transition: var(--transition);
 }
 
 .botao_transparente:hover {
-    background-color: var(--bg_light_purple);
+    background-color: var(--bg_dark_purple);
     font-weight: 500;
-    border: 2px solid var(--bg_light_purple)
+    border: 2px solid white
 }
 
 body {
@@ -475,6 +474,7 @@ td {
     line-height: 1;
     text-transform: uppercase;
     margin-bottom: 2rem;
+    color: rgba(0, 0, 0, 0.658)
 }
 
 .text-bloco {
@@ -617,7 +617,7 @@ td {
 
 .accordion-item {
     background-color: var(--bg_light_purple);
-    color: white;
+    color: black;
     margin-bottom: 2rem;
 }
 
