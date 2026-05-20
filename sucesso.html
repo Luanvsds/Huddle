@@ -54,12 +54,18 @@
                 </div>
             </div>
         </nav>
-        <div class="sucesso">
+        <div class="sucesso d-flex justify-content-center align-items-center min-vh-100">
             <img class="sucessoImagem" src="assets/Images/sucesso-check.png" alt="Símbolo de sucesso">
             <h1 class="page-title">Bem-vindo à comunidade Huddle!</h1>
             <h3>Seu cadastro foi realizado com sucesso, agora é só achar o seu squad!</h3>
             <img class="sucessoPinguim" src="assets/Images/sucesso-pinguim-acenando.png" alt="Logo Huddle acenando">
             <a class="botao_roxo botao_sucesso" href="index.html">Voltar ao início</a>
+            <div class="avaliacaoBox rounded-3 p-5 text-center shadow">
+                <p class="avaliacaoTitulo ">Como foi sua experiência de cadastro e navegação?</p>
+                <p class="avaliacaoSubtitulo text-secondary">Clique em uma estrela para avaliar.</p>
+                <div class="avaliacaoBotaos d-flex justify-content-center gap-2 mb-4" id="avaliacaoEstrela"></div>
+                <p class="avaliacaoMensagem mb-0" id="avaliacaoMensagem"></p>
+            </div>
         </div>
         <footer>
             <div class="idealizadores">
@@ -101,6 +107,7 @@
 
         </footer>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/avaliacao.js"></script>
 
     </body>
 

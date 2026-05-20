@@ -265,6 +265,46 @@ input:focus {
     margin: auto;
 }
 
+.avaliacaoBox {
+    margin-top: auto;
+    max-width: 420px;
+    width: 100%;
+}
+
+.avaliacaoTitulo {
+    font-size: 20px;
+    color: var(--bg_light_purple);
+    margin-bottom: 4px;
+}
+
+.avaliacaoSubtitulo {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+}
+
+.avaliacaoBotao {
+    font-size: 36px;
+    color: #d3d1c7;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: transform 0.15s, color 0.15s;
+}
+
+.avaliacaoBotao:hover,
+.avaliacaoBotao.on {
+    color: #f5a623;
+    transform: scale(1.2);
+}
+
+.avaliacaoMensagem {
+    font-size: 15px;
+    color: white;
+    min-height: 28px;
+}
+
 
 .hero-dados {
     text-align: center;
