@@ -122,17 +122,25 @@ body {
     border: none;
     padding: 0;
 
-    color: #6c757d;
+    color: #191B1F;
     cursor: pointer;
     z-index: 5;
 }
 
 .meu-form-botao-icone:hover {
-    color: #212529;
+    color: black;
 }
 
 .meu-form-botao-icone:focus {
     outline: none;
+}
+
+.form-control:focus::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #191B1F !important;
+}
+
+.form-floating > label{
+    color: black;
 }
 
 /* Garante que o texto não bate no ícone */
@@ -168,6 +176,7 @@ body {
 
 .botao-formulario {
     background-color: var(--bg_dark_purple);
+    color: white
 }
 
 .botao-formulario:hover {
