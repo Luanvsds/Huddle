@@ -9,9 +9,9 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-white px-4 py-12 text-foreground dark:bg-background">
-      <div className="mx-auto max-w-[1450px] space-y-20">
+      <div className="mx-auto max-w-1450px space-y-20">
         <section className="overflow-hidden rounded-[2.5rem] border border-fuchsia-blue-200 bg-fuchsia-blue-950 shadow-[0_20px_60px_rgba(39,27,90,0.18)] dark:border-fuchsia-blue-900">
-          <div className="relative min-h-[620px] overflow-hidden">
+          <div className="relative min-h-620px overflow-hidden">
             <video
               className="absolute inset-0 h-full w-full object-cover"
               src="/Video_tela_sobre.mp4"
@@ -21,11 +21,11 @@ export default function Home() {
               playsInline
             />
 
-            <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-blue-950 via-fuchsia-blue-950/80 to-fuchsia-blue-950/20"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-fuchsia-blue-950 via-fuchsia-blue-950/80 to-fuchsia-blue-950/20"></div>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-blue-950/70 via-transparent to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-fuchsia-blue-950/70 via-transparent to-transparent"></div>
 
-            <div className="relative z-10 flex min-h-[620px] items-center px-6 py-12 md:px-12 lg:px-16">
+            <div className="relative z-10 flex min-h-620px items-center px-6 py-12 md:px-12 lg:px-16">
               <div className="max-w-2xl">
                 <p className="text-sm font-bold uppercase tracking-[0.25em] text-fuchsia-blue-300">
                   Comunidade gamer inteligente
@@ -33,7 +33,7 @@ export default function Home() {
 
                 <h1 className="mt-4 text-4xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
                   Encontre seu{" "}
-                  <span className="bg-gradient-to-r from-fuchsia-blue-300 via-white to-fuchsia-blue-400 bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-fuchsia-blue-300 via-white to-fuchsia-blue-400 bg-clip-text text-transparent">
                     squad ideal
                   </span>
                 </h1>
@@ -79,7 +79,7 @@ export default function Home() {
         </section>
 
         <section className="grid gap-5 md:grid-cols-3">
-          <article className="rounded-[2rem] border border-fuchsia-blue-200 bg-gradient-to-br from-white via-fuchsia-blue-50 to-white p-6 shadow-[0_10px_40px_rgba(93,63,194,0.08)] dark:border-fuchsia-blue-900 dark:from-fuchsia-blue-950/30 dark:via-card dark:to-background">
+          <article className="rounded-[2rem] border border-fuchsia-blue-200 bg-linear-to-br from-white via-fuchsia-blue-50 to-white p-6 shadow-[0_10px_40px_rgba(93,63,194,0.08)] dark:border-fuchsia-blue-900 dark:from-fuchsia-blue-950/30 dark:via-card dark:to-background">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-fuchsia-blue-600">
               Afinidade
             </p>
@@ -94,7 +94,7 @@ export default function Home() {
             </p>
           </article>
 
-          <article className="rounded-[2rem] border border-fuchsia-blue-200 bg-gradient-to-br from-white via-fuchsia-blue-50 to-white p-6 shadow-[0_10px_40px_rgba(93,63,194,0.08)] dark:border-fuchsia-blue-900 dark:from-fuchsia-blue-950/30 dark:via-card dark:to-background">
+          <article className="rounded-[2rem] border border-fuchsia-blue-200 bg-linear-to-br from-white via-fuchsia-blue-50 to-white p-6 shadow-[0_10px_40px_rgba(93,63,194,0.08)] dark:border-fuchsia-blue-900 dark:from-fuchsia-blue-950/30 dark:via-card dark:to-background">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-fuchsia-blue-600">
               Segurança
             </p>
@@ -109,7 +109,7 @@ export default function Home() {
             </p>
           </article>
 
-          <article className="rounded-[2rem] border border-fuchsia-blue-200 bg-gradient-to-br from-white via-fuchsia-blue-50 to-white p-6 shadow-[0_10px_40px_rgba(93,63,194,0.08)] dark:border-fuchsia-blue-900 dark:from-fuchsia-blue-950/30 dark:via-card dark:to-background">
+          <article className="rounded-[2rem] border border-fuchsia-blue-200 bg-linear-to-br from-white via-fuchsia-blue-50 to-white p-6 shadow-[0_10px_40px_rgba(93,63,194,0.08)] dark:border-fuchsia-blue-900 dark:from-fuchsia-blue-950/30 dark:via-card dark:to-background">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-fuchsia-blue-600">
               Comunidade
             </p>
