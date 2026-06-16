@@ -13,21 +13,21 @@
 
     export default function Faq() {
     return (
-        <main className="min-h-screen bg-linear-to-br from-fuchsia-blue-50 via-background to-background px-4 py-14 text-foreground dark:from-fuchsia-blue-950 dark:via-background dark:to-background">
+        <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
         <div className="mx-auto max-w-6xl space-y-12">
             <section className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-fuchsia-blue-600">
+            <p className="text-xl font-bold uppercase tracking-[0.25em] text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                 Central de ajuda
             </p>
 
             <h1 className="mt-3 text-4xl font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-6xl">
                 Perguntas{" "}
-                <span className="bg-linear-to-r from-fuchsia-blue-600 to-fuchsia-blue-400 bg-clip-text text-transparent">
+                <span className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                 frequentes
                 </span>
             </h1>
 
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                 Tudo que você precisa saber antes de entrar no Huddle e encontrar o
                 seu squad ideal.
             </p>
@@ -35,7 +35,7 @@
 
             <section className="mx-auto max-w-5xl rounded-[2rem] border border-fuchsia-blue-200 bg-white/90 p-6 shadow-lg backdrop-blur md:p-10 dark:border-fuchsia-blue-900 dark:bg-card/90">
             <div className="mx-auto mb-9 max-w-2xl text-center">
-                <p className="text-sm font-semibold uppercase tracking-wide text-fuchsia-blue-600">
+                <p className="text-xl font-semibold uppercase tracking-wide text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                 FAQ
                 </p>
 
@@ -43,7 +43,7 @@
                 Respostas rápidas para continuar jogando
                 </h2>
 
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">
+                <p className="mt-3 text-lg leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-base">
                 Abra uma pergunta abaixo para ver a resposta.
                 </p>
             </div>
@@ -57,7 +57,7 @@
                     Esqueci minha senha, como prosseguir?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     É super fácil! Na tela de login, toque em “Esqueci minha
                     senha” e informe o e-mail cadastrado. Você receberá um link
@@ -79,7 +79,7 @@
                     Conheci alguém tóxico. Como posso denunciar?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>Sentimos muito por essa experiência.</p>
 
                     <p className="mt-2">
@@ -102,7 +102,7 @@
                     Não consigo fazer login, como resolver?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     Confira primeiro se seu e-mail e senha estão corretos. Se
                     ainda assim não funcionar:
@@ -133,7 +133,7 @@
                     Como alterar as minhas informações pessoais?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>É bem simples, vá até Perfil e depois Editar Perfil.</p>
 
                     <p className="mt-2">Exemplo: alterando sua foto:</p>
@@ -153,7 +153,7 @@
                     Onde posso alterar minhas preferências?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     Assim como as informações pessoais, as preferências também
                     ficam no seu perfil.
@@ -175,7 +175,7 @@
                     Preciso bloquear um usuário, como posso fazer isso?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>Para bloquear um usuário:</p>
 
                     <ol className="list-decimal pl-5">
@@ -199,7 +199,7 @@
                     Como posso me tornar VIP no Huddle?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     Para turbinar sua experiência no Huddle, você só precisa
                     acessar o seu perfil e selecionar a opção para se tornar
@@ -223,7 +223,7 @@
                     Huddle?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     Muito obrigado por querer ajudar nossa plataforma a crescer!
                     </p>
@@ -248,7 +248,7 @@
                     Como funciona o sistema de match do Huddle?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     O sistema de match do Huddle usa seus interesses, preferências
                     e horário de preferência para jogar, sugerindo pessoas com
@@ -269,7 +269,7 @@
                     Vai existir um chat de voz pelo Huddle?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     Inicialmente, todos os esforços do Huddle são para criar a
                     melhor experiência de conexão de usuários.
@@ -295,7 +295,7 @@
                     Quero excluir minha conta, como prosseguir?
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     <p>
                     Que pena que você queira excluir sua conta. Pedimos que
                     preencha o formulário final indicando melhorias para a gente.

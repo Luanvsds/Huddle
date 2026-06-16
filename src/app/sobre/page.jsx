@@ -13,25 +13,25 @@
         name: "Giovanna",
         role: "CEO",
         image: "/Sophia.png",
-        linkedin: "#",
+        linkedin: "https://www.linkedin.com/in/giovanna-sophia-gomes-6136a23b7/",
     },
     {
         name: "Carlos",
         role: "CEO",
         image: "/Carlos.png",
-        linkedin: "#",
+        linkedin: "https://www.linkedin.com/in/carlos-vasconcelos-pereira/",
     },
     {
         name: "Luan",
         role: "CEO",
         image: "/Luan.png",
-        linkedin: "#",
+        linkedin: "https://www.linkedin.com/in/luan-silva-8ba26921a/",
     },
     {
         name: "Miranda",
         role: "CEO",
         image: "/Miranda.png",
-        linkedin: "#",
+        linkedin: "https://www.linkedin.com/in/gabriela-miranda-siqueira-24b9a1328/",
     },
     ];
 
@@ -48,7 +48,7 @@
                 jogar sozinho
             </h1>
 
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-fuchsia-blue-100 md:text-xl">
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-xl">
                 E por isso o Huddle nasceu.
                 <br />
                 Para ser um espaço onde fugir do ambiente tóxico e encontrar gente
@@ -59,17 +59,17 @@
             <section className="mx-auto max-w-5xl">
             <div className="grid items-center gap-8 rounded-[2.5rem] bg-linear-to-r from-fuchsia-blue-500 to-fuchsia-blue-400 p-8 shadow-xl md:grid-cols-2 md:p-10">
                 <div className="order-2 md:order-1">
-                <p className="text-sm font-bold uppercase tracking-[0.25em] text-white/80">
+                <p className="text-lg font-bold uppercase tracking-[0.25em] text-white/80">
                     Comunidade
                 </p>
 
-                <h2 className="mt-3 text-4xl font-black uppercase leading-none text-fuchsia-blue-950 md:text-5xl">
+                <h2 className="mt-3 text-4xl font-black uppercase leading-none text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-5xl">
                     Encontre
                     <br />
                     seu squad
                 </h2>
 
-                <p className="mt-6 max-w-md text-base leading-relaxed text-white md:text-lg">
+                <p className="mt-6 max-w-md text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-lg">
                     Chega de cair com gente tóxica! No Huddle, você encontra
                     jogadores que realmente combinam com você. Mesmo estilo, mesma
                     vibe, mesmo objetivo.
@@ -106,17 +106,17 @@
                 </div>
 
                 <div>
-                <p className="text-sm font-bold uppercase tracking-[0.25em] text-white/80">
+                <p className="text-lg font-bold uppercase tracking-[0.25em] text-white/80">
                     Conexão
                 </p>
 
-                <h2 className="mt-3 text-4xl font-black uppercase leading-none text-fuchsia-blue-950 md:text-5xl">
+                <h2 className="mt-3 text-4xl font-black uppercase leading-none text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-5xl">
                     Match
                     <br />
                     de verdade
                 </h2>
 
-                <p className="mt-6 max-w-md text-base leading-relaxed text-white md:text-lg">
+                <p className="mt-6 max-w-md text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-lg">
                     Aqui não é só jogar. É criar conexão. Se divertir de verdade.
                     Você entra pelo game e fica pela parceria.
                 </p>
@@ -126,7 +126,7 @@
 
             <section className="mx-auto max-w-6xl">
             <div className="text-center">
-                <p className="text-base font-semibold text-fuchsia-blue-600 md:text-lg">
+                <p className="text-xl font-semibold text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                 Conheça o time!
                 </p>
 

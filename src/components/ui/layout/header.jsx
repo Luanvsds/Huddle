@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="w-full bg-fuchsia-blue-600 text-white">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <nav className="mx-auto flex max-w-6xl text items-center justify-between px-4 py-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/header-pinguim.png"
@@ -17,13 +17,13 @@ export default function Header() {
             width={36}
             height={36}
           />
-          <span className="text-xl font-bold">Huddle</span>
+          <span className="text-2xl font-bold">Huddle</span>
         </Link>
 
         <div className="hidden items-center gap-4 text-sm font-medium md:flex">
           <Link
             href="/"
-            className={`rounded-md px-3 py-2 transition-colors ${
+            className={`rounded-md px-3 py-2 text-2xl transition-colors ${
               pathname === "/"
                 ? "bg-fuchsia-blue-700 text-white"
                 : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"
@@ -35,7 +35,7 @@ export default function Header() {
 
           <Link
             href="/conecte-se"
-            className={`rounded-md px-3 py-2 transition-colors ${
+            className={`rounded-md px-3 py-2 text-2xl transition-colors ${
               pathname === "/conecte-se"
                 ? "bg-fuchsia-blue-700 text-white"
                 : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"
@@ -47,7 +47,7 @@ export default function Header() {
 
           <Link
             href="/sobre"
-            className={`rounded-md px-3 py-2 transition-colors ${
+            className={`rounded-md px-3 py-2 text-2xl transition-colors ${
               pathname === "/sobre"
                 ? "bg-fuchsia-blue-700 text-white"
                 : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"
@@ -59,7 +59,7 @@ export default function Header() {
 
           <Link
             href="/dados"
-            className={`rounded-md px-3 py-2 transition-colors ${
+            className={`rounded-md px-3 py-2 text-2xl transition-colors ${
               pathname === "/dados"
                 ? "bg-fuchsia-blue-700 text-white"
                 : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"
@@ -71,7 +71,7 @@ export default function Header() {
 
           <Link
             href="/faq"
-            className={`rounded-md px-3 py-2 transition-colors ${
+            className={`rounded-md px-3 py-2 text-2xl transition-colors ${
               pathname === "/faq"
                 ? "bg-fuchsia-blue-700 text-white"
                 : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"

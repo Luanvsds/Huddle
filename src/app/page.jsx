@@ -8,13 +8,13 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white px-4 py-12 text-foreground dark:bg-background">
+    <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
       <div className="mx-auto max-w-1450px space-y-20">
         <section className="overflow-hidden rounded-[2.5rem] border border-fuchsia-blue-200 bg-fuchsia-blue-950 shadow-[0_20px_60px_rgba(39,27,90,0.18)] dark:border-fuchsia-blue-900">
           <div className="relative min-h-620px overflow-hidden">
             <video
               className="absolute inset-0 h-full w-full object-cover"
-              src="/Video_tela_sobre.mp4"
+              src="/Video_home.mp4"
               autoPlay
               muted
               loop
@@ -27,7 +27,7 @@ export default function Home() {
 
             <div className="relative z-10 flex min-h-620px items-center px-6 py-12 md:px-12 lg:px-16">
               <div className="max-w-2xl">
-                <p className="text-sm font-bold uppercase tracking-[0.25em] text-fuchsia-blue-300">
+                <p className="text-2xl font-bold uppercase tracking-[0.25em] text-fuchsia-blue-300">
                   Comunidade gamer inteligente
                 </p>
 
@@ -38,7 +38,7 @@ export default function Home() {
                   </span>
                 </h1>
 
-                <p className="mt-6 max-w-xl text-sm leading-relaxed text-white/80 md:text-lg">
+                <p className="mt-6 max-w-xl text-2xl leading-relaxed text-white/80">
                   O Huddle conecta jogadores por afinidade, horários, estilo de
                   jogo e comportamento, criando uma experiência mais segura,
                   inclusiva e divertida para quem quer jogar acompanhado.
@@ -88,7 +88,7 @@ export default function Home() {
               Conexões que fazem sentido
             </h2>
 
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-lg leading-relaxed dark:text-white">
               O Huddle considera preferências, jogos favoritos, estilo de jogo e
               horários para sugerir pessoas com mais chance de conexão real.
             </p>
@@ -103,7 +103,7 @@ export default function Home() {
               Menos toxicidade no jogo
             </h2>
 
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-lg leading-relaxed dark:text-white">
               A plataforma valoriza denúncias, bloqueios, filtros e boas
               práticas para criar um ambiente mais saudável para os jogadores.
             </p>
@@ -118,7 +118,7 @@ export default function Home() {
               Jogue com quem combina
             </h2>
 
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-lg leading-relaxed dark:text-white">
               A ideia é aproximar jogadores que querem se divertir, competir ou
               criar novos grupos sem depender de encontros totalmente aleatórios.
             </p>
