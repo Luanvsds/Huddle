@@ -80,7 +80,7 @@
         <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
         <div className="mx-auto max-w-362.5 space-y-24">
             <section className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-white">
+            <p className="text-xl font-bold uppercase tracking-[0.25em] text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                 Dados e contexto
             </p>
 
