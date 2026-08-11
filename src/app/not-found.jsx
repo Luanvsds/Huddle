@@ -10,7 +10,7 @@
         <div className="mx-auto flex max-w-5xl items-center justify-center">
             <Card className="w-full max-w-3xl overflow-hidden border border-fuchsia-blue-300 bg-white/95 shadow-xl dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40">
             <CardContent className="flex flex-col items-center px-6 py-12 text-center md:px-12 md:py-16">
-                <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full border border-fuchsia-blue-200 bg-fuchsia-blue-50 shadow-sm dark:border-fuchsia-blue-700 dark:bg-fuchsia-blue-950">
+                <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-full border  shadow-sm border-fuchsia-blue-700 bg-fuchsia-blue-950">
                 <Image
                     src="/header-pinguim.png"
                     alt="Mascote do Huddle"
@@ -25,13 +25,13 @@
                 </p>
 
                 <h1 className="mt-4 text-4xl font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-6xl">
-                Squad não encontrado
+                OPS! Squad não encontrado
                 </h1>
 
-                <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                Parece que essa página saiu da partida ou nunca existiu. Mas fica
-                tranquilo, você pode voltar para o início e continuar procurando
-                seu squad ideal.
+                <p className="mt-5 max-w-xl text-xl leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                Parece que você se perdeu na sua busca. <br></br> Mas fica
+                tranquilo, você pode voltar para o início e continuar procurando o squad perfeito
+                com o Huddle!
                 </p>
 
                 <div className="mt-8 grid w-full max-w-md gap-3 sm:grid-cols-2">
@@ -45,7 +45,7 @@
                 <Button
                     asChild
                     variant="outline"
-                    className="h-12 rounded-full border-fuchsia-blue-300 text-fuchsia-blue-700 hover:bg-fuchsia-blue-50 dark:border-fuchsia-blue-600 dark:text-fuchsia-blue-100 dark:hover:bg-fuchsia-blue-950"
+                    className="h-12 rounded-full dark:border-fuchsia-blue-300 text-fuchsia-blue-950 hover:bg-fuchsia-blue-50 border-fuchsia-blue-600 dark:text-fuchsia-blue-100 dark:hover:bg-fuchsia-blue-950"
                 >
                     <Link href="/faq">Ir para FAQ</Link>
                 </Button>

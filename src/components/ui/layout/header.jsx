@@ -17,7 +17,7 @@ export default function Header() {
             width={36}
             height={36}
           />
-          <span className="text-2xl font-bold">Huddle</span>
+          <span className="text-2xl font-bold text-fuchsia-blue-950 dark:text-fuchsia-blue-100">Huddle</span>
         </Link>
 
         <div className="hidden items-center gap-4 text-sm font-medium md:flex">

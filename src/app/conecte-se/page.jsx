@@ -27,7 +27,7 @@ export default function ConecteSePage() {
     const [senha, setSenha] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
     const [apelido, setApelido] = useState("");
-    const [gameplay, setGameplay] = useState("casual");
+    const [gameplay, setGameplay] = useState("");
     'use client';
 
     const games = [
@@ -37,6 +37,13 @@ export default function ConecteSePage() {
         { id: 4, name: "Baldurs Gate 3" }
     ];
 
+    const playstyles = [
+        { id: 1, name: "Casual" },
+        { id: 2, name: "Gamer" },
+        { id: 3, name: "Tryhard" },
+        { id: 4, name: "Competitivo" }
+    ];
+
 
 
     // Aqui parece ser mais complicado, porem nao é. A logica é exatamente a mesma, servindo para as futuras validacoes
@@ -44,7 +51,6 @@ export default function ConecteSePage() {
     // Ja o mostrarRegraSenha serve para mostrar as regras quando o usuario clicar no campo ou se ele errar a senha
     // E o erros ele serve para guardar os erros ao fazer o preenchimento do formulario. Ela usa o setErros para guarda-los. Assim facilitando muito fazer as funcoes.
     const [mostrarSenha, setMostrarSenha] = useState(false);
-    const [mostrarRegrasSenha, setMostrarRegrasSenha] = useState(false);
     const [erros, setErros] = useState({});
     const [selectedGame, setSelectedGame] = useState('');
 
@@ -58,6 +64,8 @@ export default function ConecteSePage() {
     const senhaTemNumero = /[0-9]/.test(senha);
     const senhaTemEspecial = /[^A-Z a-z 0-9]/.test(senha);
 
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
     // A funcao senha valida sevre, como o nome diz, para verificar se todos os requisitos estao Corretos/preenchidos
     // fazemos essa validacao a partir do && que siginfica, basicamente 'e'. Onde para ser True, ele precisa que todas as regras sejam completadas.
 
@@ -68,30 +76,70 @@ export default function ConecteSePage() {
         senhaTemNumero &&
         senhaTemEspecial;
 
+    const mostrarRegrasSenha = !senhaValida && isPasswordFocused;
+
+    const hoje = new Date();
+
+    const dataMaxima = hoje.toISOString().split('T')[0];
+
+    const dataMinima = new Date(
+        hoje.getFullYear() - 120,
+        hoje.getMonth(),
+        hoje.getDate()
+    ).toISOString().split('T')[0];
     // Aqui estamos valindando o email. Estamos criando uma funcao para armazenar essas 2 regras e validar por meio do if Se é valido ou nao
 
-    function emailValido(emailDigitado) {
-        const temArroba = emailDigitado.includes("@");
-        const temPonto = emailDigitado.includes(".");
+    const validarEmail = (value) => {
+        if (!value) return 'Preencha o campo';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Digite um e-mail válido.';
+        return null;
+    };
 
-        if (temArroba && temPonto) {
-            return true;
+
+    function validarSenha(senha) {
+        if (!senha) return "Preencha o campo";
+
+        let senhaTemMaiuscula = /[A-Z]/.test(senha);
+        let senhaTemMinuscula = /[a-z]/.test(senha);
+        let senhaTemNumero = /[0-9]/.test(senha);
+        let senhaTemEspecial = /[^A-Z a-z 0-9]/.test(senha);
+
+        let senhaCumpreRequisitos = senhaTemMaiuscula && senhaTemMinuscula && senhaTemNumero && senhaTemEspecial;
+
+        if (!senhaCumpreRequisitos || senha.length < 12) {
+            return "Senha inválida, verifique os requisitos"
         }
-
-        return false;
+        return null
     }
 
-    // Usando a mesma logica da passada, estamos fazendo uma funcao para armazenar a regra e a verificacao da propria
-    function pessoaTem18AnosOuMais(dataDigitada) {
-        const anoAtual = new Date().getFullYear();
-        const anoNascimento = new Date(dataDigitada).getFullYear();
-        const idade = anoAtual - anoNascimento;
+    function validarIdade(dataDigitada) {
+        if (!dataDigitada) return "Preencha o campo";
 
-        if (idade >= 18) {
-            return true;
+        const nascimento = new Date(dataDigitada);
+        const hoje = new Date();
+
+        const idade = hoje.getFullYear() - nascimento.getFullYear();
+        const diferencaMes = hoje.getMonth() - nascimento.getMonth();
+        const diferencaDia = hoje.getDate() - nascimento.getDate();
+
+        // Subtrai 1 ano se ainda não fez aniversário esse ano
+        const fezAniversario = diferencaMes > 0 || (diferencaMes === 0 && diferencaDia >= 0);
+        const idadeReal = fezAniversario ? idade : idade - 1;
+
+        if (idadeReal < 18) return 'Digite uma data válida, ou lembre-se: O Huddle é uma comunidade 18+. Menores de idade não podem se cadastrar.';
+
+
+        return null;
+    }
+
+    function validarApelido(apelido) {
+        if (!apelido) return "Preencha o campo";
+
+        if (apelido.length > 20) {
+            return "Limite máximo de tamanho de apelido ultrapassado"
         }
 
-        return false;
+        return null;
     }
 
     // A funcao estiloDoCampo serve para mudar a cor do campo, caso ele esteja com algum erro ele fica vermelho Se estiver normal, ele fica roxo, apenas para dar um foco maior no campo escolhido
@@ -107,52 +155,42 @@ export default function ConecteSePage() {
         // Essa função é chamada quando o usuário clica no botão Participar.
         // Antes de mandar para a tela de sucesso, ela confere se os campos estão preenchidos corretamente.
         event.preventDefault();
-        // Por padrão, um formulário HTML recarrega a página quando é enviado.
-        // Como queremos validar os dados antes, usamos preventDefault para impedir esse comportamento automático.
+        let temErros = false;
 
-        const novosErros = {};
-        // Aqui criamos um objeto vazio para guardar os erros encontrados.
-        // Se algum campo estiver errado, colocamos uma mensagem dentro desse objeto.
+        const form = event.currentTarget;
+        const email = form.elements.namedItem('email').value;
+        const dataNascimento = form.elements.namedItem('dataNascimento').value;
+        const senha = form.elements.namedItem('senha').value;
+        const apelido = form.elements.namedItem('apelido').value;
 
-        if (email.trim() === "") {
-            novosErros.email = "Informe seu e-mail.";
-        } else if (!emailValido(email)) {
-            novosErros.email = "Digite um e-mail válido.";
-        }
-        // O primeiro passo é conferir se o campo email está vazio, para validar isso, utilizamos o trim, que serve para nao aceitar um campo preenchido so com vazio
-        // Apos passar por essa validacao, conferimos se o emaul segue as reguas para ser valido
+        const emailInvalido = validarEmail(email)
+        const idadeInvalida = validarIdade(dataNascimento)
+        const senhaInvalida = validarSenha(senha);
+        const apelidoInvalido = validarApelido(apelido);
 
-        if (senha === "") {
-            novosErros.senha = "Informe sua senha.";
-            setMostrarRegrasSenha(true);
-        } else if (!senhaValida) {
-            novosErros.senha = "A senha precisa cumprir todos os requisitos.";
-            setMostrarRegrasSenha(true);
-        }
-        // Aqui repetimos o processo, vericamos se esta vazio e se estiver acusa erro, e apaerece uma mensagem reforcando o preechimento certo
-        //  Se estiver preenchida e nao cumprir as regras, tambem vai aparecer o erro. Automaticamente abrindo as regras para o usuario entender oq faltou
-
-
-        if (dataNascimento === "") {
-            novosErros.dataNascimento = "Informe sua data de nascimento.";
-        } else if (!pessoaTem18AnosOuMais(dataNascimento)) {
-            novosErros.dataNascimento =
-                "O Huddle é uma comunidade 18+. Menores de idade não podem se cadastrar.";
-        }
-        // Na idade, tambem conferimos se esta vazio. apos isso, verificamos se o usario tem a idade minima para acessar nosso site (18 anos)
-
-
-        if (apelido.trim() === "") {
-            novosErros.apelido = "Informe seu apelido.";
-        }
-        // aqui a mesma coisa, verificamos se o usuario fez o preenchimento(atraves do trim)
-        setErros(novosErros);
-        // aqui que ocorre o salvamento dos erros. O setErros e quem faz essa magica. Ele que atualizado o valor do UseStates(erro). 
-        // E a assim que a engrenagem de verificacao de erros termina, ou quase kkk.
-
-        if (Object.keys(novosErros).length === 0) {
-            // E por ultimo, aqui é o ultimo mecanismo para verficicao do erro. Aqui por meio do length verifacmos e o valor que esta no erro esta ou nao vazio
-            // se estiver, finalmente iremos para a pagina de sucesso atravews router.push
+        setErros((prev) => {
+            const erros = { ...prev };
+            if (emailInvalido) {
+                erros.email = emailInvalido;
+                temErros = true;
+            } if (senhaInvalida) {
+                erros.senha = senhaInvalida;
+                temErros = true;
+            } if (idadeInvalida) {
+                erros.dataNascimento = idadeInvalida;
+                temErros = true;
+            } if (apelidoInvalido) {
+                erros.apelido = apelidoInvalido;
+                temErros = true;
+            } else {
+                delete erros.email;
+                delete erros.dataNascimento;
+                delete erros.senha;
+                delete erros.apelido;
+            }
+            return erros;
+        })
+        if (!temErros) {
             router.push("/sucesso");
         }
     }
@@ -161,16 +199,16 @@ export default function ConecteSePage() {
         <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
             <div className="mx-auto max-w-5xl space-y-10">
                 <section className="text-center">
-                    <p className="text-2sm font-bold uppercase tracking-[0.25em] text-white/80">
+                    <p className="text-xl font-bold uppercase tracking-[0.25em] text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                         Cadastro
                     </p>
 
-                    <h1 className="mt-3 text-10xl font-black tracking-tight text-white md:text-6xl">
+                    <h1 className="mt-3 text-10xl font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-6xl">
                         Venha fazer parte da nossa{" "}
-                        <span className="text-fuchsia-blue-200">comunidade!</span>
+                        <span className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100">comunidade!</span>
                     </h1>
 
-                    <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-white/90 md:text-base">
+                    <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-base">
                         Preencha os dados abaixo e comece a encontrar seu squad perfeito.
                     </p>
                 </section>
@@ -191,7 +229,24 @@ export default function ConecteSePage() {
                                     type="email"
                                     placeholder="seuemail@exemplo.com"
                                     value={email}
-                                    onChange={(event) => setEmail(event.target.value)}
+                                    onChange={(e) => {
+
+                                        const valor = e.target.value;
+                                        setEmail(valor);
+
+                                        const error = validarEmail(valor);
+
+                                        setErros((prev) => {
+                                            const erros = { ...prev }
+                                            if (!error) {
+                                                delete erros.email;
+                                            } else {
+                                                erros.email = error;
+                                            }
+                                            return erros;
+                                        })
+                                    }}
+
                                     className={estiloDoCampo(erros.email)}
                                 />
 
@@ -216,8 +271,24 @@ export default function ConecteSePage() {
                                         type={mostrarSenha ? "text" : "password"}
                                         placeholder="Digite sua senha"
                                         value={senha}
-                                        onChange={(event) => setSenha(event.target.value)}
-                                        onFocus={() => setMostrarRegrasSenha(true)}
+                                        onChange={(event) => {
+                                            const valor = event.target.value;
+                                            setSenha(valor);
+
+                                            const error = validarSenha(valor);
+                                            setErros((prev) => {
+                                                const erros = { ...prev }
+                                                if (!error) {
+                                                    delete erros.senha;
+                                                } else {
+                                                    erros.senha = error;
+                                                }
+                                                return erros;
+                                            })
+
+                                        }}
+                                        onFocus={() => setIsPasswordFocused(true)}
+                                        onBlur={() => setIsPasswordFocused(false)}
                                         className={`${estiloDoCampo(erros.senha)} pr-12`}
                                     />
 
@@ -306,10 +377,26 @@ export default function ConecteSePage() {
                                         id="dataNascimento"
                                         type="date"
                                         value={dataNascimento}
-                                        onChange={(event) =>
-                                            setDataNascimento(event.target.value)
-                                        }
-                                        className={estiloDoCampo(erros.dataNascimento)}
+                                        max={dataMaxima}
+                                        min={dataMinima}
+                                        onChange={(e) => {
+
+                                            const valor = e.target.value;
+                                            setDataNascimento(valor);
+
+                                            const error = validarIdade(valor);
+
+                                            setErros((prev) => {
+                                                const erros = { ...prev };
+                                                if (!error) {
+                                                    delete erros.dataNascimento;
+                                                } else {
+                                                    erros.dataNascimento = error;
+                                                }
+                                                return erros;
+                                            })
+                                        }}
+                                        className={`${estiloDoCampo(erros.dataNascimento)} appearance-none bg-transparent [&::-webkit-calendar-picker-indicator]:hidden `}
                                     />
 
                                     {erros.dataNascimento && (
@@ -332,7 +419,22 @@ export default function ConecteSePage() {
                                         type="text"
                                         placeholder="Como você quer aparecer?"
                                         value={apelido}
-                                        onChange={(event) => setApelido(event.target.value)}
+                                        onChange={(e) => {
+                                            const valor = e.target.value;
+                                            setApelido(valor);
+
+                                            const error = validarApelido(valor);
+
+                                            setErros((prev) => {
+                                                const erros = { ...prev };
+                                                if (!error) {
+                                                    delete erros.apelido;
+                                                } else {
+                                                    erros.apelido = error;
+                                                }
+                                                return erros;
+                                            })
+                                        }}
                                         className={estiloDoCampo(erros.apelido)}
                                     />
 
@@ -350,46 +452,45 @@ export default function ConecteSePage() {
                                 </Label>
 
                                 <Select value={gameplay} onValueChange={setGameplay}>
-                                    <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100">
+                                    <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
                                         <SelectValue placeholder="Escolha seu estilo" />
                                     </SelectTrigger>
 
-                                    <SelectContent>
-                                        <SelectItem className="text-xl" value="casual">Casual</SelectItem>
-                                        <SelectItem className="text-xl" value="gamer">Gamer</SelectItem>
-                                        <SelectItem className="text-xl" value="tryhard">Try hard</SelectItem>
-                                        <SelectItem className="text-xl" value="competitivo">Competitivo</SelectItem>
+                                    <SelectContent side="bottom" align="start" position="popper">
+                                        {playstyles.map((playstyle) => (
+                                            <SelectItem key={playstyle.id} value={playstyle.name} className="text-xl"> {playstyle.name}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                             </div>
-                            <div className="space-y-2 w-full p-4">
+                            <div className="space-y-2">
 
                                 <Label className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100 text-xl">
                                     Jogo preferido
                                 </Label>
                                 <Select className="w-1xl" value={selectedGame} onValueChange={setSelectedGame}>
 
-                                    <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100">
+                                    <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
                                         <SelectValue placeholder="Selecione um jogo" />
                                     </SelectTrigger>
 
-                                    <SelectContent side ="bottom" align="start" position="popper">
+                                    <SelectContent side="bottom" align="start" position="popper">
                                         {games.map((game) => (
-                                            <SelectItem key={game.id} value={game.name} className="text-1xl"> {game.name}
+                                            <SelectItem key={game.id} value={game.name} className="text-xl"> {game.name}
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
 
                                 </Select>
                             </div>
-
                             <div className="space-y-4">
                                 <Label className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100 text-xl">
                                     Horários que costuma jogar:
                                 </Label>
 
                                 <div className="grid gap-3 sm:grid-cols-2">
-                                    <label className="flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 text-xl font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-background dark:text-fuchsia-blue-100">
+                                    <label className="flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 text-xl font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-background dark:text-fuchsia-blue-100 ">
                                         <Checkbox />
                                         Manhã
                                     </label>
@@ -411,6 +512,9 @@ export default function ConecteSePage() {
                                 </div>
                             </div>
 
+                            <Label className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100 text-sm2 gap-1">
+                                Ao clicar em participar, você declara ser maior de 18 anos, e aceitar os <Link  className= " dark:hover:text-fuchsia-blue-700 hover:text-fuchsia-blue-950 no-underline hover:underline text-fuchsia-blue-500" href="/termos">termos de uso</Link> do Huddle.
+                            </Label>
                             <div className="grid gap-3 sm:grid-cols-2">
                                 <Button
                                     type="submit"

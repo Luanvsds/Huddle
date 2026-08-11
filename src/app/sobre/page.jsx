@@ -59,7 +59,7 @@
             <section className="mx-auto max-w-5xl">
             <div className="grid items-center gap-8 rounded-[2.5rem] bg-linear-to-r from-fuchsia-blue-500 to-fuchsia-blue-400 p-8 shadow-xl md:grid-cols-2 md:p-10">
                 <div className="order-2 md:order-1">
-                <p className="text-lg font-bold uppercase tracking-[0.25em] text-white/80">
+                <p className="text-lg font-bold uppercase tracking-[0.25em] text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     Comunidade
                 </p>
 
@@ -106,7 +106,7 @@
                 </div>
 
                 <div>
-                <p className="text-lg font-bold uppercase tracking-[0.25em] text-white/80">
+                <p className="text-lg font-bold uppercase tracking-[0.25em] text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                     Conexão
                 </p>
 
