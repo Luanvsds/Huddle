@@ -1,10 +1,14 @@
-    import Image from "next/image";
+   'use client'
+   import Image from "next/image";
     import Link from "next/link";
 
     import { Button } from "@/components/ui/button";
     import { Card, CardContent } from "@/components/ui/card";
+    import { useFontSize } from "@/components/ui/layout/font-size";
 
     export default function NotFound() {
+        const { XlfontClass, Xl4fontClass, Xl6fontClass, smfontClass } = useFontSize();
+
     return (
         <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-16 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
         <div className="mx-auto flex max-w-5xl items-center justify-center">
@@ -20,15 +24,15 @@
                 />
                 </div>
 
-                <p className="text-sm font-bold uppercase tracking-[0.25em] text-fuchsia-blue-600 dark:text-fuchsia-blue-300">
+                <p className={`${smfontClass} font-bold uppercase tracking-[0.25em] text-fuchsia-blue-600 dark:text-fuchsia-blue-300`}>
                 Erro 404
                 </p>
 
-                <h1 className="mt-4 text-4xl font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-6xl">
+                <h1 className={`mt-4 ${Xl4fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl6fontClass}`}>
                 OPS! Squad não encontrado
                 </h1>
 
-                <p className="mt-5 max-w-xl text-xl leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                <p className={`mt-5 max-w-xl ${XlfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                 Parece que você se perdeu na sua busca. <br></br> Mas fica
                 tranquilo, você pode voltar para o início e continuar procurando o squad perfeito
                 com o Huddle!

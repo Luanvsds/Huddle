@@ -1,3 +1,4 @@
+'use client';
 import Link from "next/link";
 import {
   FaInstagram,
@@ -6,22 +7,26 @@ import {
   FaYoutube,
   FaArrowUp,
 } from "react-icons/fa";
+import { useFontSize } from "@/components/ui/layout/font-size";
 
 export default function Footer() {
+  const { XlfontClass,XsfontClass } = useFontSize();
+
   return (
     <footer className="w-full  bg-backgroundt text-black dark:text-white ">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-4 text-xs md:grid-cols-4 md:items-center">
+      <div className={`mx-auto grid max-w-6xl gap-6 px-4 py-4 ${XsfontClass} md:grid-cols-4 md:items-center`}>
         <div>
-          <h3 className="font-semibold text-xl">Idealizadores</h3>
+          <h3 className={`font-semibold ${XlfontClass}`}>Idealizadores</h3>
 
-          <p className="mt-1 text-xl text-black dark:text-white">Giovanna Sophia</p>
-          <p className="text-black dark:text-white text-xl">Carlos Vasconcelos</p>
-          <p className="text-black dark:text-white text-xl">Luan Silveira</p>
-          <p className="text-black dark:text-white text-xl">Gabriela Miranda</p>
+          <p className={`mt-1 ${XlfontClass} text-black dark:text-white`}>Giovanna Sophia</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Carlos Vasconcelos</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Luan Silveira</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Marcela Marques</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Gabriela Miranda</p>
         </div>
 
         <div>
-          <h3 className="font-semibold text-xl">Redes sociais</h3>
+          <h3 className={`font-semibold ${XlfontClass}`}>Redes sociais</h3>
 
           <div className="mt-2 flex gap-2">
             <Link
@@ -58,30 +63,30 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="text-black dark:text-white md:text-center text-xl">
+        <div className={`text-black dark:text-white md:text-center ${XlfontClass}`}>
           © 2026 Huddle. Todos os direitos reservados.
         </div>
 
-        <div className="flex items-center justify-start gap-6 md:justify-end text-xl">
+        <div className={`flex items-center justify-start gap-6 md:justify-end ${XlfontClass}`}>
           <div className="md:text-right">
             <h3 className="font-semibold">Explorar</h3>
 
             <nav className="mt-1 flex flex-col gap-1 text-black dark:text-white">
               <Link
                 href="/conecte-se"
-                className="transition-colors hover:text-fuchsia-blue-700 text-xl"
+                className={`transition-colors hover:text-fuchsia-blue-700 ${XlfontClass}`}
               >
                 Conecte-se
               </Link>
 
               <Link
                 href="/sobre"
-                className="transition-colors  hover:text-fuchsia-blue-700 text-xl"
+                className={`transition-colors  hover:text-fuchsia-blue-700 ${XlfontClass}`}
               >
                 Sobre Nós
               </Link>
 
-              <Link href="/faq" className="transition-colors  hover:text-fuchsia-blue-700 text-xl">
+              <Link href="/faq" className={`transition-colors  hover:text-fuchsia-blue-700 ${XlfontClass}`}>
                 Perguntas frequentes
               </Link>
             </nav>
