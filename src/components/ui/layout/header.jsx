@@ -68,7 +68,7 @@ export default function Header() {
                 : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"
                 }`}
             >
-              Conecte-se
+              Cadastro
             </Link>}
           <span className="border-l border-white/40 h-5"></span>
           <Link
@@ -78,7 +78,7 @@ export default function Header() {
               : "text-white/85 hover:bg-white hover:text-fuchsia-blue-700"
               }`}
           >
-            Sobre Nós
+            Sobre
           </Link>
           <span className="border-l border-white/40 h-5"></span>
 
