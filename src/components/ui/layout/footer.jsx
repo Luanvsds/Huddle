@@ -18,11 +18,11 @@ export default function Footer() {
         <div>
           <h3 className={`font-semibold ${XlfontClass}`}>Idealizadores</h3>
 
-          <p className={`mt-1 ${XlfontClass} text-black dark:text-white`}>Giovanna Sophia</p>
-          <p className={`text-black dark:text-white ${XlfontClass}`}>Carlos Vasconcelos</p>
-          <p className={`text-black dark:text-white ${XlfontClass}`}>Luan Silveira</p>
-          <p className={`text-black dark:text-white ${XlfontClass}`}>Marcela Marques</p>
-          <p className={`text-black dark:text-white ${XlfontClass}`}>Gabriela Miranda</p>
+          <p className={`mt-1 ${XlfontClass} text-black dark:text-white`}>Giovanna</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Carlos</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Luan</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Marcela</p>
+          <p className={`text-black dark:text-white ${XlfontClass}`}>Gabriela</p>
         </div>
 
         <div>
@@ -87,7 +87,7 @@ export default function Footer() {
               </Link>
 
               <Link href="/faq" className={`transition-colors  hover:text-fuchsia-blue-700 ${XlfontClass}`}>
-                Perguntas frequentes
+                FAQ
               </Link>
             </nav>
           </div>

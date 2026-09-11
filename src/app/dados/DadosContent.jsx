@@ -85,9 +85,9 @@ export function DadosContent() {
                         Dados e contexto
                     </p>
 
-                    <h1 className={`mt-3 ${Xl4fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl6fontClass}`}>
+                    <h1 className={`mt-3 ${Xl4fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                         Os números{" "}
-                        <span className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl6fontClass}`}>
+                        <span className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                             dizem tudo
                         </span>
                     </h1>
@@ -105,14 +105,14 @@ export function DadosContent() {
                             Estatísticas
                         </p>
 
-                        <h2 className={`mt-3 ${Xl3fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${xl5fontClass}`}>
+                        <h2 className={`mt-3 ${Xl3fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                             Principais{" "}
                             <span className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                                 números
                             </span>
                         </h2>
 
-                        <p className={`mx-auto mt-4 max-w-2xl ${XlfontClass} leading-relaxed dark:text-white md:text-base`}>
+                        <p className={`mx-auto mt-4 max-w-2xl ${XlfontClass} leading-relaxed dark:text-white`}>
                             Cards com dados importantes sobre comportamento, conexão e
                             toxicidade na comunidade gamer.
                         </p>
@@ -134,7 +134,7 @@ export function DadosContent() {
                                         <div className="h-full">
                                             <div className="flex h-107.5 flex-col justify-between rounded-[2rem] bg-fuchsia-blue-700 p-7 text-white shadow-xl ring-1 ring-fuchsia-blue-300/20">
                                                 <div>
-                                                    <p className={`${xl5fontClass} font-black leading-none md:${Xl6fontClass}`}>
+                                                    <p className={`${xl5fontClass} font-black leading-none`}>
                                                         {card.number}
                                                     </p>
 
@@ -164,7 +164,7 @@ export function DadosContent() {
                 </section>
 
                 <section className="text-center">
-                    <h2 className={`${Xl3fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${xl5fontClass}`}>
+                    <h2 className={`${Xl3fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                         O Huddle vem para{" "}
                         <span className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                             mudar essa história

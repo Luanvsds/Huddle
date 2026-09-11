@@ -5,8 +5,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useFontSize } from "./font-size";
 import { useState, useEffect } from "react";
+import { AvatarDropdown } from "../meuAvatarDropdown";
 
+function handleLogout() {
 
+  localStorage.removeItem("user_email");
+  localStorage.removeItem("user_senha");
+  localStorage.removeItem("user_dataNascimento");
+  localStorage.removeItem("user_apelido");
+  localStorage.removeItem("user_gameplay");
+  localStorage.removeItem("user_selectedGame");
+  localStorage.removeItem("user_horarios");
+  window.location.href = "/";
+}
 export default function Header() {
   const { XlfontClass, smfontClass } = useFontSize();
   const pathname = usePathname();
@@ -21,9 +32,8 @@ export default function Header() {
     setCarregando(false);
   }, []);
 
-  // Evita renderizar antes de verificar o localStorage no cliente
   if (carregando) {
-    return null; // Ou um estado visual neutro (Skeleton/Spinner)
+    return null;
   }
 
   return (
@@ -102,25 +112,9 @@ export default function Header() {
           >
             FAQ
           </Link>
-          {apelido ?
-            <Link href="/perfil" className="flex items-center gap-2 pl-30">
-              <span className={`${XlfontClass} font-bold text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>{apelido}</span>
-              <Image
-                src="/imagem-de-usuario.png"
-                alt="Símbolo de usuário"
-                width={50}
-                height={50}
-              />
-            </Link>
-            : <Link href="/conecte-se" className="flex items-center gap-2 pl-30">
-              <span className={`${XlfontClass} font-bold text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>Cadastro</span>
-              <Image
-                src="/imagem-de-usuario.png"
-                alt="Símbolo de usuário"
-                width={50}
-                height={50}
-              />
-            </Link>}
+          <div className="flex items-center gap-2 pl-30">
+            <AvatarDropdown apelido={apelido} onLogout={handleLogout} />
+          </div>
         </div>
 
         <details className="relative md:hidden">

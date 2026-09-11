@@ -7,10 +7,18 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import * as Selected from '@radix-ui/react-select';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+
+} from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
 import {
     Select,
     SelectContent,
@@ -18,6 +26,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { cpf } from "cpf-cnpj-validator";
+import { InputComMascara } from "@/components/ui/inputComMascara";
+import { useRef } from 'react';
+import { TermosModal } from "@/components/ui/meusTermos";
 
 export function ConecteSeContent() {
     const router = useRouter();
@@ -30,6 +42,7 @@ export function ConecteSeContent() {
     const [dataNascimento, setDataNascimento] = useState("");
     const [apelido, setApelido] = useState("");
     const [gameplay, setGameplay] = useState("");
+    const [cpfDigitado, setCpfDigitado] = useState("");
 
     const [horarios, setHorarios] = useState({
         manha: false,
@@ -79,6 +92,7 @@ export function ConecteSeContent() {
 
     const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
+    const maskRef = useRef(null);
     // A funcao senha valida sevre, como o nome diz, para verificar se todos os requisitos estao Corretos/preenchidos
     // fazemos essa validacao a partir do && que siginfica, basicamente 'e'. Onde para ser True, ele precisa que todas as regras sejam completadas.
 
@@ -100,7 +114,16 @@ export function ConecteSeContent() {
         hoje.getMonth(),
         hoje.getDate()
     ).toISOString().split('T')[0];
-    // Aqui estamos valindando o email. Estamos criando uma funcao para armazenar essas 2 regras e validar por meio do if Se é valido ou nao
+
+
+    function validarCPF(CPF) {
+        if (!CPF) return 'Preencha o campo';
+        if (!cpf.isValid(CPF)) {
+            return 'Digite um CPF válido.';
+        }
+
+        return null;
+    }
 
     const validarEmail = (value) => {
         if (!value) return 'Preencha o campo';
@@ -175,11 +198,13 @@ export function ConecteSeContent() {
         const dataNascimento = form.elements.namedItem('dataNascimento').value;
         const senha = form.elements.namedItem('senha').value;
         const apelido = form.elements.namedItem('apelido').value;
+        const cpf = form.elements.namedItem('cpf').value;
 
         const emailInvalido = validarEmail(email)
         const idadeInvalida = validarIdade(dataNascimento)
         const senhaInvalida = validarSenha(senha);
         const apelidoInvalido = validarApelido(apelido);
+        const cpfInvalido = validarCPF(cpf)
 
         setErros((prev) => {
             const erros = { ...prev };
@@ -195,11 +220,15 @@ export function ConecteSeContent() {
             } if (apelidoInvalido) {
                 erros.apelido = apelidoInvalido;
                 temErros = true;
+            } if (cpfInvalido) {
+                erros.cpf = cpfInvalido;
+                temErros = true;
             } else {
                 delete erros.email;
                 delete erros.dataNascimento;
                 delete erros.senha;
                 delete erros.apelido;
+                delete erros.cpf
             }
             return erros;
         })
@@ -276,7 +305,7 @@ export function ConecteSeContent() {
                                     </p>
                                 )}
                             </div>
-
+                            <div className="grid gap-5 md:grid-cols-2">
                             <div className="space-y-2">
                                 <Label
                                     htmlFor="senha"
@@ -382,6 +411,66 @@ export function ConecteSeContent() {
                                         {erros.senha}
                                     </p>
                                 )}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label
+                                        htmlFor="cpf"
+                                        className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                                    >
+                                        CPF
+                                    </Label>
+
+                                    <InputComMascara
+                                        maxLength={14}
+                                        id="cpf"
+                                        type="text"
+                                        mask="000.000.000-00"
+                                        placeholder="000.000.000-00"
+                                        value={cpfDigitado}
+                                        onChange={(e) => {
+                                            const valor = e.target.value;
+                                            setCpfDigitado(valor);
+
+                                            const error = validarCPF(valor);
+
+                                            setErros((prev) => {
+                                                const erros = { ...prev };
+                                                if (!error) {
+                                                    delete erros.cpf;
+                                                } else {
+                                                    erros.cpf = error;
+                                                }
+                                                return erros;
+                                            })
+                                        }}
+                                        className={estiloDoCampo(erros.cpf)}
+                                        onComplete={(valor) => {
+                                            setCpfDigitado(valor);
+                                            const error = validarCPF(valor);
+                                            setErros((prev) => {
+                                                const erros = { ...prev };
+                                                if (!error) {
+                                                    delete erros.cpf;
+                                                } else {
+                                                    erros.cpf = error;
+                                                }
+                                                return erros;
+                                            })
+                                        }}
+                                    />
+
+                                    {erros.cpf && (
+                                        <div>
+                                            <p className={`${smfontClass} font-medium text-red-600`}>
+                                                {erros.cpf}
+                                            </p>
+                                            <p className={`${smfontClass} font-medium text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
+                                                Fica tranquilo(a), não salvamos seu CPF!
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="grid gap-5 md:grid-cols-2">
@@ -531,10 +620,7 @@ export function ConecteSeContent() {
                                     </label>
                                 </div>
                             </div>
-
-                            <Label className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 text-sm gap-1`}>
-                                Ao clicar em participar, você declara ser maior de 18 anos, e aceitar os <Link className=" dark:hover:text-fuchsia-blue-700 hover:text-fuchsia-blue-950 no-underline hover:underline text-fuchsia-blue-500" href="/termos">termos de uso</Link> do Huddle.
-                            </Label>
+                            <TermosModal/>
                             <div className="grid gap-3 sm:grid-cols-2">
                                 <Button
                                     type="submit"

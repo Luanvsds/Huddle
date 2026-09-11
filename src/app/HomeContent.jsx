@@ -29,7 +29,7 @@ export function HomeContent() {
                   Comunidade gamer inteligente
                 </p>
 
-                <h1 className={`mt-4 ${Xl4fontClass} font-black leading-tight tracking-tight text-white md:${Xl6fontClass} lg:text-7xl`}>
+                <h1 className={`mt-4 ${Xl4fontClass} font-black leading-tight tracking-tight text-white`}>
                   Encontre seu{" "}
                   <span className="bg-linear-to-r from-fuchsia-blue-300 via-white to-fuchsia-blue-400 bg-clip-text text-transparent">
                     squad ideal
