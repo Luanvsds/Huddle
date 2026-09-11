@@ -20,7 +20,7 @@ export function FAQContent() {
                         Central de ajuda
                     </p>
 
-                    <h1 className={`mt-3 ${Xl4fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl6fontClass}`}>
+                    <h1 className={`mt-3 ${Xl6fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                         Perguntas{" "}
                         <span className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                             frequentes
@@ -39,11 +39,11 @@ export function FAQContent() {
                             FAQ
                         </p>
 
-                        <h2 className={`mt-2 ${XlfontClass} font-bold text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl4fontClass}`}>
+                        <h2 className={`mt-2 ${Xl4fontClass} font-bold text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                             Respostas rápidas para continuar jogando
                         </h2>
 
-                        <p className={`mt-3 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:text-base`}>
+                        <p className={`mt-3 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                             Abra uma pergunta abaixo para ver a resposta.
                         </p>
                     </div>
@@ -53,11 +53,11 @@ export function FAQContent() {
                             value="item-1"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Esqueci minha senha, como prosseguir?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     É super fácil! Na tela de login, toque em “Esqueci minha
                                     senha” e informe o e-mail cadastrado. Você receberá um link
@@ -75,11 +75,11 @@ export function FAQContent() {
                             value="item-2"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Conheci alguém tóxico. Como posso denunciar?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>Sentimos muito por essa experiência.</p>
 
                                 <p className="mt-2">
@@ -98,11 +98,11 @@ export function FAQContent() {
                             value="item-3"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Não consigo fazer login, como resolver?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     Confira primeiro se seu e-mail e senha estão corretos. Se
                                     ainda assim não funcionar:
@@ -129,11 +129,11 @@ export function FAQContent() {
                             value="item-4"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Como alterar as minhas informações pessoais?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>É bem simples, vá até Perfil e depois Editar Perfil.</p>
 
                                 <p className="mt-2">Exemplo: alterando sua foto:</p>
@@ -149,11 +149,11 @@ export function FAQContent() {
                             value="item-5"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Onde posso alterar minhas preferências?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     Assim como as informações pessoais, as preferências também
                                     ficam no seu perfil.
@@ -171,11 +171,11 @@ export function FAQContent() {
                             value="item-6"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Preciso bloquear um usuário, como posso fazer isso?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>Para bloquear um usuário:</p>
 
                                 <ol className="list-decimal pl-5">
@@ -195,11 +195,11 @@ export function FAQContent() {
                             value="item-7"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Como posso me tornar VIP no Huddle?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     Para turbinar sua experiência no Huddle, você só precisa
                                     acessar o seu perfil e selecionar a opção para se tornar
@@ -218,12 +218,12 @@ export function FAQContent() {
                             value="item-8"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Tenho uma sugestão de melhoria, como posso enviar para a equipe
                                 Huddle?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     Muito obrigado por querer ajudar nossa plataforma a crescer!
                                 </p>
@@ -244,11 +244,11 @@ export function FAQContent() {
                             value="item-9"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Como funciona o sistema de match do Huddle?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     O sistema de match do Huddle usa seus interesses, preferências
                                     e horário de preferência para jogar, sugerindo pessoas com
@@ -265,11 +265,11 @@ export function FAQContent() {
                             value="item-10"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Vai existir um chat de voz pelo Huddle?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     Inicialmente, todos os esforços do Huddle são para criar a
                                     melhor experiência de conexão de usuários.
@@ -291,11 +291,11 @@ export function FAQContent() {
                             value="item-11"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
-                            <AccordionTrigger className={`py-5 text-left text-base font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300 md:${lgfontClass}`}>
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
                                 Quero excluir minha conta, como prosseguir?
                             </AccordionTrigger>
 
-                            <AccordionContent className="pb-5 pr-6 text-base leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
                                     Que pena que você queira excluir sua conta. Pedimos que
                                     preencha o formulário final indicando melhorias para a gente.

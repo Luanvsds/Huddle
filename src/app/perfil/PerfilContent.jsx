@@ -24,7 +24,7 @@
                 />
                 </div>
 
-                <h1 className={`mt-4 ${Xl4fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl6fontClass}`}>
+                <h1 className={`mt-4 ${Xl6fontClass} font-black tracking-tight text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                 Termos de uso Huddle:
                 </h1>
 

@@ -38,7 +38,7 @@ export function SobreContent() {
     <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
       <div className="mx-auto max-w-6xl space-y-20">
         <section className="mx-auto max-w-4xl text-center">
-          <h1 className={`${Xl4fontClass} font-black uppercase leading-none text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl6fontClass}`}>
+          <h1 className={`${Xl4fontClass} font-black uppercase leading-none text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
             Ninguém
             <br />
             gosta de
