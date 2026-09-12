@@ -3,59 +3,23 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-const xLSIZES = [ 
-  "text-2xl",
-  "text-3xl",
-  "text-4xl"
-];
+const xLSIZES = ["text-2xl", "text-3xl", "text-4xl"];
 
-const xL3SIZES = [ 
-  "text-3xl",
-  "text-4xl",
-  "text-5xl"
-];
+const xL3SIZES = ["text-3xl", "text-4xl", "text-5xl"];
 
-const xL4SIZES = [ 
-  "text-4xl",
-  "text-5xl",
-  "text-6xl"
-];
+const xL4SIZES = ["text-4xl", "text-5xl", "text-6xl"];
 
-const xL5SIZES = [ 
-  "text-5xl",
-  "text-6xl",
-  "text-7xl"
-];
+const xL5SIZES = ["text-5xl", "text-6xl", "text-7xl"];
 
-const xL6SIZES = [ 
-  "text-6xl",
-  "text-7xl",
-  "text-7xl"
-];
+const xL6SIZES = ["text-6xl", "text-7xl", "text-7xl"];
 
-const SMSIZES = [ 
-  "text-sm",
-  "text-base",
-  "text-lg"
-];
+const SMSIZES = ["text-sm", "text-base", "text-lg"];
 
-const SM2SIZES = [ 
-  "text-base",
-  "text-lg",
-  "text-2xl"
-];
+const SM2SIZES = ["text-base", "text-lg", "text-2xl"];
 
-const XSSIZES = [ 
-  "text-xs",
-  "text-sm",
-  "text-base"
-];
+const XSSIZES = ["text-xs", "text-sm", "text-base"];
 
-const LGSIZES = [ 
-  "text-lg",
-  "text-2xl",
-  "text-3xl"
-];
+const LGSIZES = ["text-lg", "text-2xl", "text-3xl"];
 
 const FontSizeContext = createContext(undefined);
 
@@ -101,6 +65,7 @@ export function FontSizeProvider({ children }) {
 
 export function useFontSize() {
   const ctx = useContext(FontSizeContext);
-  if (!ctx) throw new Error("useFontSize deve ser usado dentro de FontSizeProvider");
+  if (!ctx)
+    throw new Error("useFontSize deve ser usado dentro de FontSizeProvider");
   return ctx;
 }
