@@ -21,6 +21,11 @@ const XSSIZES = ["text-xs", "text-sm", "text-base"];
 
 const LGSIZES = ["text-lg", "text-2xl", "text-3xl"];
 
+const ICONSIZES = ["size-5", "size-7", "size-10"];
+
+const CONTROLSIZES = ["size-10", "size-15", "size-20"];
+
+const LOGOSIZES = ["size-10", "size-17", "size-23"]
 const FontSizeContext = createContext(undefined);
 
 export function FontSizeProvider({ children }) {
@@ -52,6 +57,9 @@ export function FontSizeProvider({ children }) {
         sm2fontClass: SM2SIZES[level],
         XsfontClass: XSSIZES[level],
         lgfontClass: LGSIZES[level],
+        controlSizes: CONTROLSIZES[level],
+        logoSizes: LOGOSIZES[level],
+        iconSizes: ICONSIZES[level],
         increase,
         decrease,
         canIncrease: level < xLSIZES.length - 1,

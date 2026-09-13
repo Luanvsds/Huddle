@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFontSize } from "@/components/ui/layout/font-size";
-import { useState } from "react";
+import { use, useState } from "react";
+import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
 import * as Selected from "@radix-ui/react-select";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import {} from "@/components/ui/card";
+import { } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -30,6 +31,8 @@ import { cpf } from "cpf-cnpj-validator";
 import { InputComMascara } from "@/components/ui/inputComMascara";
 import { useRef } from "react";
 import { TermosModal } from "@/components/ui/meusTermos";
+import { MeuSwitch } from "@/components/ui/meuSwitch";
+import { Textarea } from "@/components/ui/textarea";
 
 export function ConecteSeContent() {
   const router = useRouter();
@@ -43,25 +46,52 @@ export function ConecteSeContent() {
   const [dataNascimento, setDataNascimento] = useState("");
   const [apelido, setApelido] = useState("");
   const [gameplay, setGameplay] = useState("");
+  const [microfone, setMicrofone] = useState("");
   const [cpfDigitado, setCpfDigitado] = useState("");
+  const [bio, setBio] = useState("");
+  const [nome, setNome] = useState("");
+  const [motivoJogo, setMotivoJogo] = useState("");
+  const [sobre, setSobre] = useState("");
+  const [cidade, setCidade] = useState("");
 
   const [horarios, setHorarios] = useState({
     manha: false,
     tarde: false,
     noite: false,
-    fimDeSemana: false,
+    fimDeSemana: false
   });
 
-  const handleCheckboxChange = (key, checked) => {
+  const [plataformas, setPlataformas] = useState({
+    pc: false,
+    console: false,
+    mobile: false,
+  });
+
+  const [idiomas, setIdiomas] = useState({
+    PT: false,
+    EN: false,
+    ES: false
+  });
+
+  const handleHorariosChange = (key, checked) => {
     setHorarios((prev) => ({ ...prev, [key]: checked }));
   };
+
+  const handlePlataformasChange = (key, checked) => {
+    setPlataformas((prev) => ({ ...prev, [key]: checked }));
+  };
+
+  const handleIdiomasChange = (key, checked) => {
+    setIdiomas((prev) => ({ ...prev, [key]: checked }));
+  };
+
   ("use client");
 
   const games = [
     { id: 1, name: "The Legend of Zelda" },
-    { id: 2, name: "Super Mario Bros" },
+    { id: 2, name: "Valorant" },
     { id: 3, name: "God of War" },
-    { id: 4, name: "Baldurs Gate 3" },
+    { id: 4, name: "League of Legends" },
   ];
 
   const playstyles = [
@@ -70,18 +100,17 @@ export function ConecteSeContent() {
     { id: 3, name: "Tryhard" },
     { id: 4, name: "Competitivo" },
   ];
+  const microfoneOptions = [
+    { id: 1, name: "Não informado" },
+    { id: 2, name: "Disponível" },
+    { id: 3, name: "Não Disponível" },
+  ];
 
-  // Aqui parece ser mais complicado, porem nao é. A logica é exatamente a mesma, servindo para as futuras validacoes
-  // Mostrarsenha serve para quando clicarmos no olhinho o a senha fica visivel oui nao. Fazemos isso controlando o type do input.
-  // Ja o mostrarRegraSenha serve para mostrar as regras quando o usuario clicar no campo ou se ele errar a senha
-  // E o erros ele serve para guardar os erros ao fazer o preenchimento do formulario. Ela usa o setErros para guarda-los. Assim facilitando muito fazer as funcoes.
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [erros, setErros] = useState({});
-  const [selectedGame, setSelectedGame] = useState("");
+  const [jogoSelecionado, setJogoSelecionado] = useState("");
+  const [completarPerfil, setCompletarPerfil] = useState(false)
 
-  // Aqui basicamente estamos fazendo todas as validacoes das senhas e guardando em uma variavel
-  // Aqui estamos usando uma expressao regular(regex) para procurar os padroes dentro da senha
-  // e o .teste serve para verificar se ele existe na nossa variavel, q nesse momento é a "senha"
   const senhaTemMinimo = senha.length >= 12;
   const senhaTemMaiuscula = /[A-Z]/.test(senha);
   const senhaTemMinuscula = /[a-z]/.test(senha);
@@ -89,10 +118,6 @@ export function ConecteSeContent() {
   const senhaTemEspecial = /[^A-Z a-z 0-9]/.test(senha);
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
-
-  const maskRef = useRef(null);
-  // A funcao senha valida sevre, como o nome diz, para verificar se todos os requisitos estao Corretos/preenchidos
-  // fazemos essa validacao a partir do && que siginfica, basicamente 'e'. Onde para ser True, ele precisa que todas as regras sejam completadas.
 
   const senhaValida =
     senhaTemMinimo &&
@@ -161,7 +186,6 @@ export function ConecteSeContent() {
     const diferencaMes = hoje.getMonth() - nascimento.getMonth();
     const diferencaDia = hoje.getDate() - nascimento.getDate();
 
-    // Subtrai 1 ano se ainda não fez aniversário esse ano
     const fezAniversario =
       diferencaMes > 0 || (diferencaMes === 0 && diferencaDia >= 0);
     const idadeReal = fezAniversario ? idade : idade - 1;
@@ -169,6 +193,7 @@ export function ConecteSeContent() {
     if (idadeReal < 18)
       return "Digite uma data válida, ou lembre-se: O Huddle é uma comunidade 18+. Menores de idade não podem se cadastrar.";
 
+    localStorage.setItem('idade', idadeReal)
     return null;
   }
 
@@ -182,9 +207,7 @@ export function ConecteSeContent() {
     return null;
   }
 
-  // A funcao estiloDoCampo serve para mudar a cor do campo, caso ele esteja com algum erro ele fica vermelho Se estiver normal, ele fica roxo, apenas para dar um foco maior no campo escolhido
   function estiloDoCampo(campoTemErro) {
-    // Define o visual normal ou de erro dos campos do formulário
     if (campoTemErro) {
       return "h-12 border-red-500 bg-red-50 text-fuchsia-blue-950 placeholder:text-red-400 focus-visible:ring-red-500 dark:border-red-500 dark:bg-red-950/30 dark:text-fuchsia-blue-100 dark:placeholder:text-red-300/70";
     }
@@ -192,8 +215,6 @@ export function ConecteSeContent() {
     return "h-12 border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 placeholder:text-fuchsia-blue-500 focus-visible:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 dark:placeholder:text-fuchsia-blue-200/70";
   }
   function enviarFormulario(event) {
-    // Essa função é chamada quando o usuário clica no botão Participar.
-    // Antes de mandar para a tela de sucesso, ela confere se os campos estão preenchidos corretamente.
     event.preventDefault();
     let temErros = false;
 
@@ -245,9 +266,17 @@ export function ConecteSeContent() {
       localStorage.setItem("user_senha", senha);
       localStorage.setItem("user_dataNascimento", dataNascimento);
       localStorage.setItem("user_apelido", apelido);
-      localStorage.setItem("user_gameplay", gameplay);
-      localStorage.setItem("user_selectedGame", selectedGame);
+      localStorage.setItem("user_estilo", gameplay);
+      localStorage.setItem("user_jogo", jogoSelecionado);
       localStorage.setItem("user_horarios", JSON.stringify(horarios));
+      localStorage.setItem("user_plataformas", JSON.stringify(plataformas));
+      localStorage.setItem("user_idiomas", JSON.stringify(idiomas));
+      localStorage.setItem("user_bio", bio);
+      localStorage.setItem("user_sobre", sobre);
+      localStorage.setItem("user_nome", nome);
+      localStorage.setItem("user_motivo_jogo", motivoJogo);
+      localStorage.setItem("user_cidade", cidade);
+      localStorage.setItem("user_microfone", microfone);
       window.location.href = "/sucesso";
     }
   }
@@ -364,11 +393,10 @@ export function ConecteSeContent() {
 
                   {mostrarRegrasSenha && (
                     <div
-                      className={`rounded-2xl border p-4 ${smfontClass} ${
-                        erros.senha
-                          ? "border-red-300 bg-red-50"
-                          : "border-fuchsia-blue-200 bg-fuchsia-blue-50"
-                      } dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/30`}
+                      className={`rounded-2xl border p-4 ${smfontClass} ${erros.senha
+                        ? "border-red-300 bg-red-50"
+                        : "border-fuchsia-blue-200 bg-fuchsia-blue-50"
+                        } dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/30`}
                     >
                       <p className="mb-2 font-medium text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
                         Sua senha precisa ter:
@@ -436,7 +464,6 @@ export function ConecteSeContent() {
                   >
                     CPF
                   </Label>
-
                   <InputComMascara
                     maxLength={14}
                     id="cpf"
@@ -447,9 +474,7 @@ export function ConecteSeContent() {
                     onChange={(e) => {
                       const valor = e.target.value;
                       setCpfDigitado(valor);
-
                       const error = validarCPF(valor);
-
                       setErros((prev) => {
                         const erros = { ...prev };
                         if (!error) {
@@ -572,118 +597,321 @@ export function ConecteSeContent() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <Label
-                  className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
-                >
-                  Tipo de gameplay
-                </Label>
 
-                <Select value={gameplay} onValueChange={setGameplay}>
-                  <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
-                    <SelectValue placeholder="Escolha seu estilo" />
-                  </SelectTrigger>
+              <MeuSwitch
+                checked={completarPerfil}
+                onChange={setCompletarPerfil}
+                label="Completar perfil"
+                description="Mostra campos extras"
+              />
+              {completarPerfil &&
+                <>
+                  <Separator className="my-6" />
+                  <div className="space-y-2">
+                    <Label
+                      className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                    >
+                      Tipo de gameplay
+                    </Label>
 
-                  <SelectContent side="bottom" align="start" position="popper">
-                    {playstyles.map((playstyle) => (
-                      <SelectItem
-                        key={playstyle.id}
-                        value={playstyle.name}
-                        className={XlfontClass}
+                    <Select className="h-12" value={gameplay} onValueChange={setGameplay}>
+                      <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
+                        <SelectValue placeholder="Escolha seu estilo" />
+                      </SelectTrigger>
+
+                      <SelectContent side="bottom" align="start" position="popper">
+                        {playstyles.map((playstyle) => (
+                          <SelectItem
+                            key={playstyle.id}
+                            value={playstyle.name}
+                            className={XlfontClass}
+                          >
+                            {" "}
+                            {playstyle.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label
+                      className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                    >
+                      Jogo preferido
+                    </Label>
+                    <Select
+                      className="w-1xl"
+                      value={jogoSelecionado}
+                      onValueChange={setJogoSelecionado}
+                    >
+                      <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
+                        <SelectValue placeholder="Selecione um jogo" />
+                      </SelectTrigger>
+
+                      <SelectContent side="bottom" align="start" position="popper">
+                        {games.map((game) => (
+                          <SelectItem
+                            key={game.id}
+                            value={game.name}
+                            className={XlfontClass}
+                          >
+                            {" "}
+                            {game.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-4">
+                    <Label
+                      className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                    >
+                      Horários que costuma jogar:
+                    </Label>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
                       >
-                        {" "}
-                        {playstyle.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label
-                  className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
-                >
-                  Jogo preferido
-                </Label>
-                <Select
-                  className="w-1xl"
-                  value={selectedGame}
-                  onValueChange={setSelectedGame}
-                >
-                  <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
-                    <SelectValue placeholder="Selecione um jogo" />
-                  </SelectTrigger>
+                        <Checkbox
+                          checked={horarios.manha}
+                          onCheckedChange={(val) =>
+                            handleHorariosChange("manha", val)
+                          }
+                        />
+                        Manhã
+                      </label>
 
-                  <SelectContent side="bottom" align="start" position="popper">
-                    {games.map((game) => (
-                      <SelectItem
-                        key={game.id}
-                        value={game.name}
-                        className={XlfontClass}
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100`}
                       >
-                        {" "}
-                        {game.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-4">
-                <Label
-                  className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
-                >
-                  Horários que costuma jogar:
-                </Label>
+                        <Checkbox
+                          checked={horarios.tarde}
+                          onCheckedChange={(val) =>
+                            handleHorariosChange("tarde", val)
+                          }
+                        />
+                        Tarde
+                      </label>
 
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <label
-                    className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-background dark:text-fuchsia-blue-100 `}
-                  >
-                    <Checkbox
-                      checked={horarios.manha}
-                      onCheckedChange={(val) =>
-                        handleCheckboxChange("manha", val)
-                      }
-                    />
-                    Manhã
-                  </label>
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100`}
+                      >
+                        <Checkbox
+                          checked={horarios.noite}
+                          onCheckedChange={(val) =>
+                            handleHorariosChange("noite", val)
+                          }
+                        />
+                        Noite
+                      </label>
 
-                  <label
-                    className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-background dark:text-fuchsia-blue-100`}
-                  >
-                    <Checkbox
-                      checked={horarios.tarde}
-                      onCheckedChange={(val) =>
-                        handleCheckboxChange("tarde", val)
-                      }
-                    />
-                    Tarde
-                  </label>
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100`}
+                      >
+                        <Checkbox
+                          checked={horarios.fimDeSemana}
+                          onCheckedChange={(val) =>
+                            handleHorariosChange("fimDeSemana", val)
+                          }
+                        />
+                        Fins de semana
+                      </label>
+                    </div>
+                  </div>
 
-                  <label
-                    className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-background dark:text-fuchsia-blue-100`}
+                  <Label
+                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
                   >
-                    <Checkbox
-                      checked={horarios.noite}
-                      onCheckedChange={(val) =>
-                        handleCheckboxChange("noite", val)
-                      }
-                    />
-                    Noite
-                  </label>
+                    Bio do Perfil
+                  </Label>
+                  <Textarea id="bio" value={bio} placeholder="Insira a bio do seu perfil" className={estiloDoCampo()} onChange={(e) => {
+                    const valor = e.target.value;
+                    setBio(valor)
+                  }} />
 
-                  <label
-                    className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-background dark:text-fuchsia-blue-100`}
+                  <Label
+                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
                   >
-                    <Checkbox
-                      checked={horarios.fimDeSemana}
-                      onCheckedChange={(val) =>
-                        handleCheckboxChange("fimDeSemana", val)
-                      }
-                    />
-                    Fins de semana
-                  </label>
-                </div>
-              </div>
+                    Sobre você
+                  </Label>
+                  <Textarea id="sobre" value={sobre} placeholder="Fale um pouco sobre você" className={estiloDoCampo()} onChange={(e) => {
+                    const valor = e.target.value;
+                    setSobre(valor)
+                  }} />
+
+                  <Label
+                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                  >
+                    Motivo jogo preferido
+                  </Label>
+                  <Textarea id="motivoJogo"
+                    value={motivoJogo}
+                    placeholder="Conte o motivo de ter escolhido seu jogo preferido"
+                    className={estiloDoCampo()}
+                    onChange={(e) => {
+                      const valor = e.target.value;
+                      setMotivoJogo(valor)
+                    }} />
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="nome"
+                        className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                      >
+                        Nome
+                      </Label>
+
+                      <Input
+                        id="nome"
+                        type="text"
+                        placeholder="Qual o seu nome?"
+                        value={nome}
+                        onChange={(e) => {
+                          const valor = e.target.value;
+                          setNome(valor);
+                        }}
+                        className={estiloDoCampo()} />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor="cidade"
+                        className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                      >
+                        Cidade
+                      </Label>
+
+                      <Input
+                        id="cidade"
+                        type="text"
+                        placeholder="Qual o nome da sua cidade?"
+                        value={cidade}
+                        onChange={(e) => {
+                          const valor = e.target.value;
+                          setCidade(valor);
+                        }}
+                        className={estiloDoCampo()} />
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <Label
+                      className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                    >
+                      Plataformas que costuma jogar:
+                    </Label>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
+                      >
+                        <Checkbox
+                          checked={plataformas.pc}
+                          onCheckedChange={(val) =>
+                            handlePlataformasChange("pc", val)
+                          }
+                        />
+                        PC
+                      </label>
+
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
+                      >
+                        <Checkbox
+                          checked={plataformas.console}
+                          onCheckedChange={(val) =>
+                            handlePlataformasChange("console", val)
+                          }
+                        />
+                        Console
+                      </label>
+
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
+                      >
+                        <Checkbox
+                          checked={plataformas.mobile}
+                          onCheckedChange={(val) =>
+                            handlePlataformasChange("mobile", val)
+                          }
+                        />
+                        Mobile
+                      </label>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <Label
+                      className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                    >
+                      Idiomas que você fala:
+                    </Label>
+
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
+                      >
+                        <Checkbox
+                          checked={idiomas.PT}
+                          onCheckedChange={(val) =>
+                            handleIdiomasChange("PT", val)
+                          }
+                        />
+                        Português
+                      </label>
+
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
+                      >
+                        <Checkbox
+                          checked={idiomas.EN}
+                          onCheckedChange={(val) =>
+                            handleIdiomasChange("EN", val)
+                          }
+                        />
+                        Inglês
+                      </label>
+
+                      <label
+                        className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
+                      >
+                        <Checkbox
+                          checked={idiomas.ES}
+                          onCheckedChange={(val) =>
+                            handleIdiomasChange("ES", val)
+                          }
+                        />
+                        Espanhol
+                      </label>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label
+                      className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                    >
+                      Microfone
+                    </Label>
+
+                    <Select className="h-12" value={microfone} onValueChange={setMicrofone}>
+                      <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
+                        <SelectValue placeholder="Escolha seu estilo" />
+                      </SelectTrigger>
+
+                      <SelectContent side="bottom" align="start" position="popper">
+                        {microfoneOptions.map((option) => (
+                          <SelectItem
+                            key={option.id}
+                            value={option.name}
+                            className={XlfontClass}
+                          >
+                            {" "}
+                            {option.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </>
+              }
               <TermosModal />
               <div className="grid gap-3 sm:grid-cols-2">
                 <Button

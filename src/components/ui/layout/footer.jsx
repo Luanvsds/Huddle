@@ -18,13 +18,19 @@ import {
 } from "lucide-react";
 
 import { useFontSize } from "@/components/ui/layout/font-size";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   const {
     XsfontClass,
     smfontClass,
     sm2fontClass,
+    iconSizes,
+    logoSizes
   } = useFontSize();
+
+  const [logado, setLogado] = useState(false);
+  
 
   const idealizadores = [
     "Giovanna",
@@ -35,16 +41,44 @@ export default function Footer() {
   ];
 
   const links = [
-    { nome: "Home", href: "/" },
-    { nome: "Match", href: "/match" },
-    { nome: "Sobre", href: "/sobre" },
-    { nome: "Dados", href: "/dados" },
-    { nome: "FAQ", href: "/faq" },
+    {
+      href: "/",
+      nome: "Home",
+    },
+
+    {
+      href: logado ? "/perfil" : "/conecte-se",
+      nome: logado ? "Perfil" : "Cadastro",
+    },
+
+    ...(logado
+      ? [
+        {
+          href: "/huddle",
+          nome: "Huddle",
+        },
+      ]
+      : []),
+
+    {
+      href: "/sobre",
+      nome: "Sobre",
+    },
+
+    {
+      href: "/dados",
+      nome: "Dados",
+    },
+
+    {
+      href: "/faq",
+      nome: "FAQ",
+    },
   ];
 
   const socialClass = `
     flex
-    size-10
+    ${iconSizes}
     items-center
     justify-center
     rounded-full
@@ -67,6 +101,13 @@ export default function Footer() {
     dark:hover:text-white
   `;
 
+  useEffect(() => {
+    const apelidoSalvo = localStorage.getItem("user_apelido");
+    const emailSalvo = localStorage.getItem("user_email");
+
+    setLogado(Boolean(apelidoSalvo && emailSalvo))
+  }, []);
+
   return (
     <footer
       className="
@@ -74,7 +115,7 @@ export default function Footer() {
         overflow-hidden
         border-t
         border-fuchsia-blue-200/70
-        bg-gradient-to-b
+        bg-linear-to-b
         from-fuchsia-blue-50/80
         via-background
         to-background
@@ -114,7 +155,7 @@ export default function Footer() {
         "
       />
 
-      <div className="relative mx-auto w-full max-w-[1500px] px-6 py-10 lg:px-10 xl:px-12 2xl:px-16">
+      <div className="relative mx-auto w-full  px-6 py-10">
         {/* =====================================================
             PARTE PRINCIPAL DO FOOTER
         ====================================================== */}
@@ -126,9 +167,9 @@ export default function Footer() {
               className="inline-flex items-center gap-3"
             >
               <div
-                className="
+                className={`
                   flex
-                  size-12
+                  ${iconSizes}
                   items-center
                   justify-center
                   rounded-2xl
@@ -138,14 +179,15 @@ export default function Footer() {
 
                   dark:border-white/10
                   dark:bg-white/5
-                "
+                `}
               >
                 <Image
                   src="/header-pinguim.png"
-                  alt="Mascote do Huddle"
-                  width={40}
-                  height={40}
-                  className="size-9 object-contain"
+                  alt="Logo do Huddle"
+                  width={50}
+                  height={50}
+                  className={`${logoSizes} object-contain`}
+                  priority
                 />
               </div>
 
@@ -233,35 +275,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ===== Explorar ===== */}
-          <div>
-            <p
-              className={`${smfontClass} font-bold text-fuchsia-blue-950 dark:text-white`}
-            >
-              Explorar
-            </p>
-
-            <nav className="mt-4 flex flex-col items-start gap-2">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`
-                    ${smfontClass}
-                    relative
-                    text-muted-foreground
-                    transition-colors
-                    duration-200
-                    hover:text-fuchsia-blue-700
-                    dark:hover:text-fuchsia-blue-300
-                  `}
-                >
-                  {link.nome}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
           {/* ===== Idealizadores ===== */}
           <div>
             <div className="flex items-center gap-2">
@@ -295,7 +308,7 @@ export default function Footer() {
                     text-fuchsia-blue-950
 
                     dark:border-white/10
-                    dark:bg-white/[0.03]
+                    dark:bg-white/3
                     dark:text-white/80
                   `}
                 >
@@ -304,7 +317,36 @@ export default function Footer() {
               ))}
             </div>
           </div>
+          {/* ===== Explorar ===== */}
+          <div className="pl-100">
+            <p
+              className={`${smfontClass} font-bold text-fuchsia-blue-950 dark:text-white `}
+            >
+              Explorar
+            </p>
+
+            <nav className="prmt-4 flex flex-col items-start gap-3">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`
+                    ${smfontClass}
+                    relative
+                    text-muted-foreground
+                    transition-colors
+                    duration-200
+                    hover:text-fuchsia-blue-700
+                    dark:hover:text-fuchsia-blue-300
+                  `}
+                >
+                  {link.nome}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
+
 
         {/* =====================================================
             PARTE INFERIOR

@@ -33,18 +33,16 @@ const perfis = [
     gameplay: "Tryhard",
     horario: "Noite",
     plataforma: "PC",
-    afinidade: 87,
     banner:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=520&fit=crop&auto=format",
   },
   {
     nome: "MiraGG",
-    jogo: "Baldurs Gate 3",
+    jogo: "Valorant",
     microfone: "Não disponível",
     gameplay: "Casual",
     horario: "Tarde",
     plataforma: "Console",
-    afinidade: 72,
     banner:
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&h=520&fit=crop&auto=format",
   },
@@ -61,7 +59,7 @@ const perfis = [
   },
   {
     nome: "PixelRush",
-    jogo: "Super Mario Bros",
+    jogo: "League of Legends",
     microfone: "Disponível",
     gameplay: "Casual",
     horario: "Fins de semana",
@@ -79,56 +77,6 @@ const perfilUsuario = {
   microfone: "Disponível",
   plataforma: "PC",
 };
-
-// A afinidade está mockada nos perfis para esta versão de demonstração.
-// Depois ela pode voltar a ser calculada dinamicamente com os dados reais do cadastro.
-
-// Mascote simples usado dentro do selo de sinergia,
-// baseado na alternativa visual que você aprovou no Figma.
-function HuddleMascot({ className = "" }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      <path
-        d="M12 2C8 2 5 6 5 11.5C5 17 7 22 12 22C17 22 19 17 19 11.5C19 6 16 2 12 2Z"
-        fill="currentColor"
-        fillOpacity="0.15"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M8.5 13C8.5 13 10.5 15 12 15C13.5 15 15.5 13 15.5 13"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9" cy="9" r="1.25" fill="currentColor" />
-      <circle cx="15" cy="9" r="1.25" fill="currentColor" />
-      <path
-        d="M4 14C2.5 14 2 16 2 16"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M20 14C21.5 14 22 16 22 16"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export function MatchContent() {
   const {
@@ -149,18 +97,13 @@ export function MatchContent() {
   const x = useMotionValue(0);
 
   // Conforme o card vai para esquerda/direita,
-  // também inclinamos ele para dar o efeito do Figma.
   const rotacao = useTransform(x, [-300, 0, 300], [-12, 0, 12]);
 
   // ===== Indicadores visuais do swipe =====
   // Conforme o card se desloca, os indicadores aparecem.
-
   const opacidadeConectar = useTransform(x, [40, 120], [0, 1]);
-
   const escalaConectar = useTransform(x, [40, 120], [0.9, 1]);
-
   const opacidadePular = useTransform(x, [-120, -40], [1, 0]);
-
   const escalaPular = useTransform(x, [-120, -40], [1, 0.9]);
 
   // ===== RASTROS VISUAIS DO SWIPE =====
@@ -172,21 +115,23 @@ export function MatchContent() {
   // O próximo perfil fica discretamente atrás do atual e cresce
   // enquanto o card da frente é arrastado para qualquer lado.
   const escalaProximoCard = useTransform(x, [-320, 0, 320], [1, 0.965, 1]);
-
   const yProximoCard = useTransform(x, [-320, 0, 320], [0, 18, 0]);
-
   const opacidadeProximoCard = useTransform(x, [-320, 0, 320], [1, 0.78, 1]);
-
   const perfilSelecionado = perfis[perfilAtual];
   const proximoPerfilSelecionado = perfis[(perfilAtual + 1) % perfis.length];
 
   // Afinidade temporariamente mockada para a apresentação.
-  const afinidade = perfilSelecionado.afinidade;
+  const afinidade = calcularAfinidade();
+
+  function calcularAfinidade() {
+    const mesmoGameplay = perfilUsuario.gameplay === perfilSelecionado.gameplay;
+    const mesmoHorario = perfilUsuario.horario === perfilSelecionado.horario;
+    const mesmoMicrofone = perfilUsuario.microfone === perfilSelecionado.microfone;
+    const mesmaPlataforma = perfilUsuario.plataforma === perfilSelecionado.plataforma;
+    const mesmoJogo = perfilUsuario.jogo == perfilSelecionado.jogo;
+  }
 
   // ===== CÍRCULO DE AFINIDADE =====
-  // O Figma escala o anel e o conteúdo juntos.
-  // Aqui o círculo, o número e a legenda acompanham o mesmo nível
-  // de acessibilidade sem a palavra "afinidade" encostar no número.
   const tamanhoCirculo = [92, 108, 124][level] ?? 108;
   const numeroAfinidade = [20, 24, 28][level] ?? 24;
   const legendaAfinidade = [7, 8, 9][level] ?? 8;
@@ -195,73 +140,65 @@ export function MatchContent() {
   const circunferencia = 2 * Math.PI * raioCirculo;
   const progressoCirculo = circunferencia - (afinidade / 100) * circunferencia;
 
-  // ===== COMPARAÇÕES DO PERFIL =====
-  const mesmoGameplay = perfilUsuario.gameplay === perfilSelecionado.gameplay;
-  const mesmoHorario = perfilUsuario.horario === perfilSelecionado.horario;
-  const mesmoMicrofone =
-    perfilUsuario.microfone === perfilSelecionado.microfone;
-  const mesmaPlataforma =
-    perfilUsuario.plataforma === perfilSelecionado.plataforma;
-
   // ===== SELO DE SINERGIA =====
   // Cada tier usa uma família de cores diferente para a qualidade
   // da sinergia ficar evidente só de bater o olho.
   const tierInfo =
     afinidade >= 90
       ? {
-          titulo: "SINERGIA TIER S",
-          subtitulo: "ESQUADRÃO DE ELITE",
-          borda:
-            "border-amber-500/30 bg-amber-50/80 dark:border-amber-400/25 dark:bg-amber-500/5",
-          brilho:
-            "bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.22),transparent_62%)]",
-          hexagono: "text-amber-600/30 dark:text-amber-400/25",
-          mascote: "text-amber-700 dark:text-amber-300",
-          tituloCor:
-            "from-amber-800 via-amber-500 to-amber-700 dark:from-amber-200 dark:via-amber-400 dark:to-amber-200",
-          subtituloCor: "text-amber-800/70 dark:text-amber-400/70",
-        }
+        titulo: "SINERGIA TIER S",
+        subtitulo: "ESQUADRÃO DE ELITE",
+        borda:
+          "border-amber-500/30 bg-amber-50/80 dark:border-amber-400/25 dark:bg-amber-500/5",
+        brilho:
+          "bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.22),transparent_62%)]",
+        hexagono: "text-amber-600/30 dark:text-amber-400/25",
+        mascote: "text-amber-700 dark:text-amber-300",
+        tituloCor:
+          "from-amber-800 via-amber-500 to-amber-700 dark:from-amber-200 dark:via-amber-400 dark:to-amber-200",
+        subtituloCor: "text-amber-800/70 dark:text-amber-400/70",
+      }
       : afinidade >= 75
         ? {
-            titulo: "SINERGIA TIER A",
-            subtitulo: "CONEXÃO MUITO FORTE",
-            borda:
-              "border-cyan-500/30 bg-cyan-50/80 dark:border-cyan-400/25 dark:bg-cyan-500/5",
-            brilho:
-              "bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.20),transparent_62%)]",
-            hexagono: "text-cyan-600/30 dark:text-cyan-300/25",
-            mascote: "text-cyan-700 dark:text-cyan-300",
-            tituloCor:
-              "from-cyan-800 via-sky-500 to-cyan-700 dark:from-cyan-200 dark:via-sky-300 dark:to-cyan-200",
-            subtituloCor: "text-cyan-800/70 dark:text-cyan-300/70",
-          }
+          titulo: "SINERGIA TIER A",
+          subtitulo: "CONEXÃO MUITO FORTE",
+          borda:
+            "border-cyan-500/30 bg-cyan-50/80 dark:border-cyan-400/25 dark:bg-cyan-500/5",
+          brilho:
+            "bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.20),transparent_62%)]",
+          hexagono: "text-cyan-600/30 dark:text-cyan-300/25",
+          mascote: "text-cyan-700 dark:text-cyan-300",
+          tituloCor:
+            "from-cyan-800 via-sky-500 to-cyan-700 dark:from-cyan-200 dark:via-sky-300 dark:to-cyan-200",
+          subtituloCor: "text-cyan-800/70 dark:text-cyan-300/70",
+        }
         : afinidade >= 60
           ? {
-              titulo: "SINERGIA TIER B",
-              subtitulo: "BOA SINCRONIA",
-              borda:
-                "border-violet-500/30 bg-violet-50/80 dark:border-violet-400/25 dark:bg-violet-500/5",
-              brilho:
-                "bg-[radial-gradient(ellipse_at_top,rgba(139,124,246,0.20),transparent_62%)]",
-              hexagono: "text-violet-600/30 dark:text-violet-300/25",
-              mascote: "text-violet-700 dark:text-violet-300",
-              tituloCor:
-                "from-violet-800 via-fuchsia-blue-600 to-violet-700 dark:from-violet-200 dark:via-fuchsia-blue-300 dark:to-violet-200",
-              subtituloCor: "text-violet-800/70 dark:text-violet-300/70",
-            }
+            titulo: "SINERGIA TIER B",
+            subtitulo: "BOA SINCRONIA",
+            borda:
+              "border-violet-500/30 bg-violet-50/80 dark:border-violet-400/25 dark:bg-violet-500/5",
+            brilho:
+              "bg-[radial-gradient(ellipse_at_top,rgba(139,124,246,0.20),transparent_62%)]",
+            hexagono: "text-violet-600/30 dark:text-violet-300/25",
+            mascote: "text-violet-700 dark:text-violet-300",
+            tituloCor:
+              "from-violet-800 via-fuchsia-blue-600 to-violet-700 dark:from-violet-200 dark:via-fuchsia-blue-300 dark:to-violet-200",
+            subtituloCor: "text-violet-800/70 dark:text-violet-300/70",
+          }
           : {
-              titulo: "SINERGIA TIER C",
-              subtitulo: "EM EVOLUÇÃO",
-              borda:
-                "border-slate-400/35 bg-slate-100/80 dark:border-slate-500/25 dark:bg-slate-400/5",
-              brilho:
-                "bg-[radial-gradient(ellipse_at_top,rgba(148,163,184,0.18),transparent_62%)]",
-              hexagono: "text-slate-500/35 dark:text-slate-400/25",
-              mascote: "text-slate-700 dark:text-slate-300",
-              tituloCor:
-                "from-slate-800 via-slate-500 to-slate-700 dark:from-slate-200 dark:via-slate-300 dark:to-slate-200",
-              subtituloCor: "text-slate-700/70 dark:text-slate-400/70",
-            };
+            titulo: "SINERGIA TIER C",
+            subtitulo: "EM EVOLUÇÃO",
+            borda:
+              "border-slate-400/35 bg-slate-100/80 dark:border-slate-500/25 dark:bg-slate-400/5",
+            brilho:
+              "bg-[radial-gradient(ellipse_at_top,rgba(148,163,184,0.18),transparent_62%)]",
+            hexagono: "text-slate-500/35 dark:text-slate-400/25",
+            mascote: "text-slate-700 dark:text-slate-300",
+            tituloCor:
+              "from-slate-800 via-slate-500 to-slate-700 dark:from-slate-200 dark:via-slate-300 dark:to-slate-200",
+            subtituloCor: "text-slate-700/70 dark:text-slate-400/70",
+          };
 
   const microfoneDisponivel = perfilSelecionado.microfone === "Disponível";
 
@@ -1104,26 +1041,6 @@ export function MatchContent() {
           </aside>
         </div>
       </section>
-
-      {/* ===== CONFIRMAÇÃO DE CONEXÃO ===== */}
-      {conviteEnviado && (
-        <div
-          role="status"
-          aria-live="polite"
-          className="fixed inset-x-0 bottom-8 z-[60] mx-auto flex w-fit max-w-[calc(100%_-_2rem)] animate-in items-center gap-3 rounded-full border border-cyan-400/40 bg-card/95 px-5 py-3 text-foreground shadow-2xl backdrop-blur-xl fade-in slide-in-from-bottom-4 duration-300"
-        >
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-linear-to-br from-[#8b7cf6] to-[#22d3ee] text-[#0f0c1a]">
-            <Zap className="size-4" fill="currentColor" />
-          </span>
-
-          <span className={`${smfontClass} font-medium`}>
-            Pedido de conexão enviado para{" "}
-            <span className="font-bold">{conviteEnviado}</span>
-          </span>
-
-          <Sparkles className="size-4 shrink-0 text-cyan-500 dark:text-cyan-300" />
-        </div>
-      )}
     </main>
   );
 }
