@@ -2,10 +2,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/ui/layout/header";
-import Script from "next/script";
 import Footer from "@/components/ui/layout/footer";
-import ThemeToggle from "@/components/ui/layout/theme-toggle";
-import { cn } from "@/lib/utils";
+
+import Script from "next/script";
+
 import { FontSizeProvider } from "@/components/ui/layout/font-size";
 
 const geistSans = Geist({
@@ -27,16 +27,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <FontSizeProvider>
-      <body id="top"
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen flex flex-col antialiased`}
-      >
-        <ThemeToggle />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <Script src='https://vlibras.gov.br/app/vlibras-plugin.js' />
-      </body>
-        </FontSizeProvider>
+        <body
+          id="top"
+          className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
+        >
+          <Header />
+
+          <main className="flex-1">
+            {children}
+          </main>
+
+          <Footer />
+
+          <Script src="https://vlibras.gov.br/app/vlibras-plugin.js" />
+        </body>
+      </FontSizeProvider>
     </html>
   );
 }
