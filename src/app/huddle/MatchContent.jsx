@@ -1,6 +1,7 @@
 "use client";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useFontSize } from "@/components/ui/layout/font-size";
 import { JetBrains_Mono } from "next/font/google";
 import {
@@ -11,6 +12,7 @@ import {
   Hexagon,
   Mic,
   MicOff,
+  MessageCircle,
   Monitor,
   Shield,
   Sparkles,
@@ -33,6 +35,9 @@ const perfis = [
     gameplay: "Tryhard",
     horario: "Noite",
     plataforma: "PC",
+    afinidade: 87,
+    huddleReciproco: false,
+    mensagemInicial: "Oi! Tudo bem? Vi que nossos horários combinam. Bora jogar qualquer hora?",
     banner:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1000&h=520&fit=crop&auto=format",
   },
@@ -43,6 +48,9 @@ const perfis = [
     gameplay: "Casual",
     horario: "Tarde",
     plataforma: "Console",
+    afinidade: 72,
+    huddleReciproco: true,
+    mensagemInicial: "Opa! Tranquilo? Quer jogar alguma coisa qualquer hora?",
     banner:
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1000&h=520&fit=crop&auto=format",
   },
@@ -54,6 +62,8 @@ const perfis = [
     horario: "Manhã",
     plataforma: "PC",
     afinidade: 90,
+    huddleReciproco: false,
+    mensagemInicial: "Fala! Vi que você também curte jogar mais competitivo. Bora marcar uma?",
     banner:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1000&h=520&fit=crop&auto=format",
   },
@@ -65,6 +75,8 @@ const perfis = [
     horario: "Fins de semana",
     plataforma: "PC",
     afinidade: 78,
+    huddleReciproco: true,
+    mensagemInicial: "Oi! Tudo certo? Quer combinar uma partida no fim de semana?",
     banner:
       "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1000&h=520&fit=crop&auto=format",
   },
@@ -88,9 +100,11 @@ export function MatchContent() {
     Xl3fontClass,
   } = useFontSize();
 
+  const router = useRouter();
+
   const [perfilAtual, setPerfilAtual] = useState(0);
-  const [conviteEnviado, setConviteEnviado] = useState(null);
   const [swipeEmAndamento, setSwipeEmAndamento] = useState(false);
+  const [huddleFormado, setHuddleFormado] = useState(null);
 
   // ===== Movimento do card de Match =====
   // Começa no centro: x = 0
@@ -114,22 +128,34 @@ export function MatchContent() {
   // ===== CARD SEGUINTE / EFEITO DE PILHA =====
   // O próximo perfil fica discretamente atrás do atual e cresce
   // enquanto o card da frente é arrastado para qualquer lado.
-  const escalaProximoCard = useTransform(x, [-320, 0, 320], [1, 0.965, 1]);
-  const yProximoCard = useTransform(x, [-320, 0, 320], [0, 18, 0]);
-  const opacidadeProximoCard = useTransform(x, [-320, 0, 320], [1, 0.78, 1]);
-  const perfilSelecionado = perfis[perfilAtual];
-  const proximoPerfilSelecionado = perfis[(perfilAtual + 1) % perfis.length];
+  const escalaProximoCard = useTransform(
+    x,
+    [-320, 0, 320],
+    [1, 0.965, 1],
+  );
+
+  const yProximoCard = useTransform(
+    x,
+    [-320, 0, 320],
+    [0, 18, 0],
+  );
+
+  const opacidadeProximoCard = useTransform(
+    x,
+    [-320, 0, 320],
+    [1, 0.78, 1],
+  );
+
+  // ===== PERFIL ATUAL / FIM DA FILA =====
+  // Não existe mais loop: quando o índice passa do último perfil,
+  // a tela entra no estado "sem novos perfis".
+  const acabaramPerfis = perfilAtual >= perfis.length;
+  const perfilSelecionado = acabaramPerfis ? null : perfis[perfilAtual];
+  const proximoPerfilSelecionado =
+    perfilAtual + 1 < perfis.length ? perfis[perfilAtual + 1] : null;
 
   // Afinidade temporariamente mockada para a apresentação.
-  const afinidade = calcularAfinidade();
-
-  function calcularAfinidade() {
-    const mesmoGameplay = perfilUsuario.gameplay === perfilSelecionado.gameplay;
-    const mesmoHorario = perfilUsuario.horario === perfilSelecionado.horario;
-    const mesmoMicrofone = perfilUsuario.microfone === perfilSelecionado.microfone;
-    const mesmaPlataforma = perfilUsuario.plataforma === perfilSelecionado.plataforma;
-    const mesmoJogo = perfilUsuario.jogo == perfilSelecionado.jogo;
-  }
+  const afinidade = perfilSelecionado?.afinidade ?? 0;
 
   // ===== CÍRCULO DE AFINIDADE =====
   const tamanhoCirculo = [92, 108, 124][level] ?? 108;
@@ -139,6 +165,20 @@ export function MatchContent() {
   const raioCirculo = 42;
   const circunferencia = 2 * Math.PI * raioCirculo;
   const progressoCirculo = circunferencia - (afinidade / 100) * circunferencia;
+
+  // ===== COMPARAÇÕES DO PERFIL =====
+  const mesmoGameplay =
+    perfilSelecionado &&
+    perfilUsuario.gameplay === perfilSelecionado.gameplay;
+  const mesmoHorario =
+    perfilSelecionado &&
+    perfilUsuario.horario === perfilSelecionado.horario;
+  const mesmoMicrofone =
+    perfilSelecionado &&
+    perfilUsuario.microfone === perfilSelecionado.microfone;
+  const mesmaPlataforma =
+    perfilSelecionado &&
+    perfilUsuario.plataforma === perfilSelecionado.plataforma;
 
   // ===== SELO DE SINERGIA =====
   // Cada tier usa uma família de cores diferente para a qualidade
@@ -200,46 +240,78 @@ export function MatchContent() {
             subtituloCor: "text-slate-700/70 dark:text-slate-400/70",
           };
 
-  const microfoneDisponivel = perfilSelecionado.microfone === "Disponível";
+  const microfoneDisponivel = perfilSelecionado?.microfone === "Disponível";
 
   function proximoPerfil() {
-    if (perfilAtual < perfis.length - 1) {
-      setPerfilAtual(perfilAtual + 1);
-    } else {
-      setPerfilAtual(0);
+    // Não volta ao começo: cada card é tratado uma única vez.
+    setPerfilAtual((indiceAtual) => indiceAtual + 1);
+  }
+
+  // ===== REGISTRA UM HUDDLE PARA A PÁGINA DE MENSAGENS =====
+  // É um mock simples para a integração entre as telas.
+  // Depois, quando os dados reais do Carlos estiverem prontos,
+  // este objeto poderá vir do banco/estado global.
+  function salvarHuddleParaMensagens(perfil) {
+    if (typeof window === "undefined") return;
+
+    const horarioDoHuddle = new Date().toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const novaConversa = {
+      id: `huddle-${perfil.nome.toLowerCase()}`,
+      nome: perfil.nome,
+      ultimaMensagem: perfil.mensagemInicial,
+      horario: horarioDoHuddle,
+      online: true,
+      naoLidas: 1,
+      mensagens: [
+        {
+          id: Date.now(),
+          autor: "outro",
+          texto: perfil.mensagemInicial,
+          horario: horarioDoHuddle,
+        },
+      ],
+    };
+
+    const chave = "huddleConversas";
+    const conversasSalvas = JSON.parse(localStorage.getItem(chave) ?? "[]");
+
+    const jaExiste = conversasSalvas.some(
+      (conversa) => conversa.nome === perfil.nome,
+    );
+
+    if (!jaExiste) {
+      localStorage.setItem(
+        chave,
+        JSON.stringify([novaConversa, ...conversasSalvas]),
+      );
     }
   }
 
   // ===== Finaliza o swipe =====
   // esquerda = pular
-  // direita = conectar
+  // direita = demonstrar interesse
   async function finalizarSwipe(direcao) {
-    if (swipeEmAndamento) return;
+    if (swipeEmAndamento || !perfilSelecionado) return;
 
     setSwipeEmAndamento(true);
 
-    const nomeAtual = perfilSelecionado.nome;
+    // Guardamos o perfil antes de avançar o índice.
+    const perfilDaAcao = perfilSelecionado;
 
     // O destino é calculado pelo tamanho da tela,
     // então funciona também no monitor ultrawide.
     const distanciaSaida = Math.max(window.innerWidth * 0.75, 900);
-
     const destino = direcao === "direita" ? distanciaSaida : -distanciaSaida;
 
-    // Saída mais suave, parecida com o Figma.
+    // Saída suave, mantendo o comportamento aprovado do swipe.
     await animate(x, destino, {
       duration: 0.48,
       ease: [0.22, 1, 0.36, 1],
     });
-
-    // Direita = conexão
-    if (direcao === "direita") {
-      setConviteEnviado(nomeAtual);
-
-      window.setTimeout(() => {
-        setConviteEnviado(null);
-      }, 2200);
-    }
 
     // Para qualquer animação anterior.
     x.stop();
@@ -251,7 +323,15 @@ export function MatchContent() {
       x.set(0);
     }
 
+    // O card sempre sai da fila, tanto ao pular quanto ao conectar.
     proximoPerfil();
+
+    // MOCK: somente o 2º e o 4º perfil aceitam de volta.
+    // Nesses casos existe um Huddle recíproco.
+    if (direcao === "direita" && perfilDaAcao.huddleReciproco) {
+      salvarHuddleParaMensagens(perfilDaAcao);
+      setHuddleFormado(perfilDaAcao);
+    }
 
     setSwipeEmAndamento(false);
   }
@@ -286,37 +366,28 @@ export function MatchContent() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
-      {/* ===== CABEÇALHO DA TELA DE MATCH ===== */}
-      {/*
-        Agora ele pertence ao MAIN, não à section centralizada.
-        Por isso fica preso ao canto esquerdo da tela, como no Figma,
-        sem acompanhar a posição dos cards.
-      */}
-      <div className="absolute left-5 top-6 z-20 flex items-center gap-2.5 sm:left-8 sm:top-8 lg:left-10 xl:left-12 2xl:left-16">
-        {/* <span className="grid size-9 shrink-0 place-items-center rounded-lg border border-fuchsia-blue-500/15 bg-fuchsia-blue-600/10 text-fuchsia-blue-800 shadow-sm dark:border-fuchsia-blue-300/10 dark:bg-fuchsia-blue-500/15 dark:text-fuchsia-blue-300">
-          <Compass className="size-5" />
-        </span> */}
+      <section className="mx-auto w-full max-w-[1720px] px-4 pb-8 pt-10 sm:px-8 sm:pt-14">
+        {/* ===== TÍTULO DA EXPERIÊNCIA ===== */}
+        {/* Agora ele funciona como título da tela e não como etiqueta no canto. */}
+        <div className="mx-auto mb-10 flex max-w-3xl items-center justify-center gap-3 text-center">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-fuchsia-blue-500/15 bg-fuchsia-blue-600/10 text-fuchsia-blue-800 shadow-sm dark:border-fuchsia-blue-300/10 dark:bg-fuchsia-blue-500/15 dark:text-fuchsia-blue-300">
+            <Compass className="size-5" />
+          </span>
 
-        {/* <div className="min-w-0">
-          <h1
-            className={`${lgfontClass} font-bold leading-tight text-fuchsia-blue-950 dark:text-white`}
-          >
-            Descobrir jogadores
-          </h1>
+          <div>
+            <h1
+              className={`${XlfontClass} font-black leading-tight text-fuchsia-blue-950 dark:text-white`}
+            >
+              Encontre seu próximo Huddle
+            </h1>
 
-          <p
-            className={`${smfontClass} mt-0.5 leading-tight text-fuchsia-blue-950/60 dark:text-white/50`}
-          >
-            Arraste para escolher com quem jogar
-          </p>
-        </div> */}
-      </div>
-
-      <section className="mx-auto w-full max-w-[1720px] px-4 pb-8 pt-24 sm:px-8 sm:pt-28">
-        {/*
-          A grid continua centralizada. O cabeçalho acima já não participa
-          desta largura máxima, então fica realmente no canto da tela.
-        */}
+            <p
+              className={`${smfontClass} mt-1 leading-relaxed text-fuchsia-blue-950/60 dark:text-white/55`}
+            >
+              Arraste para encontrar alguém que combine com seu jeito de jogar.
+            </p>
+          </div>
+        </div>
         <div className="grid cursor-grab touch-pan-y items-start justify-center gap-20 xl:grid-cols-[minmax(600px,680px)_minmax(500px,580px)] xl:gap-40 2xl:gap-52">
           {/* ===== COLUNA ESQUERDA / CARD DO JOGADOR ===== */}
           <div className="min-w-0">
@@ -347,6 +418,7 @@ export function MatchContent() {
               </motion.div>
 
               {/* ===== PRÓXIMO PERFIL ATRÁS ===== */}
+              {proximoPerfilSelecionado && (
               <motion.article
                 style={{
                   scale: escalaProximoCard,
@@ -459,28 +531,30 @@ export function MatchContent() {
                   </div>
                 </div>
               </motion.article>
+              )}
 
               {/* ===== CARD ATUAL / ARRASTÁVEL ===== */}
+              {perfilSelecionado ? (
               <motion.article
                 drag="x"
-                dragMomentum={false}
-                onDragEnd={aoSoltarCard}
+              dragMomentum={false}
+              onDragEnd={aoSoltarCard}
+              style={{
+                x,
+                rotate: rotacao,
+              }}
+              whileDrag={{
+                cursor: "grabbing",
+              }}
+              className="relative z-20 min-h-200 cursor-grab touch-pan-y overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/90 text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"
+            >
+              {/* ===== Indicador: PULAR ===== */}
+              <motion.div
                 style={{
-                  x,
-                  rotate: rotacao,
+                  opacity: opacidadePular,
+                  scale: escalaPular,
                 }}
-                whileDrag={{
-                  cursor: "grabbing",
-                }}
-                className="relative z-20 min-h-200 cursor-grab touch-pan-y overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/90 text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"
-              >
-                {/* ===== Indicador: PULAR ===== */}
-                <motion.div
-                  style={{
-                    opacity: opacidadePular,
-                    scale: escalaPular,
-                  }}
-                  className="
+                className="
     pointer-events-none
     absolute
     left-5
@@ -501,18 +575,18 @@ export function MatchContent() {
     shadow-lg
     backdrop-blur-md
   "
-                >
-                  <X className="size-5" />
-                  PULAR
-                </motion.div>
+              >
+                <X className="size-5" />
+                PULAR
+              </motion.div>
 
-                {/* ===== Indicador: CONECTAR ===== */}
-                <motion.div
-                  style={{
-                    opacity: opacidadeConectar,
-                    scale: escalaConectar,
-                  }}
-                  className="
+              {/* ===== Indicador: CONECTAR ===== */}
+              <motion.div
+                style={{
+                  opacity: opacidadeConectar,
+                  scale: escalaConectar,
+                }}
+                className="
     pointer-events-none
     absolute
     right-5
@@ -533,163 +607,179 @@ export function MatchContent() {
     shadow-[0_0_24px_rgba(34,211,238,0.25)]
     backdrop-blur-md
   "
+              >
+                <Zap className="size-5" />
+                CONECTAR
+              </motion.div>
+              {/* Banner gamer */}
+              <div className="relative h-75 overflow-hidden bg-muted">
+                <img
+                  src={perfilSelecionado.banner}
+                  alt={`Ambiente de jogo de ${perfilSelecionado.nome}`}
+                  className="h-full w-full object-cover opacity-90"
+                />
+
+                {/* Sobreposições escuras somente em cima da imagem */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-r from-black/35 to-transparent" />
+
+                {/* Status online */}
+                <div
+                  className={`absolute left-4 top-4 z-10 flex w-fit items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-black/45 px-3 py-1.5 ${XsfontClass} font-medium text-white backdrop-blur-md`}
                 >
-                  <Zap className="size-5" />
-                  CONECTAR
-                </motion.div>
-                {/* Banner gamer */}
-                <div className="relative h-75 overflow-hidden bg-muted">
-                  <img
-                    src={perfilSelecionado.banner}
-                    alt={`Ambiente de jogo de ${perfilSelecionado.nome}`}
-                    className="h-full w-full object-cover opacity-90"
-                  />
+                  <span className="relative flex size-2 shrink-0">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+                    <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+                  </span>
+                  Online agora
+                </div>
 
-                  {/* Sobreposições escuras somente em cima da imagem */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
-                  <div className="absolute inset-0 bg-linear-to-r from-black/35 to-transparent" />
+                {/* Plataforma */}
+                <div
+                  className={`absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full border border-cyan-300/30 bg-black/45 px-3 py-1.5 ${XsfontClass} font-semibold text-white backdrop-blur-md`}
+                >
+                  <Monitor className="size-3.5 text-cyan-300" />
+                  {perfilSelecionado.plataforma}
+                </div>
 
-                  {/* Status online */}
+                {/* Identidade do jogador */}
+                <div className="absolute inset-x-0 bottom-0 z-10 flex items-center gap-4 p-6">
                   <div
-                    className={`absolute left-4 top-4 z-10 flex w-fit items-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-black/45 px-3 py-1.5 ${XsfontClass} font-medium text-white backdrop-blur-md`}
+                    className={`flex size-16 shrink-0 items-center justify-center rounded-2xl border-2 border-white/20 bg-white/10 ${XlfontClass} font-black text-white shadow-lg backdrop-blur`}
                   >
-                    <span className="relative flex size-2 shrink-0">
-                      <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                      <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+                    {perfilSelecionado.nome.slice(0, 2)}
+                  </div>
+
+                  <div className="min-w-0">
+                    <h2 className={`${XlfontClass} font-black text-white`}>
+                      {perfilSelecionado.nome}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+
+              {/* Informações do jogador */}
+              <div className="p-7">
+                {/* Jogo preferido em destaque */}
+                <div>
+                  <div
+                    className={`${XsfontClass} mb-2 flex items-center gap-1.5 font-semibold uppercase tracking-wider text-muted-foreground`}
+                  >
+                    <Gamepad2 className="size-4" />
+                    Jogo preferido
+                  </div>
+
+                  <span
+                    className={`${smfontClass} inline-flex rounded-xl border border-fuchsia-blue-500/30 bg-fuchsia-blue-500/10 px-3 py-1.5 font-semibold text-foreground`}
+                  >
+                    {perfilSelecionado.jogo}
+                  </span>
+                </div>
+
+                {/* Grade principal com ícones */}
+                <div className="mt-6 grid gap-3.5 sm:grid-cols-2">
+                  <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
+                      <Swords className="size-4" />
                     </span>
-                    Online agora
-                  </div>
-
-                  {/* Plataforma */}
-                  <div
-                    className={`absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full border border-cyan-300/30 bg-black/45 px-3 py-1.5 ${XsfontClass} font-semibold text-white backdrop-blur-md`}
-                  >
-                    <Monitor className="size-3.5 text-cyan-300" />
-                    {perfilSelecionado.plataforma}
-                  </div>
-
-                  {/* Identidade do jogador */}
-                  <div className="absolute inset-x-0 bottom-0 z-10 flex items-center gap-4 p-6">
-                    <div
-                      className={`flex size-16 shrink-0 items-center justify-center rounded-2xl border-2 border-white/20 bg-white/10 ${XlfontClass} font-black text-white shadow-lg backdrop-blur`}
-                    >
-                      {perfilSelecionado.nome.slice(0, 2)}
-                    </div>
 
                     <div className="min-w-0">
-                      <h2 className={`${XlfontClass} font-black text-white`}>
-                        {perfilSelecionado.nome}
-                      </h2>
+                      <p className={`${XsfontClass} text-muted-foreground`}>
+                        Gameplay
+                      </p>
+                      <p className={`${smfontClass} mt-0.5 font-bold`}>
+                        {perfilSelecionado.gameplay}
+                      </p>
                     </div>
                   </div>
-                </div>
 
-                {/* Informações do jogador */}
-                <div className="p-7">
-                  {/* Jogo preferido em destaque */}
-                  <div>
-                    <div
-                      className={`${XsfontClass} mb-2 flex items-center gap-1.5 font-semibold uppercase tracking-wider text-muted-foreground`}
-                    >
-                      <Gamepad2 className="size-4" />
-                      Jogo preferido
-                    </div>
-
-                    <span
-                      className={`${smfontClass} inline-flex rounded-xl border border-fuchsia-blue-500/30 bg-fuchsia-blue-500/10 px-3 py-1.5 font-semibold text-foreground`}
-                    >
-                      {perfilSelecionado.jogo}
+                  <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
+                      {microfoneDisponivel ? (
+                        <Mic className="size-4" />
+                      ) : (
+                        <MicOff className="size-4" />
+                      )}
                     </span>
-                  </div>
 
-                  {/* Grade principal com ícones */}
-                  <div className="mt-6 grid gap-3.5 sm:grid-cols-2">
-                    <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
-                      <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
-                        <Swords className="size-4" />
-                      </span>
-
-                      <div className="min-w-0">
-                        <p className={`${XsfontClass} text-muted-foreground`}>
-                          Gameplay
-                        </p>
-                        <p className={`${smfontClass} mt-0.5 font-bold`}>
-                          {perfilSelecionado.gameplay}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
-                      <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
-                        {microfoneDisponivel ? (
-                          <Mic className="size-4" />
-                        ) : (
-                          <MicOff className="size-4" />
-                        )}
-                      </span>
-
-                      <div className="min-w-0">
-                        <p className={`${XsfontClass} text-muted-foreground`}>
-                          Microfone
-                        </p>
-                        <p className={`${smfontClass} mt-0.5 font-bold`}>
-                          {perfilSelecionado.microfone}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
-                      <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
-                        <Clock3 className="size-4" />
-                      </span>
-
-                      <div className="min-w-0">
-                        <p className={`${XsfontClass} text-muted-foreground`}>
-                          Horário
-                        </p>
-                        <p className={`${smfontClass} mt-0.5 font-bold`}>
-                          {perfilSelecionado.horario}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
-                      <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
-                        <Monitor className="size-4" />
-                      </span>
-
-                      <div className="min-w-0">
-                        <p className={`${XsfontClass} text-muted-foreground`}>
-                          Plataforma
-                        </p>
-                        <p className={`${smfontClass} mt-0.5 font-bold`}>
-                          {perfilSelecionado.plataforma}
-                        </p>
-                      </div>
+                    <div className="min-w-0">
+                      <p className={`${XsfontClass} text-muted-foreground`}>
+                        Microfone
+                      </p>
+                      <p className={`${smfontClass} mt-0.5 font-bold`}>
+                        {perfilSelecionado.microfone}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Chips adicionais usando apenas dados que já existem no cadastro */}
-                  {/* ===== Detalhe visual inferior do card ===== */}
-                  {/* Fica centralizado na área vazia criada pelo aumento da altura do card */}
-                  <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3 ">
-                    <div className="flex size-10 items-center justify-center rounded-full border border-fuchsia-blue-400/20 bg-fuchsia-blue-600/10 text-fuchsia-blue-300">
-                      <Swords className="size-5" />
-                    </div>
+                  <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
+                      <Clock3 className="size-4" />
+                    </span>
 
-                    <div className="flex size-12 items-center justify-center rounded-full border border-cyan-400/25 bg-cyan-400/10 text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.10)]">
-                      <Shield className="size-6" />
+                    <div className="min-w-0">
+                      <p className={`${XsfontClass} text-muted-foreground`}>
+                        Horário
+                      </p>
+                      <p className={`${smfontClass} mt-0.5 font-bold`}>
+                        {perfilSelecionado.horario}
+                      </p>
                     </div>
+                  </div>
 
-                    <div className="flex size-10 items-center justify-center rounded-full border border-fuchsia-blue-400/20 bg-fuchsia-blue-600/10 text-fuchsia-blue-300">
-                      <Gamepad2 className="size-5" />
+                  <div className="flex min-h-[76px] items-center gap-3 rounded-2xl border border-fuchsia-blue-200/70 bg-white/55 px-4 py-3.5 dark:border-border dark:bg-muted/45">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
+                      <Monitor className="size-4" />
+                    </span>
+
+                    <div className="min-w-0">
+                      <p className={`${XsfontClass} text-muted-foreground`}>
+                        Plataforma
+                      </p>
+                      <p className={`${smfontClass} mt-0.5 font-bold`}>
+                        {perfilSelecionado.plataforma}
+                      </p>
                     </div>
                   </div>
                 </div>
-              </motion.article>
+
+                {/* Chips adicionais usando apenas dados que já existem no cadastro */}
+                {/* ===== Detalhe visual inferior do card ===== */}
+                {/* Fica centralizado na área vazia criada pelo aumento da altura do card */}
+                <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3 ">
+                  <div className="flex size-10 items-center justify-center rounded-full border border-fuchsia-blue-400/20 bg-fuchsia-blue-600/10 text-fuchsia-blue-300">
+                    <Swords className="size-5" />
+                  </div>
+
+                  <div className="flex size-12 items-center justify-center rounded-full border border-cyan-400/25 bg-cyan-400/10 text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.10)]">
+                    <Shield className="size-6" />
+                  </div>
+
+                  <div className="flex size-10 items-center justify-center rounded-full border border-fuchsia-blue-400/20 bg-fuchsia-blue-600/10 text-fuchsia-blue-300">
+                    <Gamepad2 className="size-5" />
+                  </div>
+                </div>
+              </div>
+            </motion.article>
+              ) : (
+                <div className="relative z-20 flex min-h-200 flex-col items-center justify-center overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/90 px-8 text-center text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground">
+                  <div className="grid size-16 place-items-center rounded-2xl border border-fuchsia-blue-500/20 bg-fuchsia-blue-600/10 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
+                    <Sparkles className="size-8" />
+                  </div>
+
+                  <h2 className={`${XlfontClass} mt-6 font-black`}>
+                    Você viu todos os perfis por agora
+                  </h2>
+
+                  <p className={`${smfontClass} mt-3 max-w-md text-muted-foreground`}>
+                    Novos jogadores podem aparecer depois. Por enquanto, sua fila de Huddles terminou.
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* ===== AÇÕES DO MATCH ===== */}
+            {/* ===== AÇÕES DO HUDDLE ===== */}
+            {perfilSelecionado && (
             <div className="mt-7 flex items-center justify-center gap-4">
               {/* Pular */}
               <button
@@ -715,7 +805,9 @@ export function MatchContent() {
                 <Zap className="size-7" strokeWidth={2.4} fill="currentColor" />
               </button>
             </div>
+            )}
 
+            {perfilSelecionado && (
             <p
               className={`${XsfontClass} mt-3 text-center text-muted-foreground`}
             >
@@ -728,9 +820,11 @@ export function MatchContent() {
                 direita para conectar
               </span>
             </p>
+            )}
           </div>
 
           {/* ===== COLUNA DIREITA / COMPATIBILIDADE ===== */}
+          {perfilSelecionado ? (
           <aside className="flex min-h-[680px] flex-col rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/92 p-7 text-fuchsia-blue-950 shadow-xl backdrop-blur dark:border-fuchsia-blue-400/20 dark:bg-card/95 dark:text-card-foreground">
             {/* Título */}
             <div className="flex items-center gap-2 text-fuchsia-blue-700 dark:text-fuchsia-blue-300">
@@ -1039,8 +1133,70 @@ export function MatchContent() {
               </div>
             </div>
           </aside>
+          ) : (
+            <aside className="flex min-h-[680px] flex-col items-center justify-center rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/92 p-8 text-center text-fuchsia-blue-950 shadow-xl backdrop-blur dark:border-fuchsia-blue-400/20 dark:bg-card/95 dark:text-card-foreground">
+              <Gamepad2 className="size-10 text-fuchsia-blue-600 dark:text-fuchsia-blue-300" />
+
+              <h2 className={`${XlfontClass} mt-5 font-black`}>
+                Fila concluída
+              </h2>
+
+              <p className={`${smfontClass} mt-3 max-w-sm text-muted-foreground`}>
+                Quando houver novos jogadores disponíveis, a compatibilidade volta a aparecer aqui.
+              </p>
+            </aside>
+          )}
         </div>
       </section>
+
+      {/* ===== HUDDLE RECÍPROCO ===== */}
+      {huddleFormado && (
+        <div className="fixed inset-0 z-[80] grid place-items-center bg-[#080711]/65 px-4 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 18 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full max-w-xl rounded-3xl border border-fuchsia-blue-300/20 bg-[#111020]/95 p-8 text-center text-white shadow-2xl sm:p-10"
+          >
+            <p
+              className={`${XsfontClass} font-bold uppercase tracking-[0.28em] text-cyan-300`}
+            >
+              Conexão recíproca
+            </p>
+
+            <h2 className={`${Xl3fontClass} mt-3 font-black leading-tight`}>
+              Novo Huddle!
+            </h2>
+
+            <p className={`${lgfontClass} mx-auto mt-4 max-w-md text-white/70`}>
+              Você e{" "}
+              <span className="font-bold text-white">
+                {huddleFormado.nome}
+              </span>{" "}
+              escolheram jogar juntos.
+            </p>
+
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => router.push("/mensagens")}
+                className={`${smfontClass} inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#8b7cf6] to-[#22d3ee] px-5 font-black text-[#0f0c1a] transition hover:brightness-110`}
+              >
+                <MessageCircle className="size-5" />
+                Ir para mensagens
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setHuddleFormado(null)}
+                className={`${smfontClass} min-h-12 rounded-xl border border-white/15 bg-white/5 px-5 font-bold text-white transition hover:bg-white/10`}
+              >
+                Continuar procurando
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </main>
   );
 }
