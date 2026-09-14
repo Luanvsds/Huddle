@@ -12,11 +12,11 @@ import { useAuth } from "@/components/hook/useAuth";
 
 export function SucessoContent() {
   const autorizado = useAuth()
-  if (!autorizado) return null;
   const { Xl4fontClass, Xl5fontClass, smfontClass, lgfontClass } =
-    useFontSize();
-
+  useFontSize();
+  
   const [avaliacao, setAvaliacao] = useState(0);
+  if (!autorizado) return null;
 
   return (
     <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-16 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">

@@ -179,7 +179,7 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
 
             <DropdownMenuItem asChild>
               <Link
-                href="/Sobre"
+                href="/sobre"
                 className="flex cursor-pointer items-center gap-2 rounded-lg"
               >
                 <Star className="size-4" />

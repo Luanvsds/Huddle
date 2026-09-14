@@ -33,9 +33,11 @@ import { useRef } from "react";
 import { TermosModal } from "@/components/ui/meusTermos";
 import { MeuSwitch } from "@/components/ui/meuSwitch";
 import { Textarea } from "@/components/ui/textarea";
+import { useAuth } from "@/components/hook/useAuth";
 
 export function ConecteSeContent() {
   const router = useRouter();
+  const logado = useAuth();
   const { XlfontClass, Xl5fontClass, smfontClass, sm2fontClass } =
     useFontSize();
 
@@ -140,6 +142,7 @@ export function ConecteSeContent() {
     .toISOString()
     .split("T")[0];
 
+  if(logado){window.location.href = "/perfil"};
   function validarCPF(CPF) {
     if (!CPF) return "Preencha o campo";
     if (!cpf.isValid(CPF)) {
@@ -662,6 +665,24 @@ export function ConecteSeContent() {
                       </SelectContent>
                     </Select>
                   </div>
+                  {jogoSelecionado &&
+                    <>
+                      <Label
+                        className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                      >
+                        Por que <strong>{jogoSelecionado}</strong> é seu jogo favorito?
+                      </Label>
+                      <Textarea id="motivoJogo"
+                        value={motivoJogo}
+                        placeholder="Conte o motivo de ter escolhido seu jogo preferido"
+                        className={estiloDoCampo()}
+                        onChange={(e) => {
+                          const valor = e.target.value;
+                          setMotivoJogo(valor)
+                        }} />
+                    </>
+                  }
+
                   <div className="space-y-4">
                     <Label
                       className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
@@ -719,40 +740,6 @@ export function ConecteSeContent() {
                       </label>
                     </div>
                   </div>
-
-                  <Label
-                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
-                  >
-                    Bio do Perfil
-                  </Label>
-                  <Textarea id="bio" value={bio} placeholder="Insira a bio do seu perfil" className={estiloDoCampo()} onChange={(e) => {
-                    const valor = e.target.value;
-                    setBio(valor)
-                  }} />
-
-                  <Label
-                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
-                  >
-                    Sobre você
-                  </Label>
-                  <Textarea id="sobre" value={sobre} placeholder="Fale um pouco sobre você" className={estiloDoCampo()} onChange={(e) => {
-                    const valor = e.target.value;
-                    setSobre(valor)
-                  }} />
-
-                  <Label
-                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
-                  >
-                    Motivo jogo preferido
-                  </Label>
-                  <Textarea id="motivoJogo"
-                    value={motivoJogo}
-                    placeholder="Conte o motivo de ter escolhido seu jogo preferido"
-                    className={estiloDoCampo()}
-                    onChange={(e) => {
-                      const valor = e.target.value;
-                      setMotivoJogo(valor)
-                    }} />
                   <div className="grid gap-5 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label
@@ -884,6 +871,25 @@ export function ConecteSeContent() {
                       </label>
                     </div>
                   </div>
+                  <Label
+                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                  >
+                    Bio do Perfil
+                  </Label>
+                  <Textarea id="bio" value={bio} placeholder="Insira a bio do seu perfil" className={estiloDoCampo()} onChange={(e) => {
+                    const valor = e.target.value;
+                    setBio(valor)
+                  }} />
+
+                  <Label
+                    className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
+                  >
+                    Sobre você
+                  </Label>
+                  <Textarea id="sobre" value={sobre} placeholder="Fale um pouco sobre você" className={estiloDoCampo()} onChange={(e) => {
+                    const valor = e.target.value;
+                    setSobre(valor)
+                  }} />
                   <div className="space-y-2">
                     <Label
                       className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
@@ -893,7 +899,7 @@ export function ConecteSeContent() {
 
                     <Select className="h-12" value={microfone} onValueChange={setMicrofone}>
                       <SelectTrigger className="h-12 w-full flex items-center border-fuchsia-blue-300 bg-fuchsia-blue-50 text-fuchsia-blue-950 focus:ring-fuchsia-blue-600 dark:border-fuchsia-blue-600 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 data-placeholder:text-fuchsia-blue-500 dark:data-placeholder:text-fuchsia-blue-200/70">
-                        <SelectValue placeholder="Escolha seu estilo" />
+                        <SelectValue placeholder="Seu microfone está disponível?" />
                       </SelectTrigger>
 
                       <SelectContent side="bottom" align="start" position="popper">
