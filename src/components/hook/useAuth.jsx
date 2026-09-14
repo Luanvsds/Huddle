@@ -9,7 +9,7 @@ export function useAuth() {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    const logged = localStorage.getItem("apelido");
+    const logged = localStorage.getItem("user_apelido");
 
     if (logged) {
       setAuthorized(true);

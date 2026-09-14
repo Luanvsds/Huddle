@@ -41,7 +41,7 @@ const perfis = [
     huddleReciproco: true,
     mensagemInicial: "Oi! Tudo bem? Vi que nossos horários combinam. Bora jogar qualquer hora?",
     banner:
-      "/The Legend of Zelda.jpg",
+    "/The Legend of Zelda.jpg",
   },
   {
     nome: "MiraGG",
@@ -54,7 +54,7 @@ const perfis = [
     huddleReciproco: true,
     mensagemInicial: "Opa! Tranquilo? Quer jogar alguma coisa qualquer hora?",
     banner:
-      "/Valorant.jpg",
+    "/Valorant.jpg",
   },
   {
     nome: "Nexusbr",
@@ -67,7 +67,7 @@ const perfis = [
     huddleReciproco: true,
     mensagemInicial: "Fala! Vi que você também curte jogar mais competitivo. Bora marcar uma?",
     banner:
-      "/God of War.jpg",
+    "/God of War.jpg",
   },
   {
     nome: "PixelRush",
@@ -80,7 +80,7 @@ const perfis = [
     huddleReciproco: true,
     mensagemInicial: "Hi, I really liked your profile, lets play?",
     banner:
-      "/League of Legends.jpg",
+    "/League of Legends.jpg",
   },
 ];
 
@@ -128,18 +128,18 @@ const CHAVES_LOCALSTORAGE_USUARIO = {
 // Remove acentos/maiúsculas para não depender de digitação idêntica.
 function normalizarTexto(valor) {
   return (valor ?? "")
-    .toString()
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  .toString()
+  .trim()
+  .toLowerCase()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "");
 }
 
 // ATENÇÃO: ainda não confirmamos o formato exato salvo em `user_microfone`
 // (o campo veio vazio no seu exemplo). Esta função aceita os formatos mais
 // prováveis. Ajuste a lista abaixo se o valor real salvo for diferente.
 function usuarioTemMicrofone(valorBruto) {
-
+  
   console.log(normalizarTexto(valorBruto));
   return normalizarTexto(valorBruto) === "disponivel";
 }
@@ -157,7 +157,7 @@ function lerObjetoDoLocalStorage(chave, valorPadrao) {
 // ===== CARREGA O PERFIL DO USUÁRIO LOGADO =====
 function carregarPerfilUsuarioLogado() {
   if (typeof window === "undefined") return null;
-
+  
   return {
     jogo: localStorage.getItem(CHAVES_LOCALSTORAGE_USUARIO.jogo) || "",
     gameplay: localStorage.getItem(CHAVES_LOCALSTORAGE_USUARIO.gameplay) || "",
@@ -171,22 +171,22 @@ function carregarPerfilUsuarioLogado() {
 // ===== CALCULA A AFINIDADE ENTRE O USUÁRIO LOGADO E UM PERFIL =====
 function calcularAfinidade(perfilUsuario, perfil) {
   if (!perfilUsuario || !perfil) return 0;
-
+  
   let pontos = SINERGIA_BASE;
-
+  
   if (perfilUsuario.jogo && normalizarTexto(perfilUsuario.jogo) === normalizarTexto(perfil.jogo)) {
     pontos += PESO_POR_CARACTERISTICA;
   }
-
+  
   if (perfilUsuario.gameplay && normalizarTexto(perfilUsuario.gameplay) === normalizarTexto(perfil.gameplay)) {
     pontos += PESO_POR_CARACTERISTICA;
   }
-
+  
   const chaveHorario = CHAVE_HORARIO_LOCALSTORAGE[perfil.horario];
   if (chaveHorario && perfilUsuario.horarios?.[chaveHorario]) {
     pontos += PESO_POR_CARACTERISTICA;
   }
-
+  
   const chavePlataforma = CHAVE_PLATAFORMA_LOCALSTORAGE[perfil.plataforma];
   if (chavePlataforma && perfilUsuario.plataformas?.[chavePlataforma]) {
     pontos += PESO_POR_CARACTERISTICA;
@@ -195,18 +195,17 @@ function calcularAfinidade(perfilUsuario, perfil) {
   if (chaveIdioma && perfilUsuario.idiomas?.[chaveIdioma]) {
     pontos += PESO_POR_CARACTERISTICA;
   }
-
+  
   if (usuarioTemMicrofone(perfilUsuario.microfone) === usuarioTemMicrofone(perfil.microfone)) {
     console.log(perfil.nome)
     pontos += PESO_POR_CARACTERISTICA;
   }
-
+  
   return Math.min(100, pontos);
 }
 
 export function MatchContent() {
   const autorizado = useAuth()
-  if(!autorizado) return null;
   const [perfilUsuario, setPerfilUsuario] = useState(null);
   const {
     level,
@@ -216,36 +215,36 @@ export function MatchContent() {
     XlfontClass,
     Xl3fontClass,
   } = useFontSize();
-
+  
   const router = useRouter();
-
+  
   useEffect(() => {
     setPerfilUsuario(carregarPerfilUsuarioLogado());
   }, []);
-
+  
   const [perfilAtual, setPerfilAtual] = useState(0);
   const [swipeEmAndamento, setSwipeEmAndamento] = useState(false);
   const [huddleFormado, setHuddleFormado] = useState(null);
-
+  
   // ===== Movimento do card de Match =====
   // Começa no centro: x = 0
   const x = useMotionValue(0);
-
+  
   // Conforme o card vai para esquerda/direita,
   const rotacao = useTransform(x, [-300, 0, 300], [-12, 0, 12]);
-
+  
   // ===== Indicadores visuais do swipe =====
   // Conforme o card se desloca, os indicadores aparecem.
   const opacidadeConectar = useTransform(x, [40, 120], [0, 1]);
   const escalaConectar = useTransform(x, [40, 120], [0.9, 1]);
   const opacidadePular = useTransform(x, [-120, -40], [1, 0]);
   const escalaPular = useTransform(x, [-120, -40], [1, 0.9]);
-
+  
   // ===== RASTROS VISUAIS DO SWIPE =====
   // Os traços aparecem progressivamente conforme o card sai do centro.
   const opacidadeRastroDireita = useTransform(x, [25, 150], [0, 1]);
   const opacidadeRastroEsquerda = useTransform(x, [-150, -25], [1, 0]);
-
+  
   // ===== CARD SEGUINTE / EFEITO DE PILHA =====
   // O próximo perfil fica discretamente atrás do atual e cresce
   // enquanto o card da frente é arrastado para qualquer lado.
@@ -254,32 +253,33 @@ export function MatchContent() {
     [-320, 0, 320],
     [1, 0.965, 1],
   );
-
+  
   const yProximoCard = useTransform(
     x,
     [-320, 0, 320],
     [0, 18, 0],
   );
-
+  
   const opacidadeProximoCard = useTransform(
     x,
     [-320, 0, 320],
     [1, 0.78, 1],
   );
-
+  
   // ===== PERFIL ATUAL / FIM DA FILA =====
   // Não existe mais loop: quando o índice passa do último perfil,
   // a tela entra no estado "sem novos perfis".
   const acabaramPerfis = perfilAtual >= perfis.length;
   const perfilSelecionado = acabaramPerfis ? null : perfis[perfilAtual];
   const proximoPerfilSelecionado =
-    perfilAtual + 1 < perfis.length ? perfis[perfilAtual + 1] : null;
-
+  perfilAtual + 1 < perfis.length ? perfis[perfilAtual + 1] : null;
+  
   // Afinidade temporariamente mockada para a apresentação.
   const afinidade = useMemo(
     () => calcularAfinidade(perfilUsuario, perfilSelecionado),
     [perfilUsuario, perfilSelecionado],
   );
+  if(!autorizado) return null;
   // ===== CÍRCULO DE AFINIDADE =====
   const tamanhoCirculo = [92, 108, 124][level] ?? 108;
   const numeroAfinidade = [20, 24, 28][level] ?? 24;
@@ -288,177 +288,177 @@ export function MatchContent() {
   const raioCirculo = 42;
   const circunferencia = 2 * Math.PI * raioCirculo;
   const progressoCirculo = circunferencia - (afinidade / 100) * circunferencia;
-
+  
   // ===== COMPARAÇÕES DO PERFIL =====
   const mesmoGameplay =
-    perfilSelecionado &&
-    Boolean(perfilUsuario?.gameplay) &&
-    normalizarTexto(perfilUsuario.gameplay) === normalizarTexto(perfilSelecionado.gameplay);
-
+  perfilSelecionado &&
+  Boolean(perfilUsuario?.gameplay) &&
+  normalizarTexto(perfilUsuario.gameplay) === normalizarTexto(perfilSelecionado.gameplay);
+  
   const mesmoHorario =
-    perfilSelecionado &&
-    Boolean(perfilUsuario?.horarios?.[CHAVE_HORARIO_LOCALSTORAGE[perfilSelecionado.horario]]);
-
+  perfilSelecionado &&
+  Boolean(perfilUsuario?.horarios?.[CHAVE_HORARIO_LOCALSTORAGE[perfilSelecionado.horario]]);
+  
   const mesmoMicrofone =
-    perfilSelecionado &&
-    usuarioTemMicrofone(perfilUsuario?.microfone) === usuarioTemMicrofone(perfilSelecionado.microfone);
-
+  perfilSelecionado &&
+  usuarioTemMicrofone(perfilUsuario?.microfone) === usuarioTemMicrofone(perfilSelecionado.microfone);
+  
   const mesmaPlataforma =
-    perfilSelecionado &&
-    Boolean(perfilUsuario?.plataformas?.[CHAVE_PLATAFORMA_LOCALSTORAGE[perfilSelecionado.plataforma]]);
-
+  perfilSelecionado &&
+  Boolean(perfilUsuario?.plataformas?.[CHAVE_PLATAFORMA_LOCALSTORAGE[perfilSelecionado.plataforma]]);
+  
   const mesmoIdioma = perfilSelecionado && Boolean(perfilUsuario?.idiomas?.[CHAVE_IDIOMA_LOCALSTORAGE[perfilSelecionado.idioma]]);
-
+  
   // ===== SELO DE SINERGIA =====
   // Cada tier usa uma família de cores diferente para a qualidade
   // da sinergia ficar evidente só de bater o olho.
   const tierInfo =
-    afinidade >= 85
-      ? {
-        titulo: "SINERGIA TIER S",
-        subtitulo: "ESQUADRÃO DE ELITE",
-        borda:
-          "border-amber-500/30 bg-amber-50/80 dark:border-amber-400/25 dark:bg-amber-500/5",
-        brilho:
-          "bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.22),transparent_62%)]",
-        hexagono: "text-amber-600/30 dark:text-amber-400/25",
-        mascote: "text-amber-700 dark:text-amber-300",
-        tituloCor:
-          "from-amber-800 via-amber-500 to-amber-700 dark:from-amber-200 dark:via-amber-400 dark:to-amber-200",
-        subtituloCor: "text-amber-800/70 dark:text-amber-400/70",
-        fill: "fill-amber-600"
-      }
-      : afinidade >= 70
-        ? {
-          titulo: "SINERGIA TIER A",
-          subtitulo: "CONEXÃO MUITO FORTE",
-          borda:
-            "border-violet-500/30 bg-violet-50/80 dark:border-violet-400/25 dark:bg-violet-500/5",
-          brilho:
-            "bg-[radial-gradient(ellipse_at_top,rgba(139,124,246,0.20),transparent_62%)]",
-          hexagono: "text-violet-600/30 dark:text-violet-300/25",
-          mascote: "text-violet-700 dark:text-violet-300",
-          tituloCor:
-            "from-violet-800 via-fuchsia-blue-600 to-violet-700 dark:from-violet-200 dark:via-fuchsia-blue-300 dark:to-violet-200",
-          subtituloCor: "text-violet-800/70 dark:text-violet-300/70",
-          fill: "fill-violet-600"
-        }
-        : afinidade >= 55
-          ? {
-            titulo: "SINERGIA TIER B",
-            subtitulo: "BOA SINCRONIA",
-            borda:
-              "border-cyan-500/30 bg-cyan-50/80 dark:border-cyan-400/25 dark:bg-cyan-500/5",
-            brilho:
-              "bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.20),transparent_62%)]",
-            hexagono: "text-cyan-600/30 dark:text-cyan-300/25",
-            mascote: "text-cyan-700 dark:text-cyan-300",
-            tituloCor:
-              "from-cyan-800 via-sky-500 to-cyan-700 dark:from-cyan-200 dark:via-sky-300 dark:to-cyan-200",
-            subtituloCor: "text-cyan-800/70 dark:text-cyan-300/70",
-            fill: "fill-cyan-600"
-          }
-          : {
-            titulo: "SINERGIA TIER C",
-            subtitulo: "EM EVOLUÇÃO",
-            borda:
-              "border-slate-400/35 bg-slate-100/80 dark:border-slate-500/25 dark:bg-slate-400/5",
-            brilho:
-              "bg-[radial-gradient(ellipse_at_top,rgba(148,163,184,0.18),transparent_62%)]",
-            hexagono: "text-slate-500/35 dark:text-slate-400/25",
-            mascote: "text-slate-700 dark:text-slate-300",
-            tituloCor:
-              "from-slate-800 via-slate-500 to-slate-700 dark:from-slate-200 dark:via-slate-300 dark:to-slate-200",
-            subtituloCor: "text-slate-700/70 dark:text-slate-400/70",
-            fill: "fill-slate-400"
-          };
-
+  afinidade >= 85
+  ? {
+    titulo: "SINERGIA TIER S",
+    subtitulo: "ESQUADRÃO DE ELITE",
+    borda:
+    "border-amber-500/30 bg-amber-50/80 dark:border-amber-400/25 dark:bg-amber-500/5",
+    brilho:
+    "bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.22),transparent_62%)]",
+    hexagono: "text-amber-600/30 dark:text-amber-400/25",
+    mascote: "text-amber-700 dark:text-amber-300",
+    tituloCor:
+    "from-amber-800 via-amber-500 to-amber-700 dark:from-amber-200 dark:via-amber-400 dark:to-amber-200",
+    subtituloCor: "text-amber-800/70 dark:text-amber-400/70",
+    fill: "fill-amber-600"
+  }
+  : afinidade >= 70
+  ? {
+    titulo: "SINERGIA TIER A",
+    subtitulo: "CONEXÃO MUITO FORTE",
+    borda:
+    "border-violet-500/30 bg-violet-50/80 dark:border-violet-400/25 dark:bg-violet-500/5",
+    brilho:
+    "bg-[radial-gradient(ellipse_at_top,rgba(139,124,246,0.20),transparent_62%)]",
+    hexagono: "text-violet-600/30 dark:text-violet-300/25",
+    mascote: "text-violet-700 dark:text-violet-300",
+    tituloCor:
+    "from-violet-800 via-fuchsia-blue-600 to-violet-700 dark:from-violet-200 dark:via-fuchsia-blue-300 dark:to-violet-200",
+    subtituloCor: "text-violet-800/70 dark:text-violet-300/70",
+    fill: "fill-violet-600"
+  }
+  : afinidade >= 55
+  ? {
+    titulo: "SINERGIA TIER B",
+    subtitulo: "BOA SINCRONIA",
+    borda:
+    "border-cyan-500/30 bg-cyan-50/80 dark:border-cyan-400/25 dark:bg-cyan-500/5",
+    brilho:
+    "bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.20),transparent_62%)]",
+    hexagono: "text-cyan-600/30 dark:text-cyan-300/25",
+    mascote: "text-cyan-700 dark:text-cyan-300",
+    tituloCor:
+    "from-cyan-800 via-sky-500 to-cyan-700 dark:from-cyan-200 dark:via-sky-300 dark:to-cyan-200",
+    subtituloCor: "text-cyan-800/70 dark:text-cyan-300/70",
+    fill: "fill-cyan-600"
+  }
+  : {
+    titulo: "SINERGIA TIER C",
+    subtitulo: "EM EVOLUÇÃO",
+    borda:
+    "border-slate-400/35 bg-slate-100/80 dark:border-slate-500/25 dark:bg-slate-400/5",
+    brilho:
+    "bg-[radial-gradient(ellipse_at_top,rgba(148,163,184,0.18),transparent_62%)]",
+    hexagono: "text-slate-500/35 dark:text-slate-400/25",
+    mascote: "text-slate-700 dark:text-slate-300",
+    tituloCor:
+    "from-slate-800 via-slate-500 to-slate-700 dark:from-slate-200 dark:via-slate-300 dark:to-slate-200",
+    subtituloCor: "text-slate-700/70 dark:text-slate-400/70",
+    fill: "fill-slate-400"
+  };
+  
   const microfoneDisponivel = perfilSelecionado?.microfone === "Disponível";
-
+  
   function proximoPerfil() {
     // Não volta ao começo: cada card é tratado uma única vez.
     setPerfilAtual((indiceAtual) => indiceAtual + 1);
   }
-
+  
   // ===== REGISTRA UM HUDDLE PARA A PÁGINA DE MENSAGENS =====
   function salvarHuddleParaMensagens(perfil) {
     if (typeof window === "undefined") return;
-
+    
     localStorage.setItem(`huddle_horario_${perfil.nome}`, new Date().toLocaleTimeString("pt-BR", {
       hour: "2-digit",
       minute: "2-digit",
     }));
-
+    
     const nomesSalvos= JSON.parse(
       localStorage.getItem("huddle_nomes") ?? "[]"
     );
-
+    
     localStorage.setItem(
       "huddle_nomes",
       JSON.stringify([...nomesSalvos, perfil.nome])
     );
   }
-
+  
   // ===== Finaliza o swipe =====
   // esquerda = pular
   // direita = demonstrar interesse
   async function finalizarSwipe(direcao) {
     if (swipeEmAndamento || !perfilSelecionado) return;
-
+    
     setSwipeEmAndamento(true);
-
+    
     // Guardamos o perfil antes de avançar o índice.
     const perfilDaAcao = perfilSelecionado;
-
+    
     // O destino é calculado pelo tamanho da tela,
     // então funciona também no monitor ultrawide.
     const distanciaSaida = Math.max(window.innerWidth * 0.75, 900);
     const destino = direcao === "direita" ? distanciaSaida : -distanciaSaida;
-
+    
     // Saída suave, mantendo o comportamento aprovado do swipe.
     await animate(x, destino, {
       duration: 0.48,
       ease: [0.22, 1, 0.36, 1],
     });
-
+    
     // Para qualquer animação anterior.
     x.stop();
-
+    
     // Próximo card nasce exatamente no centro.
     if (typeof x.jump === "function") {
       x.jump(0);
     } else {
       x.set(0);
     }
-
+    
     proximoPerfil();
-
+    
     if (direcao === "direita" && perfilDaAcao.huddleReciproco) {
       salvarHuddleParaMensagens(perfilDaAcao);
       setHuddleFormado(perfilDaAcao);
     }
-
+    
     setSwipeEmAndamento(false);
   }
-
+  
   // ===== Decide o resultado ao soltar o card =====
   function aoSoltarCard() {
     if (swipeEmAndamento) return;
-
+    
     const posicaoAtual = x.get();
-
+    
     // Direita = conectar
     if (posicaoAtual >= 110) {
       finalizarSwipe("direita");
       return;
     }
-
+    
     // Esquerda = pular
     if (posicaoAtual <= -110) {
       finalizarSwipe("esquerda");
       return;
     }
-
+    
     // Não chegou ao limite:
     // volta suavemente para o centro.
     animate(x, 0, {
@@ -468,7 +468,7 @@ export function MatchContent() {
       mass: 0.9,
     });
   }
-
+  
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
       <section className="mx-auto w-full max-w-[1720px] px-4 pb-8 pt-10 sm:px-8 sm:pt-14">

@@ -144,12 +144,11 @@ function setInfo() {
 
 export function PerfilContent() {
     const autorizado = useAuth()
-    if (!autorizado) return null;
     const [status, setStatus] = useState(STATUS_OPTIONS[0]);
     const { XlfontClass, lgfontClass, smfontClass, XsfontClass } = useFontSize();
     const [info_rows, setInfoRows] = useState([{ icon: Gamepad2, label: "Plataformas", value: "Não informado" }]);
     const [tags, setTags] = useState(["Tipo de gameplay não informado"]);
-
+    
     const [perfil, setPerfil] = useState({
         apelido: "",
         nome: "",
@@ -179,6 +178,7 @@ export function PerfilContent() {
             motivoJogo: localStorage.getItem("user_motivo_jogo") || ""
         });
     }, []);
+    if (!autorizado) return null;
     return (
         <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
             <div className="mx-auto flex max-w-6xl flex-col gap-6">

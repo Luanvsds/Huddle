@@ -16,9 +16,24 @@ function handleLogout() {
   localStorage.removeItem("user_senha");
   localStorage.removeItem("user_dataNascimento");
   localStorage.removeItem("user_apelido");
-  localStorage.removeItem("user_gameplay");
-  localStorage.removeItem("user_selectedGame");
+  localStorage.removeItem("user_estilo");
+  localStorage.removeItem("user_jogo");
   localStorage.removeItem("user_horarios");
+  localStorage.removeItem("user_plataformas");
+  localStorage.removeItem("idade");
+  localStorage.removeItem("user_idiomas");
+  localStorage.removeItem("user_microfone");
+  localStorage.removeItem("user_bio");
+  localStorage.removeItem("user_motivo_jogo");
+  localStorage.removeItem("user_nome");
+  localStorage.removeItem("user_sobre");
+  localStorage.removeItem("user_cidade");
+
+  {
+    Object.keys(localStorage)
+      .filter((chave) => chave.startsWith("huddle_"))
+      .forEach((chave) => localStorage.removeItem(chave));
+  }
 
   window.location.href = "/";
 }
@@ -180,16 +195,16 @@ export default function Header() {
           <div
             ref={controlesRef}
             className="fixed left-0 flex items-center gap-1.5"
-          >            
-          <Button
-            type="button"
-            onClick={decrease}
-            disabled={!canDecrease}
-            variant="ghost"
-            size="icon"
-            aria-label="Diminuir fonte"
-            className={`${controlSizes} rounded-full border border-white/10 bg-black text-white/80 shadow-none hover:bg-white/20 hover:text-white disabled:opacity-30`}
           >
+            <Button
+              type="button"
+              onClick={decrease}
+              disabled={!canDecrease}
+              variant="ghost"
+              size="icon"
+              aria-label="Diminuir fonte"
+              className={`${controlSizes} rounded-full border border-white/10 bg-black text-white/80 shadow-none hover:bg-white/20 hover:text-white disabled:opacity-30`}
+            >
               <Minus className={iconSizes} />
             </Button>
 

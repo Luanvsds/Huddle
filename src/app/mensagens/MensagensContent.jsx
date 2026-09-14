@@ -100,54 +100,54 @@ const conversasIniciais = [
 export function MensagensContent() {
   // ===== CONVERSAS =====
   const autorizado = useAuth()
-  if (!autorizado) return null;
   const [conversas, setConversas] = useState([]);
-
+  
   useEffect(() => {
     const nomesComMatch = JSON.parse(
       localStorage.getItem("huddle_nomes") ?? "[]"
     );
-
+    
     const conversasFiltradas = conversasIniciais.filter((conversa) =>
       nomesComMatch.includes(conversa.nome)
-    );
-
-    setConversas(
-      conversasFiltradas.map((conversa) => ({
-        ...conversa,
+  );
+  
+  setConversas(
+    conversasFiltradas.map((conversa) => ({
+      ...conversa,
+      horario:
+      localStorage.getItem(
+        `huddle_horario_${conversa.nome}`
+      ) ?? "",
+      
+      mensagens: conversa.mensagens.map((mensagem) => ({
+        ...mensagem,
         horario:
-          localStorage.getItem(
-            `huddle_horario_${conversa.nome}`
-          ) ?? "",
+        localStorage.getItem(
+          `huddle_horario_${conversa.nome}`
+        ) ?? "",
+      })),
+    }))
+  );
+}, []);;
+// ===== CONVERSA SELECIONADA =====
+// Guardamos apenas o id da conversa escolhida.
+const [conversaSelecionadaId, setConversaSelecionadaId] = useState(1);
 
-        mensagens: conversa.mensagens.map((mensagem) => ({
-          ...mensagem,
-          horario:
-            localStorage.getItem(
-              `huddle_horario_${conversa.nome}`
-            ) ?? "",
-        })),
-      }))
-    );
-  }, []);;
-  // ===== CONVERSA SELECIONADA =====
-  // Guardamos apenas o id da conversa escolhida.
-  const [conversaSelecionadaId, setConversaSelecionadaId] = useState(1);
+// ===== VISUALIZAÇÃO MOBILE =====
+// false = mostra a lista de conversas
+// true = mostra o chat aberto
+const [mostrarChatMobile, setMostrarChatMobile] = useState(false);
+if (!autorizado) return null;
 
-  // ===== VISUALIZAÇÃO MOBILE =====
-  // false = mostra a lista de conversas
-  // true = mostra o chat aberto
-  const [mostrarChatMobile, setMostrarChatMobile] = useState(false);
-
-  // ===== SELECIONAR CONVERSA =====
-  // Abre a conversa, marca como lida
-  // e no mobile troca a lista pelo chat.
-  function selecionarConversa(id) {
-    setConversaSelecionadaId(id);
-
-    setMostrarChatMobile(true);
-
-    setConversas((conversasAtuais) =>
+// ===== SELECIONAR CONVERSA =====
+// Abre a conversa, marca como lida
+// e no mobile troca a lista pelo chat.
+function selecionarConversa(id) {
+  setConversaSelecionadaId(id);
+  
+  setMostrarChatMobile(true);
+  
+  setConversas((conversasAtuais) =>
       conversasAtuais.map((conversa) => {
         if (conversa.id !== id) {
           return conversa;
