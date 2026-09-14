@@ -270,33 +270,61 @@ A aplicação utiliza o **App Router do Next.js** e organiza elementos de interf
 
 ---
 
-# Como executar o projeto
+# 🚀 Como executar o projeto
+
+Esta seção explica, passo a passo, como instalar e executar o Huddle localmente em um computador.
+
+> **Importante:** todos os comandos apresentados abaixo devem ser executados em um terminal, como o **Terminal do Visual Studio Code**, **PowerShell**, **Prompt de Comando (CMD)** ou outro terminal de sua preferência.
 
 ## Pré-requisitos
 
-Antes de iniciar, instale:
+Antes de iniciar, é necessário ter instalado no computador:
 
 - **Node.js 20.9 ou superior**
-- **npm**
+- **npm** — instalado juntamente com o Node.js
 - **Git**
 
-Você pode conferir as versões instaladas com:
+Caso alguma dessas ferramentas ainda não esteja instalada, realize a instalação antes de continuar.
+
+Após a instalação, recomenda-se fechar e abrir novamente o terminal.
+
+Para conferir se as ferramentas estão disponíveis, abra um terminal e execute:
 
 ```bash
 node -v
+```
+
+Depois:
+
+```bash
 npm -v
+```
+
+E:
+
+```bash
 git --version
 ```
+
+Se os comandos retornarem os números das versões instaladas, o computador está pronto para executar o projeto.
 
 ---
 
 ## 1. Clonar o repositório
 
+Abra um terminal na pasta onde deseja salvar o projeto.
+
+No Windows, também é possível abrir o **Visual Studio Code**, acessar **Terminal > New Terminal** e utilizar o terminal integrado.
+
+No terminal, execute:
+
 ```bash
 git clone https://github.com/Luanvsds/Huddle.git
 ```
 
-Entre na pasta:
+Esse comando fará o download de uma cópia do projeto para o computador.
+
+Depois, ainda no terminal, entre na pasta do projeto:
 
 ```bash
 cd Huddle
@@ -306,13 +334,95 @@ cd Huddle
 
 ## 2. Instalar as dependências
 
+Com o terminal aberto dentro da pasta `Huddle`, execute:
+
 ```bash
 npm install
 ```
 
+Esse comando instalará automaticamente as bibliotecas e dependências necessárias para executar a aplicação.
+
+Aguarde até que o processo seja concluído.
+
 ---
 
-## 3. Iniciar o ambiente de desenvolvimento
+## 3. Iniciar o projeto
+
+Ainda no terminal, dentro da pasta do projeto, execute:
+
+```bash
+npm run dev
+```
+
+Após alguns segundos, o terminal deverá indicar que o servidor de desenvolvimento foi iniciado.
+
+Normalmente será exibido um endereço semelhante a:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## 4. Abrir a aplicação
+
+Abra um navegador, como Google Chrome, Microsoft Edge ou Firefox.
+
+Na barra de endereço, digite:
+
+```text
+http://localhost:3000
+```
+
+A aplicação Huddle deverá ser carregada.
+
+---
+
+## 5. Encerrar a aplicação
+
+Quando quiser interromper o servidor local, volte ao terminal onde o projeto está sendo executado e pressione:
+
+```text
+Ctrl + C
+```
+
+O servidor será encerrado.
+
+---
+
+## 🔄 Executando novamente depois
+
+Depois que o projeto já estiver instalado no computador, não é necessário repetir o processo de clonagem.
+
+Abra um terminal dentro da pasta `Huddle` e execute:
+
+```bash
+npm run dev
+```
+
+Depois acesse novamente:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## 🔄 Atualizar o projeto
+
+Caso o repositório já esteja no computador e você queira baixar as alterações mais recentes disponíveis no GitHub, abra o terminal dentro da pasta `Huddle` e execute:
+
+```bash
+git pull
+```
+
+Caso tenham sido adicionadas ou alteradas dependências, execute também:
+
+```bash
+npm install
+```
+
+Depois inicie normalmente:
 
 ```bash
 npm run dev
@@ -320,15 +430,11 @@ npm run dev
 
 ---
 
-## 4. Abrir no navegador
+## Observação sobre os dados
 
-Acesse:
+A versão acadêmica atual do Huddle não exige configuração de banco de dados, servidor externo ou arquivo de variáveis de ambiente para executar a demonstração principal.
 
-```text
-http://localhost:3000
-```
-
-No estágio atual, o projeto não depende de banco de dados ou configuração externa obrigatória para executar a experiência demonstrativa.
+Os dados necessários ao funcionamento do protótipo são armazenados localmente no navegador utilizando `localStorage`.
 
 ---
 
