@@ -8,8 +8,11 @@ import { useFontSize } from "@/components/ui/layout/font-size";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/components/hook/useAuth";
 
 export function SucessoContent() {
+  const autorizado = useAuth()
+  if (!autorizado) return null;
   const { Xl4fontClass, Xl5fontClass, smfontClass, lgfontClass } =
     useFontSize();
 
