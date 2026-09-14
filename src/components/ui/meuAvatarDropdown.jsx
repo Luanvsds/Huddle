@@ -1,5 +1,5 @@
 "use client";
-import { CircleUserRound, LogOut, Swords, UserRound } from "lucide-react";
+import { ArrowDownCircle, CircleQuestionMark, CircleUserRound, LogOut, MessageCircle, Star, UserRound, Users } from "lucide-react";
 
 import Link from "next/link";
 
@@ -15,8 +15,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import { DropdownLogin } from "./meuLogin";
 
 export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
   return (
@@ -52,12 +50,11 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
       data-[state=open]:ring-white/15`}
           aria-label="Abrir menu do usuário"
         >
+          <ArrowDownCircle className="absolute bottom-0 right-0  rounded-full border-2 border-fuchsia-blue-600" />
           <CircleUserRound className="size-[65%] stroke-[1.7]" />
 
           {/* Indicador de usuário conectado */}
-          {apelido && (
-            <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-fuchsia-blue-600 bg-emerald-400" />
-          )}
+
         </Button>
       </DropdownMenuTrigger>
 
@@ -83,6 +80,7 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
         {apelido ? (
           <>
             {/* ===== Usuário logado ===== */}
+            <Link href={"/perfil"}>
             <div className="mb-2 flex items-center gap-3 rounded-xl bg-fuchsia-blue-100/80 p-3 dark:bg-fuchsia-blue-600/10">
               <div className="flex size-10 items-center justify-center rounded-full bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:bg-fuchsia-blue-600/20 dark:text-fuchsia-blue-300">
                 <CircleUserRound className="size-6" />
@@ -96,6 +94,7 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
                 </p>
               </div>
             </div>
+            </Link>
 
             <DropdownMenuSeparator />
 
@@ -111,11 +110,21 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
 
             <DropdownMenuItem asChild>
               <Link
-                href="/match"
+                href="/huddle"
                 className="flex cursor-pointer items-center gap-2 rounded-lg"
               >
-                <Swords className="size-4" />
-                Match
+                <Users className="size-4" />
+                Huddle
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
+              <Link
+                href="/mensagens"
+                className="flex cursor-pointer items-center gap-2 rounded-lg"
+              >
+                <MessageCircle className="size-4" />
+                Mensagens
               </Link>
             </DropdownMenuItem>
 
@@ -130,8 +139,56 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
             </DropdownMenuItem>
           </>
         ) : (
-          <DropdownLogin />
+          <>
+            <Link href={"/conecte-se"}>
+              <div className="mb-2 flex items-center gap-3 rounded-xl bg-fuchsia-blue-100/80 p-3 dark:bg-fuchsia-blue-600/10">
+                <div className="flex size-10 items-center justify-center rounded-full bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:bg-fuchsia-blue-600/20 dark:text-fuchsia-blue-300">
+                  <CircleUserRound className="size-6" />
+                </div>
+
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-bold">{apelido}</p>
+
+                  <p className="text-xs text-muted-foreground">
+                    Sem jogador conectado
+                  </p>
+                </div>
+              </div>
+            </Link>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem asChild>
+              <Link
+                href="/conecte-se"
+                className="flex cursor-pointer items-center gap-2 rounded-lg"
+              >
+                <UserRound className="size-4" />
+                Cadastre-se
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
+              <Link
+                href="/faq"
+                className="flex cursor-pointer items-center gap-2 rounded-lg"
+              >
+                <CircleQuestionMark className="size-4" />
+                FAQ
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
+              <Link
+                href="/Sobre"
+                className="flex cursor-pointer items-center gap-2 rounded-lg"
+              >
+                <Star className="size-4" />
+                Sobre nós
+              </Link>
+            </DropdownMenuItem>
+          </>
         )}
+
       </DropdownMenuContent>
     </DropdownMenu>
   );

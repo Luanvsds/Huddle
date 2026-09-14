@@ -50,6 +50,26 @@ export function FAQContent() {
 
                     <Accordion type="single" collapsible className="space-y-6">
                         <AccordionItem
+                            value="item-0"
+                            className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
+                        >
+                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
+                                Li Huddle na minha foto e no header, o que é isso?
+                            </AccordionTrigger>
+
+                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
+                                <p>
+                                 Huddle é a nossa forma de chamar as conexões, não queremos que as pessoas só sintam que "acharam" um outro perfil,
+                                 queremos que as pessoas sintam que fazem parte de um <strong className="text-fuchsia-blue-600">abraço coletivo</strong>, como o nosso nome sugere. 
+                                </p>
+
+                                <p className="mt-2">
+                                    Aqui no Huddle você não está procurando só um perfil compatível como se estivesse vendo um currículo, queremos conexões reais, duradouras e significativas.
+                                </p>
+                            </AccordionContent>
+                        </AccordionItem>
+
+                        <AccordionItem
                             value="item-1"
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >

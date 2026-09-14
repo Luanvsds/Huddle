@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useFontSize } from "@/components/ui/layout/font-size";
 import Image from "next/image";
+import { useAuth } from "@/components/hook/useAuth";
 const STATUS_OPTIONS = [
     {
         id: "online",
@@ -142,6 +143,8 @@ function setInfo() {
 }
 
 export function PerfilContent() {
+    const autorizado = useAuth()
+    if (!autorizado) return null;
     const [status, setStatus] = useState(STATUS_OPTIONS[0]);
     const { XlfontClass, lgfontClass, smfontClass, XsfontClass } = useFontSize();
     const [info_rows, setInfoRows] = useState([{ icon: Gamepad2, label: "Plataformas", value: "Não informado" }]);
@@ -182,7 +185,7 @@ export function PerfilContent() {
                 <div className="rounded-[2.5rem] bg-linear-to-br from-violet-500 via-indigo-500 to-blue-500 p-0.5 shadow-[0_0_60px_-15px_rgba(124,58,237,0.5)]">
                     <div className="overflow-hidden rounded-[2.375rem] bg-white dark:bg-[#0b0817]">
                         <div className="relative h-64 w-full overflow-hidden">
-                            <Image src={perfil.jogo ? `/${perfil.jogo}.jpg` : '/padraoBanner.jpg'} alt="Imagem do jogo preferido do jogador, se não selecionado, imagem padrão" fill={true}/>
+                            <Image src={perfil.jogo ? `/${perfil.jogo}.jpg` : '/padraoBanner.jpg'} alt="Imagem do jogo preferido do jogador, se não selecionado, imagem padrão" fill={true} />
 
                             <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-black/10" />
 
@@ -335,13 +338,13 @@ export function PerfilContent() {
 
                                 <div className="mt-5 flex flex-col gap-5 sm:flex-row">
                                     <div className="relative h-44 w-36 shrink-0 overflow-hidden rounded-[1.75rem] bg-linear-to-br from-violet-500 to-indigo-800">
-                                        <Image src={perfil.jogo ? `/${perfil.jogo}-mini.jpg` : '/padraoBanner.jpg'} alt="Imagem do jogo preferido do jogador, se não selecionado, imagem padrão" fill={true}/> 
+                                        <Image src={perfil.jogo ? `/${perfil.jogo}-mini.jpg` : '/padraoBanner.jpg'} alt="Imagem do jogo preferido do jogador, se não selecionado, imagem padrão" fill={true} />
                                         <span className="absolute right-2 top-2 rounded-md bg-black/50 px-2 py-0.5 text-[10px] font-semibold text-white">
                                             {perfil.plataforma || ""}
                                         </span>
                                         <div className="absolute bottom-0 w-full bg-linear-to-t from-black/70 to-transparent p-3">
                                             <p className="text-sm font-bold leading-tight text-white">
-                                             {perfil.jogo ? "Imagem do jogo escolhido" : "Esse jogador não escolheu um jogo preferido ainda"}
+                                                {perfil.jogo ? "Imagem do jogo escolhido" : "Esse jogador não escolheu um jogo preferido ainda"}
                                             </p>
                                         </div>
                                     </div>

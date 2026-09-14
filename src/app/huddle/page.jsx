@@ -1,5 +1,4 @@
 import { MatchContent } from "./MatchContent";
-import { MatchGuard } from "./MatchGuard";
 
 export const metadata = {
   title: "Huddle | Match",
@@ -8,8 +7,6 @@ export const metadata = {
 
 export default function MatchPage() {
   return (
-    <MatchGuard>
       <MatchContent />
-    </MatchGuard>
   );
 }

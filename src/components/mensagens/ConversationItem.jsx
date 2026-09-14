@@ -54,7 +54,6 @@ export function ConversationItem({ conversa, selecionada, onClick }) {
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-3">
           <p className={`${lgfontClass} truncate font-bold`}>{conversa.nome}</p>
-
           <span className={`${smfontClass} shrink-0 text-muted-foreground`}>
             {conversa.horario}
           </span>

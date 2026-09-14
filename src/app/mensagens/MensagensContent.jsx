@@ -3,94 +3,133 @@
 import { useEffect, useState } from "react";
 import { ConversationList } from "@/components/mensagens/ConversationList";
 import { ChatArea } from "@/components/mensagens/ChatArea";
-
-// ===== HORÁRIO DO HUDDLE =====
-// Por enquanto usamos o horário em que a página foi carregada.
-// Quando integrarmos com o Match/Huddle,
-// esse horário será criado exatamente no momento da conexão.
-const horarioDoHuddle = new Date().toLocaleTimeString("pt-BR", {
-  hour: "2-digit",
-  minute: "2-digit",
-});
+import { useAuth } from "@/components/hook/useAuth";
 
 const conversasIniciais = [
   {
     id: 1,
     nome: "LunaFPS",
-    ultimaMensagem: "Oi! Tudo bem? Eu jogo de SUP, e você?",
-    horario: horarioDoHuddle,
-    online: true,
-    naoLidas: 0,
+    ultimaMensagem: "Topo qualquer um!",
+    horario: "",
+    online: false,
+    naoLidas: 1,
 
     mensagens: [
       {
         id: 1,
         autor: "outro",
-        texto: "Oi! Tudo bem? Eu jogo de SUP, e você?",
-        horario: horarioDoHuddle,
+        texto: "Oii, prazer te conhecer!",
+        horario: "",
       },
+      {
+        id: 2,
+        autor: "outro",
+        texto: "Gosto de vários tipos de jogos, tem algum que você prefira?",
+        horario: "",
+      },
+      {
+        id: 3,
+        autor: "outro",
+        texto: "Topo qualquer um!",
+        horario: "",
+      }
     ],
   },
-
   {
     id: 2,
     nome: "MiraGG",
-    ultimaMensagem: "Opa! Bora jogar alguma coisa qualquer hora?",
-    horario: horarioDoHuddle,
-    online: true,
+    ultimaMensagem: "Partiu um Valorant?",
+    horario: "",
+    online: false,
     naoLidas: 1,
-
     mensagens: [
       {
         id: 1,
         autor: "outro",
-        texto: "Opa! Bora jogar alguma coisa qualquer hora?",
-        horario: horarioDoHuddle,
+        texto: "Só os MVPs aqui!",
+        horario: "",
       },
+      {
+        id: 2,
+        autor: "outro",
+        texto: "Partiu um Valorant?",
+        horario: "",
+      }
     ],
   },
-
   {
     id: 3,
-    nome: "Nexusbr",
-    ultimaMensagem: "E aí! Vi que nosso estilo de jogo combina bastante.",
-    horario: horarioDoHuddle,
+    nome: "PixelRush",
+    ultimaMensagem: "O que acha de procurar uma partida comigo e meus amigos?",
+    horario: "",
     online: false,
     naoLidas: 1,
-
     mensagens: [
       {
         id: 1,
         autor: "outro",
-        texto: "E aí! Vi que nosso estilo de jogo combina bastante.",
-        horario: horarioDoHuddle,
+        texto: "Fala aí, incrível o seu perfil!.",
+        horario: "",
       },
+      {
+        id: 2,
+        autor: "outro",
+        texto: "O que acha de procurar uma partida comigo e meus amigos?",
+        horario: "",
+      }
     ],
   },
-
   {
     id: 4,
-    nome: "PixelRush",
-    ultimaMensagem: "Fala! Quer combinar uma partida depois?",
-    horario: horarioDoHuddle,
+    nome: "Nexusbr",
+    ultimaMensagem: "E aí! Vi que nosso estilo de jogo combina bastante. Bora jogar?",
+    horario: "",
     online: false,
     naoLidas: 1,
-
     mensagens: [
       {
         id: 1,
         autor: "outro",
-        texto: "Fala! Quer combinar uma partida depois?",
-        horario: horarioDoHuddle,
-      },
+        texto: "E aí! Vi que nosso estilo de jogo combina bastante. Bora jogar?",
+        horario: "",
+      }
     ],
-  },
+  }
 ];
 
 export function MensagensContent() {
   // ===== CONVERSAS =====
-  const [conversas, setConversas] = useState(conversasIniciais);
+  const autorizado = useAuth()
+  if (!autorizado) return null;
+  const [conversas, setConversas] = useState([]);
 
+  useEffect(() => {
+    const nomesComMatch = JSON.parse(
+      localStorage.getItem("huddle_nomes") ?? "[]"
+    );
+
+    const conversasFiltradas = conversasIniciais.filter((conversa) =>
+      nomesComMatch.includes(conversa.nome)
+    );
+
+    setConversas(
+      conversasFiltradas.map((conversa) => ({
+        ...conversa,
+        horario:
+          localStorage.getItem(
+            `huddle_horario_${conversa.nome}`
+          ) ?? "",
+
+        mensagens: conversa.mensagens.map((mensagem) => ({
+          ...mensagem,
+          horario:
+            localStorage.getItem(
+              `huddle_horario_${conversa.nome}`
+            ) ?? "",
+        })),
+      }))
+    );
+  }, []);;
   // ===== CONVERSA SELECIONADA =====
   // Guardamos apenas o id da conversa escolhida.
   const [conversaSelecionadaId, setConversaSelecionadaId] = useState(1);
@@ -99,30 +138,6 @@ export function MensagensContent() {
   // false = mostra a lista de conversas
   // true = mostra o chat aberto
   const [mostrarChatMobile, setMostrarChatMobile] = useState(false);
-
-  // ===== HUDDLES VINDOS DA TELA DE MATCH =====
-  // Ao abrir Mensagens, procura conversas criadas quando
-  // aconteceu um Huddle recíproco.
-  useEffect(() => {
-    const conversasSalvas = JSON.parse(
-      localStorage.getItem("huddleConversas") ?? "[]",
-    );
-
-    if (conversasSalvas.length === 0) {
-      return;
-    }
-
-    setConversas((conversasAtuais) => {
-      const conversasSemDuplicar = conversasAtuais.filter(
-        (conversaAtual) =>
-          !conversasSalvas.some(
-            (conversaSalva) => conversaSalva.nome === conversaAtual.nome,
-          ),
-      );
-
-      return [...conversasSalvas, ...conversasSemDuplicar];
-    });
-  }, []);
 
   // ===== SELECIONAR CONVERSA =====
   // Abre a conversa, marca como lida
@@ -199,19 +214,19 @@ export function MensagensContent() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
-      <section className="mx-auto w-full max-w-[1500px] px-6 py-8">
-        <div className="flex min-h-[680px] overflow-hidden rounded-3xl border border-border bg-card">
+      <section className="mx-auto w-full max-w-375 px-6 py-8">
+        <div className="flex min-h-170 overflow-hidden rounded-3xl border border-border bg-card">
           {/* ===== LISTA DE CONVERSAS ===== */}
           {/* No mobile some quando uma conversa é aberta.
       No desktop permanece sempre visível. */}
           <div
             className={`
-      w-full
-      shrink-0
-      lg:block
-      lg:w-[340px]
+  w-full
+  shrink-0
+  lg:block
+  lg:w-85
       ${mostrarChatMobile ? "hidden" : "block"}
-    `}
+  `}
           >
             <ConversationList
               conversas={conversas}
@@ -225,11 +240,11 @@ export function MensagensContent() {
       No desktop permanece sempre visível. */}
           <div
             className={`
-      min-w-0
-      flex-1
-      lg:flex
+  min-w-0
+  flex-1
+  lg:
       ${mostrarChatMobile ? "flex" : "hidden"}
-    `}
+  `}
           >
             <ChatArea
               conversa={conversaSelecionada}

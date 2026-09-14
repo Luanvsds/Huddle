@@ -95,7 +95,7 @@ export default function CrescimentoHuddle() {
           max={24}
           step={1}
           onValueChange={(valor) => setMeses(valor[0])}
-          className="**:data-[slot=slider-track]:h-2 **:data-[slot=slider-track]:bg-fuchsia-blue-300/30 [&_[data-slot=slider-range]]:bg-fuchsia-blue-600 [&_[data-slot=slider-thumb]]:size-5 [&_[data-slot=slider-thumb]]:border-2 [&_[data-slot=slider-thumb]]:border-white [&_[data-slot=slider-thumb]]:bg-fuchsia-blue-600 [&_[data-slot=slider-thumb]]:shadow-md"
+          className="**:data-[slot=slider-track]:h-2 **:data-[slot=slider-track]:bg-fuchsia-blue-300/30 **:data-[slot=slider-range]:bg-fuchsia-blue-600 **:data-[slot=slider-thumb]:size-5 **:data-[slot=slider-thumb]:border-2 **:data-[slot=slider-thumb]:border-white **:data-[slot=slider-thumb]:bg-fuchsia-blue-600 **:data-[slot=slider-thumb]:shadow-md"
         />
         <div
           className={`mt-2 flex justify-between ${smfontClass} text-muted-foreground`}
