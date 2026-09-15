@@ -1,12 +1,12 @@
-import { MatchContent } from "./MatchContent";
+import { HuddleContent } from "./HuddleContent";
 
 export const metadata = {
-  title: "Huddle | Match",
+  title: "Huddle | Conexão",
   description: "Encontre jogadores compatíveis com o seu estilo de gameplay.",
 };
 
-export default function MatchPage() {
+export default function HuddlePage() {
   return (
-      <MatchContent />
+      <HuddleContent />
   );
 }

@@ -1,47 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { FaLinkedin } from "react-icons/fa";
 import { useFontSize } from "@/components/ui/layout/font-size";
 import CrescimentoHuddle from "@/components/CrescimentoHuddle";
-
-const teamMembers = [
-  {
-    name: "Giovanna",
-    role: "CEO",
-    image: "/Sophia.png",
-    linkedin: "https://www.linkedin.com/in/giovanna-sophia-gomes-6136a23b7/",
-  },
-  {
-    name: "Carlos",
-    role: "CEO",
-    image: "/Carlos.png",
-    linkedin: "https://www.linkedin.com/in/carlos-vasconcelos-pereira/",
-  },
-  {
-    name: "Luan",
-    role: "CEO",
-    image: "/Luan.png",
-    linkedin: "https://www.linkedin.com/in/luan-silva-8ba26921a/",
-  },
-  {
-    name: "Miranda",
-    role: "CEO",
-    image: "/Miranda.png",
-    linkedin:
-      "https://www.linkedin.com/in/gabriela-miranda-siqueira-24b9a1328/",
-  },
-];
 
 export function SobreContent() {
   const {
     XlfontClass,
-    Xl3fontClass,
     Xl4fontClass,
     Xl5fontClass,
-    Xl6fontClass,
-    smfontClass,
     lgfontClass,
   } = useFontSize();
 
@@ -134,7 +101,7 @@ export function SobreContent() {
               <h2
                 className={`mt-3 ${Xl4fontClass} font-black uppercase leading-none text-fuchsia-blue-950 dark:text-fuchsia-blue-100 md:${Xl5fontClass}`}
               >
-                Match
+                Social
                 <br />
                 de verdade
               </h2>

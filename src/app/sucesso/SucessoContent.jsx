@@ -12,7 +12,7 @@ import { useAuth } from "@/components/hook/useAuth";
 
 export function SucessoContent() {
   const autorizado = useAuth()
-  const { Xl4fontClass, Xl5fontClass, smfontClass, lgfontClass } =
+  const { Xl4fontClass, smfontClass, lgfontClass } =
   useFontSize();
   
   const [avaliacao, setAvaliacao] = useState(0);

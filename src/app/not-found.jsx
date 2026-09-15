@@ -7,7 +7,7 @@
     import { useFontSize } from "@/components/ui/layout/font-size";
 
     export default function NotFound() {
-        const { XlfontClass, Xl4fontClass, Xl6fontClass, smfontClass } = useFontSize();
+        const { XlfontClass, Xl4fontClass, smfontClass } = useFontSize();
 
     return (
         <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-16 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
