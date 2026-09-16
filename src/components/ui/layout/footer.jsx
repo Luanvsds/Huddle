@@ -220,7 +220,7 @@ export default function Footer() {
                 className={`${XsfontClass} inline-flex items-center gap-1.5 rounded-full border border-fuchsia-blue-300/40 bg-fuchsia-blue-600/5 px-3 py-1.5 text-fuchsia-blue-800 dark:border-white/10 dark:text-fuchsia-blue-200`}
               >
                 <Gamepad2 className="size-3.5" />
-                Match gamer
+                Conexão gamer
               </span>
 
               <span

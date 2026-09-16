@@ -217,8 +217,6 @@ function selecionarConversa(id) {
       <section className="mx-auto w-full max-w-375 px-6 py-8">
         <div className="flex min-h-170 overflow-hidden rounded-3xl border border-border bg-card">
           {/* ===== LISTA DE CONVERSAS ===== */}
-          {/* No mobile some quando uma conversa é aberta.
-      No desktop permanece sempre visível. */}
           <div
             className={`
   w-full
@@ -236,8 +234,6 @@ function selecionarConversa(id) {
           </div>
 
           {/* ===== CHAT ===== */}
-          {/* No mobile só aparece depois que escolhemos alguém.
-      No desktop permanece sempre visível. */}
           <div
             className={`
   min-w-0
