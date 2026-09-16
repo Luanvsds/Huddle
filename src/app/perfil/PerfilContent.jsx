@@ -28,6 +28,7 @@ import {
 import { useFontSize } from "@/components/ui/layout/font-size";
 import Image from "next/image";
 import { useAuth } from "@/components/hook/useAuth";
+import { EditarPerfilModal } from "@/components/ui/editarPerfilModal";
 const STATUS_OPTIONS = [
     {
         id: "online",
@@ -148,7 +149,7 @@ export function PerfilContent() {
     const { XlfontClass, lgfontClass, smfontClass, XsfontClass } = useFontSize();
     const [info_rows, setInfoRows] = useState([{ icon: Gamepad2, label: "Plataformas", value: "Não informado" }]);
     const [tags, setTags] = useState(["Tipo de gameplay não informado"]);
-    
+
     const [perfil, setPerfil] = useState({
         apelido: "",
         nome: "",
@@ -160,23 +161,36 @@ export function PerfilContent() {
         jogo: "",
         motivoJogo: "",
     });
-    useEffect(() => {
-        const estilo = localStorage.getItem("user_estilo");
-        if (estilo) {
-            setTags([estilo]);
+    function carregarPrimeiraPlataforma() {
+        try {
+            const plataformas = JSON.parse(localStorage.getItem("user_plataformas") || "{}");
+            const labels = { pc: "PC", console: "Console", mobile: "Mobile" };
+            const chave = Object.keys(labels).find((key) => plataformas[key]);
+            return chave ? labels[chave] : "";
+        } catch {
+            return "";
         }
+    }
+
+    function carregarPerfilDoStorage() {
+        const estilo = localStorage.getItem("user_estilo");
+        setTags(estilo ? [estilo] : ["Tipo de gameplay não informado"]);
         setInfoRows(setInfo());
         setPerfil({
             apelido: localStorage.getItem("user_apelido") || "",
             nome: localStorage.getItem("user_nome") || "",
             cidade: localStorage.getItem("user_cidade") || "",
-            plataforma: localStorage.getItem("user_plataforma") || "",
+            plataforma: carregarPrimeiraPlataforma(),
             idade: localStorage.getItem("idade") || "",
             bio: localStorage.getItem("user_bio") || "",
             sobre: localStorage.getItem("user_sobre") || "",
             jogo: localStorage.getItem("user_jogo") || "",
             motivoJogo: localStorage.getItem("user_motivo_jogo") || ""
         });
+    }
+
+    useEffect(() => {
+        carregarPerfilDoStorage();
     }, []);
     if (!autorizado) return null;
     return (
@@ -270,6 +284,7 @@ export function PerfilContent() {
                                             })}
                                         </DropdownMenuContent>
                                     </DropdownMenu>
+                                        <EditarPerfilModal onSalvar={carregarPerfilDoStorage} />
                                 </div>
                             </div>
 
