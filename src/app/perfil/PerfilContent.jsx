@@ -8,11 +8,9 @@ import {
     Clock,
     Gamepad2,
     Globe,
-    Image as ImageIcon,
     MapPin,
     Mic,
     MinusCircle,
-    SignalHigh,
     Trophy,
     XCircle,
 } from "lucide-react";
@@ -100,9 +98,9 @@ function verificarPlataformas() {
                 localStorage.getItem("user_plataformas") || "{}"
             );
             const labels = {
-                pc: "PC",
-                console: "Console",
-                mobile: "Mobile",
+                PC: "PC",
+                Console: "Console",
+                Mobile: "Mobile",
             };
             const ativos = Object.keys(plataforma)
                 .filter((key) => plataforma[key])
@@ -164,7 +162,7 @@ export function PerfilContent() {
     function carregarPrimeiraPlataforma() {
         try {
             const plataformas = JSON.parse(localStorage.getItem("user_plataformas") || "{}");
-            const labels = { pc: "PC", console: "Console", mobile: "Mobile" };
+            const labels = { PC: "PC", Console: "Console", Mobile: "Mobile" };
             const chave = Object.keys(labels).find((key) => plataformas[key]);
             return chave ? labels[chave] : "";
         } catch {
@@ -284,7 +282,7 @@ export function PerfilContent() {
                                             })}
                                         </DropdownMenuContent>
                                     </DropdownMenu>
-                                        <EditarPerfilModal onSalvar={carregarPerfilDoStorage} />
+                                    <EditarPerfilModal onSalvar={carregarPerfilDoStorage} />
                                 </div>
                             </div>
 

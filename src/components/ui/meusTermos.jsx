@@ -16,17 +16,17 @@ export function TermosModal() {
   return (
     <Label className="text-fuchsia-blue-950 dark:text-fuchsia-blue-100 text-sm gap-1 flex items-center flex-wrap">
       Ao clicar em participar, você declara ser maior de 18 anos, e aceitar os{" "}
-      
+
       <Dialog>
         <DialogTrigger asChild>
-          <button 
+          <button
             type="button"
             className="dark:hover:text-fuchsia-blue-700 hover:text-fuchsia-blue-950 no-underline hover:underline text-fuchsia-blue-500 bg-transparent border-none p-0 cursor-pointer text-sm inline"
           >
             termos de uso
           </button>
         </DialogTrigger>
-        
+
         <DialogContent className="sm:max-w-xl p-0 overflow-hidden border-none bg-transparent shadow-none">
           <Card className="mx-auto w-full">
             <CardHeader>
@@ -37,7 +37,7 @@ export function TermosModal() {
             </CardHeader>
             <CardContent className="-mb-(--card-spacing)">
               <div className="-mx-(--card-spacing) max-h-105 space-y-4 overflow-y-scroll border-t bg-muted/50 px-(--card-spacing) py-4 text-sm leading-relaxed text-left">
-                
+
                 <p>
                   A sua privacidade é muito importante para nós. É política do Huddle respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar.
                 </p>

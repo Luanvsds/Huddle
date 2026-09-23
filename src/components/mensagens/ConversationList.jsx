@@ -17,13 +17,8 @@ export function ConversationList({
     XlfontClass,
   } = useFontSize();
 
-  // ===== TEXTO DA BUSCA =====
-  // Começa vazio e vai guardar aquilo que o usuário digitar.
   const [busca, setBusca] = useState("");
 
-  // ===== FILTRO DAS CONVERSAS =====
-  // Cria uma nova lista somente com as conversas
-  // cujo nome contém o texto pesquisado.
   const conversasFiltradas = conversas.filter((conversa) =>
     conversa.nome.toLowerCase().includes(busca.toLowerCase())
   );

@@ -68,7 +68,7 @@ const benchmarkData = [
     plataforma: "Huddle",
     foco: "Afinidade e Inclusão",
     diferencial:
-      "Mecânica de match com filtros de segurança, acessibilidade e afinidade.",
+      "Mecânica de huddle com filtros de segurança, acessibilidade e afinidade.",
     pontoFraco: "Focado em um nicho específico: gamers.",
   },
 ];
@@ -79,7 +79,6 @@ export function DadosContent() {
     Xl3fontClass,
     Xl4fontClass,
     Xl5fontClass,
-    Xl6fontClass,
     smfontClass,
     sm2fontClass,
     XsfontClass,
@@ -107,7 +106,7 @@ export function DadosContent() {
           </h1>
 
           <p
-            className={`mx-auto mt-4 max-w-3xl ${lgfontClass}  text-fuschia-blue-100`}
+            className={`mx-auto mt-4 max-w-3xl ${lgfontClass} text-fuchsia-blue-100`}
           >
             Dados reais sobre comportamento, conexão e os desafios que os
             jogadores enfrentam hoje, motivo de estamos construindo uma forma

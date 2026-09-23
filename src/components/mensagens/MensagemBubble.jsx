@@ -3,9 +3,6 @@ import { useFontSize } from "@/components/ui/layout/font-size";
 export function MensagemBubble({ mensagem }) {
   const { smfontClass, lgfontClass } = useFontSize();
 
-  // ===== QUEM ENVIOU? =====
-  // Se autor for "eu", a mensagem vai para direita.
-  // Caso contrário, fica na esquerda.
   const enviadaPorMim = mensagem.autor === "eu";
 
   return (
@@ -23,10 +20,9 @@ export function MensagemBubble({ mensagem }) {
           px-4
           py-3
           shadow-sm
-          ${
-            enviadaPorMim
-              ? "rounded-br-md bg-fuchsia-blue-600 text-white"
-              : "rounded-bl-md border border-border bg-card text-card-foreground"
+          ${enviadaPorMim
+            ? "rounded-br-md bg-fuchsia-blue-600 text-white"
+            : "rounded-bl-md border border-border bg-card text-card-foreground"
           }
         `}
       >

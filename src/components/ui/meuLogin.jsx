@@ -75,7 +75,7 @@ export function DropdownLogin() {
                             <Button type="submit" className="w-full">
                                 Entrar
                             </Button>
-                            <Button variant="outline" className="w-full" asChild onClick ={() => setOpen(false)}>
+                            <Button variant="outline" className="w-full" asChild onClick={() => setOpen(false)}>
                                 <Link href="/conecte-se">
                                     Cadastrar-se
                                 </Link>

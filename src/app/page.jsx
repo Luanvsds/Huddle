@@ -4,7 +4,7 @@ import { HomeContent } from "./HomeContent.jsx";
 export const metadata = {
   title: "Huddle | Home",
   description:
-    "Huddle é uma plataforma para conectar jogadores por afinidade, segurança e estilo de jogo.",
+    "Huddle é uma plataforma para conectar jogadores.",
 };
 
 export default function HomePage() {

@@ -1,6 +1,5 @@
 import { SobreContent } from "./SobreContent";
 
-// Exportação do metadata no Server Component
 export const metadata = {
   title: "Huddle | Sobre Nós",
   description:

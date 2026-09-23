@@ -253,7 +253,7 @@ Huddle/
 │
 ├── src/
 │   ├── app/                # páginas e rotas da aplicação
-│   │   ├── match/          # descoberta e afinidade entre jogadores
+│   │   ├── huddle/          # descoberta e afinidade entre jogadores
 │   │   └── ...
 │   │
 │   └── components/         # componentes reutilizáveis

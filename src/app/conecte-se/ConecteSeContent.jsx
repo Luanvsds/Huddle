@@ -3,22 +3,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFontSize } from "@/components/ui/layout/font-size";
-import { use, useState } from "react";
+import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Eye, EyeOff } from "lucide-react";
-import * as Selected from "@radix-ui/react-select";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -29,7 +20,6 @@ import {
 } from "@/components/ui/select";
 import { cpf } from "cpf-cnpj-validator";
 import { InputComMascara } from "@/components/ui/inputComMascara";
-import { useRef } from "react";
 import { TermosModal } from "@/components/ui/meusTermos";
 import { MeuSwitch } from "@/components/ui/meuSwitch";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,8 +28,12 @@ import { useAuth } from "@/components/hook/useAuth";
 export function ConecteSeContent() {
   const router = useRouter();
   const logado = useAuth();
-  const { XlfontClass, Xl5fontClass, smfontClass, sm2fontClass } =
-    useFontSize();
+  useEffect(() => {
+    if (logado) {
+      router.replace("/perfil");
+    }
+  }, [logado, router]);
+  const { XlfontClass, Xl5fontClass, smfontClass } = useFontSize();
 
   // Aqui estamos usandos o useState para guardar oq a pessoa digita no formulario.
   // é muito importante, pois usamos ela para as validacoes.
@@ -64,9 +58,9 @@ export function ConecteSeContent() {
   });
 
   const [plataformas, setPlataformas] = useState({
-    pc: false,
-    console: false,
-    mobile: false,
+    PC: false,
+    Console: false,
+    Mobile: false,
   });
 
   const [idiomas, setIdiomas] = useState({
@@ -86,8 +80,6 @@ export function ConecteSeContent() {
   const handleIdiomasChange = (key, checked) => {
     setIdiomas((prev) => ({ ...prev, [key]: checked }));
   };
-
-  ("use client");
 
   const games = [
     { id: 1, name: "The Legend of Zelda" },
@@ -142,7 +134,6 @@ export function ConecteSeContent() {
     .toISOString()
     .split("T")[0];
 
-  if(logado){window.location.href = "/perfil"};
   function validarCPF(CPF) {
     if (!CPF) return "Preencha o campo";
     if (!cpf.isValid(CPF)) {
@@ -179,9 +170,7 @@ export function ConecteSeContent() {
     return null;
   }
 
-  function validarIdade(dataDigitada) {
-    if (!dataDigitada) return "Preencha o campo";
-
+  function calcularIdade(dataDigitada) {
     const nascimento = new Date(dataDigitada);
     const hoje = new Date();
 
@@ -191,12 +180,18 @@ export function ConecteSeContent() {
 
     const fezAniversario =
       diferencaMes > 0 || (diferencaMes === 0 && diferencaDia >= 0);
-    const idadeReal = fezAniversario ? idade : idade - 1;
+
+    return fezAniversario ? idade : idade - 1;
+  }
+
+  function validarIdade(dataDigitada) {
+    if (!dataDigitada) return "Preencha o campo";
+
+    const idadeReal = calcularIdade(dataDigitada);
 
     if (idadeReal < 18)
       return "Digite uma data válida, ou lembre-se: O Huddle é uma comunidade 18+. Menores de idade não podem se cadastrar.";
 
-    localStorage.setItem('idade', idadeReal)
     return null;
   }
 
@@ -219,7 +214,6 @@ export function ConecteSeContent() {
   }
   function enviarFormulario(event) {
     event.preventDefault();
-    let temErros = false;
 
     const form = event.currentTarget;
     const email = form.elements.namedItem("email").value;
@@ -234,37 +228,52 @@ export function ConecteSeContent() {
     const apelidoInvalido = validarApelido(apelido);
     const cpfInvalido = validarCPF(cpf);
 
+    const temErros = Boolean(
+      emailInvalido ||
+      senhaInvalida ||
+      idadeInvalida ||
+      apelidoInvalido ||
+      cpfInvalido
+    );
+
     setErros((prev) => {
       const erros = { ...prev };
+
       if (emailInvalido) {
         erros.email = emailInvalido;
-        temErros = true;
-      }
-      if (senhaInvalida) {
-        erros.senha = senhaInvalida;
-        temErros = true;
-      }
-      if (idadeInvalida) {
-        erros.dataNascimento = idadeInvalida;
-        temErros = true;
-      }
-      if (apelidoInvalido) {
-        erros.apelido = apelidoInvalido;
-        temErros = true;
-      }
-      if (cpfInvalido) {
-        erros.cpf = cpfInvalido;
-        temErros = true;
       } else {
         delete erros.email;
-        delete erros.dataNascimento;
+      }
+
+      if (senhaInvalida) {
+        erros.senha = senhaInvalida;
+      } else {
         delete erros.senha;
+      }
+
+      if (idadeInvalida) {
+        erros.dataNascimento = idadeInvalida;
+      } else {
+        delete erros.dataNascimento;
+      }
+
+      if (apelidoInvalido) {
+        erros.apelido = apelidoInvalido;
+      } else {
         delete erros.apelido;
+      }
+
+      if (cpfInvalido) {
+        erros.cpf = cpfInvalido;
+      } else {
         delete erros.cpf;
       }
+
       return erros;
     });
     if (!temErros) {
+      const idadeCalculada = calcularIdade(dataNascimento);
+      localStorage.setItem("idade", idadeCalculada);
       localStorage.setItem("user_email", email);
       localStorage.setItem("user_senha", senha);
       localStorage.setItem("user_dataNascimento", dataNascimento);
@@ -537,9 +546,10 @@ export function ConecteSeContent() {
                     onChange={(e) => {
                       const valor = e.target.value;
                       setDataNascimento(valor);
-
+                      if (valor.length > 0 && valor.length < 10) {
+                        return;
+                      }
                       const error = validarIdade(valor);
-
                       setErros((prev) => {
                         const erros = { ...prev };
                         if (!error) {
@@ -571,6 +581,8 @@ export function ConecteSeContent() {
                   <Input
                     id="apelido"
                     type="text"
+                    maxLength={20}
+                    aria-describedby="apelido-contador"
                     placeholder="Como você quer aparecer?"
                     value={apelido}
                     onChange={(e) => {
@@ -591,6 +603,13 @@ export function ConecteSeContent() {
                     }}
                     className={estiloDoCampo(erros.apelido)}
                   />
+
+                  <p
+                    id="apelido-contador"
+                    className="text-sm text-muted-foreground"
+                  >
+                    {apelido.length}/20 caracteres
+                  </p>
 
                   {erros.apelido && (
                     <p className={`${smfontClass} font-medium text-red-600`}>
@@ -674,12 +693,20 @@ export function ConecteSeContent() {
                       </Label>
                       <Textarea id="motivoJogo"
                         value={motivoJogo}
+                        maxLength={500}
+                        aria-describedby="motivoJogo-contador"
                         placeholder="Conte o motivo de ter escolhido seu jogo preferido"
                         className={estiloDoCampo()}
                         onChange={(e) => {
                           const valor = e.target.value;
                           setMotivoJogo(valor)
                         }} />
+                      <p
+                        id="motivoJogo-contador"
+                        className="text-sm text-muted-foreground"
+                      >
+                        {motivoJogo.length}/500 caracteres
+                      </p>
                     </>
                   }
 
@@ -752,6 +779,8 @@ export function ConecteSeContent() {
                       <Input
                         id="nome"
                         type="text"
+                        maxLength={200}
+                        aria-describedby="nome-contador"
                         placeholder="Qual o seu nome?"
                         value={nome}
                         onChange={(e) => {
@@ -759,6 +788,13 @@ export function ConecteSeContent() {
                           setNome(valor);
                         }}
                         className={estiloDoCampo()} />
+
+                      <p
+                        id="nome-contador"
+                        className="text-sm text-muted-foreground"
+                      >
+                        {nome.length}/200 caracteres
+                      </p>
                     </div>
 
                     <div className="space-y-2">
@@ -772,6 +808,8 @@ export function ConecteSeContent() {
                       <Input
                         id="cidade"
                         type="text"
+                        maxLength={169}
+                        aria-describedby="cidade-contador"
                         placeholder="Qual o nome da sua cidade?"
                         value={cidade}
                         onChange={(e) => {
@@ -779,6 +817,13 @@ export function ConecteSeContent() {
                           setCidade(valor);
                         }}
                         className={estiloDoCampo()} />
+
+                      <p
+                        id="cidade-contador"
+                        className="text-sm text-muted-foreground"
+                      >
+                        {cidade.length}/169 caracteres
+                      </p>
                     </div>
                   </div>
                   <div className="space-y-4">
@@ -793,9 +838,9 @@ export function ConecteSeContent() {
                         className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
                       >
                         <Checkbox
-                          checked={plataformas.pc}
+                          checked={plataformas.PC}
                           onCheckedChange={(val) =>
-                            handlePlataformasChange("pc", val)
+                            handlePlataformasChange("PC", val)
                           }
                         />
                         PC
@@ -805,9 +850,9 @@ export function ConecteSeContent() {
                         className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
                       >
                         <Checkbox
-                          checked={plataformas.console}
+                          checked={plataformas.Console}
                           onCheckedChange={(val) =>
-                            handlePlataformasChange("console", val)
+                            handlePlataformasChange("Console", val)
                           }
                         />
                         Console
@@ -817,9 +862,9 @@ export function ConecteSeContent() {
                         className={`flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 ${XlfontClass} font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100 `}
                       >
                         <Checkbox
-                          checked={plataformas.mobile}
+                          checked={plataformas.Mobile}
                           onCheckedChange={(val) =>
-                            handlePlataformasChange("mobile", val)
+                            handlePlataformasChange("Mobile", val)
                           }
                         />
                         Mobile
@@ -876,20 +921,32 @@ export function ConecteSeContent() {
                   >
                     Bio do Perfil
                   </Label>
-                  <Textarea id="bio" value={bio} placeholder="Insira a bio do seu perfil" className={estiloDoCampo()} onChange={(e) => {
+                  <Textarea id="bio" value={bio} maxLength={150} aria-describedby="bio-contador" placeholder="Insira a bio do seu perfil" className={estiloDoCampo()} onChange={(e) => {
                     const valor = e.target.value;
                     setBio(valor)
                   }} />
+                  <p
+                    id="bio-contador"
+                    className="text-sm text-muted-foreground"
+                  >
+                    {bio.length}/150 caracteres
+                  </p>
 
                   <Label
                     className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}
                   >
                     Sobre você
                   </Label>
-                  <Textarea id="sobre" value={sobre} placeholder="Fale um pouco sobre você" className={estiloDoCampo()} onChange={(e) => {
+                  <Textarea id="sobre" value={sobre} maxLength={500} aria-describedby="sobre-contador" placeholder="Fale um pouco sobre você" className={estiloDoCampo()} onChange={(e) => {
                     const valor = e.target.value;
                     setSobre(valor)
                   }} />
+                  <p
+                    id="sobre-contador"
+                    className="text-sm text-muted-foreground"
+                  >
+                    {sobre.length}/500 caracteres
+                  </p>
                   <div className="space-y-2">
                     <Label
                       className={`text-fuchsia-blue-950 dark:text-fuchsia-blue-100 ${XlfontClass}`}

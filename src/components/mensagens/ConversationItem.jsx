@@ -18,10 +18,9 @@ export function ConversationItem({ conversa, selecionada, onClick }) {
         py-3
         text-left
 				transition-colors duration-75
-        ${
-          selecionada
-            ? "border-l-fuchsia-blue-500 bg-fuchsia-blue-600/15"
-            : "border-l-transparent hover:bg-muted/50"
+        ${selecionada
+          ? "border-l-fuchsia-blue-500 bg-fuchsia-blue-600/15"
+          : "border-l-transparent hover:bg-muted/50"
         }
       `}
     >
