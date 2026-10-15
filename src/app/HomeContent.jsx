@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useFontSize } from "@/components/ui/layout/font-size";
 
 export function HomeContent() {
-      const { XlfontClass, Xl4fontClass, smfontClass, XsfontClass, lgfontClass } = useFontSize();
+  const { XlfontClass, Xl4fontClass, smfontClass, XsfontClass, lgfontClass } = useFontSize();
 
   return (
     <main className="min-h-screen bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white px-4 py-14 text-foreground dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
@@ -66,7 +66,7 @@ export function HomeContent() {
 
                   <Link
                     href="/sobre"
-                    className={`rounded-full border border-white/30 bg-white/10 px-6 py-3 text-center ${smfontClass} font-bold text-white transition-colors hover:bg-white/20`} 
+                    className={`rounded-full border border-white/30 bg-white/10 px-6 py-3 text-center ${smfontClass} font-bold text-white transition-colors hover:bg-white/20`}
                   >
                     Conhecer o projeto
                   </Link>

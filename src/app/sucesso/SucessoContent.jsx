@@ -13,8 +13,8 @@ import { useAuth } from "@/components/hook/useAuth";
 export function SucessoContent() {
   const autorizado = useAuth()
   const { Xl4fontClass, smfontClass, lgfontClass } =
-  useFontSize();
-  
+    useFontSize();
+
   const [avaliacao, setAvaliacao] = useState(0);
   if (!autorizado) return null;
 

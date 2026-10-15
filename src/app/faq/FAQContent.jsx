@@ -59,34 +59,12 @@ export function FAQContent() {
 
                             <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
-                                 Huddle é a nossa forma de chamar as conexões, não queremos que as pessoas só sintam que "acharam" um outro perfil,
-                                 queremos que as pessoas sintam que fazem parte de um <strong className="text-fuchsia-blue-600">abraço coletivo</strong>, como o nosso nome sugere. 
+                                    Huddle é a nossa forma de chamar as conexões, não queremos que as pessoas só sintam que "acharam" um outro perfil,
+                                    queremos que as pessoas sintam que fazem parte de um <strong className="text-fuchsia-blue-600">abraço coletivo</strong>, como o nosso nome sugere.
                                 </p>
 
                                 <p className="mt-2">
                                     Aqui no Huddle você não está procurando só um perfil compatível como se estivesse vendo um currículo, queremos conexões reais, duradouras e significativas.
-                                </p>
-                            </AccordionContent>
-                        </AccordionItem>
-
-                        <AccordionItem
-                            value="item-1"
-                            className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
-                        >
-                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
-                                Esqueci minha senha, como prosseguir?
-                            </AccordionTrigger>
-
-                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
-                                <p>
-                                    É super fácil! Na tela de login, toque em “Esqueci minha
-                                    senha” e informe o e-mail cadastrado. Você receberá um link
-                                    para criar uma nova senha em poucos minutos.
-                                </p>
-
-                                <p className="mt-2">
-                                    Caso não encontre o e-mail, não esqueça de dar uma olhadinha
-                                    no spam.
                                 </p>
                             </AccordionContent>
                         </AccordionItem>
@@ -100,7 +78,7 @@ export function FAQContent() {
                             </AccordionTrigger>
 
                             <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
-                                <p>Sentimos muito por essa experiência.</p>
+                                <p>Sentimos muito por essa experiência. No futuro iremos adicionar essa funcionalidade, e os passos serão os seguintes:</p>
 
                                 <p className="mt-2">
                                     Para denunciar, acesse o perfil da pessoa ou a conversa, toque
@@ -108,7 +86,7 @@ export function FAQContent() {
                                 </p>
 
                                 <p className="mt-2">
-                                    Nossa equipe analisa todos os relatos com atenção e sigilo
+                                    Nossa equipe analisará todos os relatos com atenção e sigilo
                                     para manter o Huddle seguro para todo mundo.
                                 </p>
                             </AccordionContent>
@@ -156,11 +134,10 @@ export function FAQContent() {
                             <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>É bem simples, vá até Perfil e depois Editar Perfil.</p>
 
-                                <p className="mt-2">Exemplo: alterando sua foto:</p>
+                                <p className="mt-2">Exemplo: alterando seu Nome:</p>
 
                                 <p className="mt-2">
-                                    Toque na sua foto e escolha uma nova imagem da galeria ou da
-                                    câmera. Depois é só salvar.
+                                    Escreva no campo Nome, o valor que quer adicionar.
                                 </p>
                             </AccordionContent>
                         </AccordionItem>
@@ -196,7 +173,7 @@ export function FAQContent() {
                             </AccordionTrigger>
 
                             <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
-                                <p>Para bloquear um usuário:</p>
+                                <p>Ainda não possuímos um sistema de bloqueio, mas quando adicionado será:</p>
 
                                 <ol className="list-decimal pl-5">
                                     <li>Abra o perfil da pessoa</li>
@@ -221,15 +198,13 @@ export function FAQContent() {
 
                             <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
-                                    Para turbinar sua experiência no Huddle, você só precisa
-                                    acessar o seu perfil e selecionar a opção para se tornar
-                                    membro VIP.
+                                    Ainda não possuímos um sistema de assinatura, porém está em nossos planos e estudos.
                                 </p>
 
                                 <p className="mt-2">
-                                    Sendo VIP, você ganha benefícios exclusivos como mais
+                                    Sendo VIP, você ganhará benefícios exclusivos como mais
                                     visibilidade, recursos extras para personalização e prioridade
-                                    em novidades.
+                                    em novidades, fique ligado nas atualizações!
                                 </p>
                             </AccordionContent>
                         </AccordionItem>
@@ -249,8 +224,7 @@ export function FAQContent() {
                                 </p>
 
                                 <p className="mt-2">
-                                    Envie sua sugestão pelo menu Configurações, depois Enviar
-                                    feedback, ou pelo nosso canal de suporte.
+                                    Atualmente não possuimos um sistema de sugestões, porém será adicionada no futuro na sua tela de perfil.
                                 </p>
 
                                 <p className="mt-2">
@@ -265,18 +239,18 @@ export function FAQContent() {
                             className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
                         >
                             <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
-                                Como funciona o sistema de match do Huddle?
+                                Como funciona o sistema de conexão do Huddle?
                             </AccordionTrigger>
 
                             <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
                                 <p>
-                                    O sistema de match do Huddle usa seus interesses, preferências
+                                    O sistema de Huddle do nosso app usa seus interesses, preferências
                                     e horário de preferência para jogar, sugerindo pessoas com
                                     maior chance de conexão real e mais adaptadas ao seu perfil.
                                 </p>
 
                                 <p className="mt-2">
-                                    Quanto mais completo seu perfil, melhores serão os matches.
+                                    Quanto mais completo seu perfil, melhores serão os Huddles, mas não se limite a isso, se encontrar alguém legal, mesmo com uma sinergia baixa, vale a tentativa!
                                 </p>
                             </AccordionContent>
                         </AccordionItem>
@@ -303,31 +277,6 @@ export function FAQContent() {
                                 <p className="mt-2">
                                     Mas claro, se for um pedido da nossa comunidade,
                                     implementaremos no futuro.
-                                </p>
-                            </AccordionContent>
-                        </AccordionItem>
-
-                        <AccordionItem
-                            value="item-11"
-                            className="rounded-2xl border border-fuchsia-blue-200 bg-white/90 px-5 shadow-sm transition-colors hover:border-fuchsia-blue-300 hover:bg-fuchsia-blue-50/70 dark:border-fuchsia-blue-900 dark:bg-card/90 dark:hover:bg-fuchsia-blue-950/40"
-                        >
-                            <AccordionTrigger className={`py-5 text-left ${lgfontClass} font-medium text-fuchsia-blue-950 transition-colors hover:text-fuchsia-blue-700 dark:text-fuchsia-blue-100 dark:hover:text-fuchsia-blue-300`}>
-                                Quero excluir minha conta, como prosseguir?
-                            </AccordionTrigger>
-
-                            <AccordionContent className={`pb-5 pr-6 ${lgfontClass} leading-relaxed text-fuchsia-blue-950 dark:text-fuchsia-blue-100`}>
-                                <p>
-                                    Que pena que você queira excluir sua conta. Pedimos que
-                                    preencha o formulário final indicando melhorias para a gente.
-                                </p>
-
-                                <p className="mt-2">
-                                    Acesse Configurações, depois Conta, depois Excluir conta e
-                                    siga as instruções.
-                                </p>
-
-                                <p className="mt-2 font-semibold text-fuchsia-blue-950 dark:text-fuchsia-blue-100">
-                                    Importante: essa ação é permanente e não pode ser desfeita.
                                 </p>
                             </AccordionContent>
                         </AccordionItem>

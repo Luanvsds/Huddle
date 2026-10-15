@@ -1,6 +1,6 @@
 "use client";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useFontSize } from "@/components/ui/layout/font-size";
 import { JetBrains_Mono } from "next/font/google";
@@ -23,75 +23,66 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/components/hook/useAuth";
 
-// Fonte usada somente no número da afinidade, igual à proposta do Figma.
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
 });
 
-const perfis = [
+// ===== CONFIGURAÇÃO DA GERAÇÃO DE PERFIS =====
+const TEMA_GERACAO_PERFIS = "jogadores de games em geral";
+
+// Tempo máximo de espera pela IA antes de usar os perfis padrão (1 minuto).
+const TIMEOUT_GERACAO_PERFIS_MS = 60000;
+
+// ===== PERFIS PADRÃO (FALLBACK) =====
+// Usados somente quando não for possível gerar os perfis com a IA.
+// Mesma estrutura retornada por /api/gerar-perfis (banner = `/${jogo}.jpg`).
+const PERFIS_PADRAO = [
   {
-    nome: "LunaFPS",
-    jogo: "The Legend of Zelda",
+    nome: "SombraTática",
+    jogo: "Valorant",
     microfone: "Disponível",
-    gameplay: "Tryhard",
+    gameplay: "Competitivo",
     horario: "Noite",
     plataforma: "PC",
     idioma: "PT",
     huddleReciproco: true,
-    mensagemInicial: "Oi! Tudo bem? Vi que nossos horários combinam. Bora jogar qualquer hora?",
-    banner:
-      "/The Legend of Zelda.jpg",
+    mensagemInicial:
+      "Busco alguém focado e pontual para jogar ranqueada hoje à noite. Se curtiu meu perfil, bora combinar um horário?",
+    banner: "/Valorant.jpg",
   },
   {
-    nome: "MiraGG",
-    jogo: "Valorant",
-    microfone: "Não disponível",
-    gameplay: "Casual",
-    horario: "Tarde",
-    idioma: "ES",
-    plataforma: "Console",
-    huddleReciproco: true,
-    mensagemInicial: "Opa! Tranquilo? Quer jogar alguma coisa qualquer hora?",
-    banner:
-      "/Valorant.jpg",
-  },
-  {
-    nome: "Nexusbr",
-    jogo: "God of War",
-    microfone: "Disponível",
-    gameplay: "Competitivo",
-    horario: "Manhã",
-    idioma: "PT",
-    plataforma: "PC",
-    huddleReciproco: true,
-    mensagemInicial: "Fala! Vi que você também curte jogar mais competitivo. Bora marcar uma?",
-    banner:
-      "/God of War.jpg",
-  },
-  {
-    nome: "PixelRush",
+    nome: "PixelPipoca",
     jogo: "League of Legends",
     microfone: "Disponível",
     gameplay: "Casual",
-    idioma: "PT",
     horario: "Fins de semana",
     plataforma: "PC",
+    idioma: "PT",
+    huddleReciproco: false,
+    mensagemInicial:
+      "Prometo perder com estilo e rir de cada derrota. Bora jogar uma partida e ver quem erra mais feio?",
+    banner: "/League of Legends.jpg",
+  },
+  {
+    nome: "LunaQuest",
+    jogo: "The Legend of Zelda",
+    microfone: "Indisponível",
+    gameplay: "Gamer",
+    horario: "Tarde",
+    plataforma: "Console",
+    idioma: "PT",
     huddleReciproco: true,
-    mensagemInicial: "Hi, I really liked your profile, lets play?",
-    banner:
-      "/League of Legends.jpg",
+    mensagemInicial:
+      "Aqui o respeito vem primeiro e todo estilo de jogo é bem-vindo. Quer explorar um mundo novo comigo, no seu ritmo?",
+    banner: "/The Legend of Zelda.jpg",
   },
 ];
 
 
-// ===== CONFIGURAÇÃO DO CÁLCULO DE AFINIDADE =====
-// Sinergia base de 15%, e os outros 85% divididos igualmente
-// entre as 6 características comparadas (10 + 6 × 15 = 100).
 const SINERGIA_BASE = 10;
 const PESO_POR_CARACTERISTICA = 15;
 
-// Perfis mockados usam rótulos em texto (ex: "Noite", "PC");
 const CHAVE_HORARIO_LOCALSTORAGE = {
   "Manhã": "manha",
   "Tarde": "tarde",
@@ -100,9 +91,9 @@ const CHAVE_HORARIO_LOCALSTORAGE = {
 };
 
 const CHAVE_PLATAFORMA_LOCALSTORAGE = {
-  PC: "pc",
-  Console: "console",
-  Mobile: "mobile",
+  PC: "PC",
+  Console: "Console",
+  Mobile: "Mobile",
 };
 
 const CHAVE_IDIOMA_LOCALSTORAGE = {
@@ -112,7 +103,7 @@ const CHAVE_IDIOMA_LOCALSTORAGE = {
 };
 
 const HORARIOS_PADRAO = { manha: false, tarde: false, noite: false, fimDeSemana: false };
-const PLATAFORMAS_PADRAO = { pc: false, console: false, mobile: false };
+const PLATAFORMAS_PADRAO = { PC: false, Console: false, Mobile: false };
 const IDIOMAS_PADRAO = { PT: false, EN: false, ES: false };
 
 const CHAVES_LOCALSTORAGE_USUARIO = {
@@ -135,7 +126,6 @@ function normalizarTexto(valor) {
 }
 
 function usuarioTemMicrofone(valorBruto) {
-
   return normalizarTexto(valorBruto) === "disponivel";
 }
 
@@ -192,7 +182,6 @@ function calcularAfinidade(perfilUsuario, perfil) {
   }
 
   if (usuarioTemMicrofone(perfilUsuario.microfone) === usuarioTemMicrofone(perfil.microfone)) {
-    console.log(perfil.nome)
     pontos += PESO_POR_CARACTERISTICA;
   }
 
@@ -200,7 +189,7 @@ function calcularAfinidade(perfilUsuario, perfil) {
 }
 
 export function HuddleContent() {
-  const autorizado = useAuth()
+  const autorizado = useAuth();
   const [perfilUsuario, setPerfilUsuario] = useState(null);
   const {
     level,
@@ -213,8 +202,55 @@ export function HuddleContent() {
 
   const router = useRouter();
 
+  // ===== PERFIS GERADOS PELA IA =====
+  const [perfis, setPerfis] = useState([]);
+  const [carregandoPerfis, setCarregandoPerfis] = useState(true);
+
   useEffect(() => {
     setPerfilUsuario(carregarPerfilUsuarioLogado());
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    // Se a IA demorar demais, cancela a requisição e usa os perfis padrão.
+    let tempoEsgotado = false;
+    const timeoutId = setTimeout(() => {
+      tempoEsgotado = true;
+      controller.abort();
+    }, TIMEOUT_GERACAO_PERFIS_MS);
+
+    async function buscarPerfis() {
+      try {
+        const res = await fetch("/api/gerar-perfis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tema: TEMA_GERACAO_PERFIS }),
+          signal: controller.signal,
+        });
+
+        if (!res.ok) throw new Error("Falha ao gerar perfis");
+
+        const data = await res.json();
+        const perfisGerados = data.perfis ?? [];
+        setPerfis(perfisGerados.length > 0 ? perfisGerados : PERFIS_PADRAO);
+      } catch (err) {
+        if (err.name === "AbortError" && !tempoEsgotado) {
+          return;
+        }
+        console.warn("Erro ao buscar perfis:", err);
+        setPerfis(PERFIS_PADRAO);
+      } finally {
+        clearTimeout(timeoutId);
+        if (!controller.signal.aborted || tempoEsgotado) {
+          setCarregandoPerfis(false);
+        }
+      }
+    }
+
+    buscarPerfis();
+
+    return () => controller.abort();
   }, []);
 
   const [perfilAtual, setPerfilAtual] = useState(0);
@@ -272,7 +308,20 @@ export function HuddleContent() {
     () => calcularAfinidade(perfilUsuario, perfilSelecionado),
     [perfilUsuario, perfilSelecionado],
   );
+
   if (!autorizado) return null;
+
+  // ===== CARREGANDO PERFIS DA IA =====
+  if (carregandoPerfis) {
+    return (
+      <main className="grid min-h-screen place-items-center bg-linear-to-b from-fuchsia-blue-600 via-fuchsia-blue-50 to-white dark:from-fuchsia-blue-600 dark:via-fuchsia-blue-950 dark:to-background">
+        <p className={`${smfontClass} text-fuchsia-blue-950/70 dark:text-white/70`}>
+          Buscando novos jogadores...
+        </p>
+      </main>
+    );
+  }
+
   // ===== CÍRCULO DE AFINIDADE =====
   const tamanhoCirculo = [92, 108, 124][level] ?? 108;
   const numeroAfinidade = [20, 24, 28][level] ?? 24;
@@ -373,22 +422,38 @@ export function HuddleContent() {
     setPerfilAtual((indiceAtual) => indiceAtual + 1);
   }
 
-  // ===== REGISTRA UM HUDDLE PARA A PÁGINA DE MENSAGENS =====
   function salvarHuddleParaMensagens(perfil) {
     if (typeof window === "undefined") return;
 
-    localStorage.setItem(`huddle_horario_${perfil.nome}`, new Date().toLocaleTimeString("pt-BR", {
+    const horarioAtual = new Date().toLocaleTimeString("pt-BR", {
       hour: "2-digit",
       minute: "2-digit",
-    }));
+    });
 
-    const nomesSalvos = JSON.parse(
-      localStorage.getItem("huddle_nomes") ?? "[]"
+    const conexoesSalvas = JSON.parse(
+      localStorage.getItem("huddle_conexoes") ?? "[]"
     );
 
+    const jaExiste = conexoesSalvas.some((huddle) => huddle.nome === perfil.nome);
+    if (jaExiste) return;
+
+    const novoHuddle = {
+      nome: perfil.nome,
+      horario: horarioAtual,
+      ultimaMensagem: perfil.mensagemInicial,
+      mensagens: [
+        {
+          id: 1,
+          autor: "outro",
+          texto: perfil.mensagemInicial,
+          horario: horarioAtual,
+        },
+      ],
+    };
+
     localStorage.setItem(
-      "huddle_nomes",
-      JSON.stringify([...nomesSalvos, perfil.nome])
+      "huddle_conexoes",
+      JSON.stringify([...conexoesSalvas, novoHuddle])
     );
   }
 
@@ -488,7 +553,7 @@ export function HuddleContent() {
         <div className="flex cursor-grab touch-pan-y justify-center">
           {/* ===== COLUNA ESQUERDA / CARD DO JOGADOR (agora centralizado) ==== */}
           <div className="w-full min-w-0 max-w-190">
-            {/* ===== PILHA DE CARDS / DECK DO MATCH ===== */}
+            {/* ===== PILHA DE CARDS / DECK DO HUDDLE ===== */}
             <div className="relative min-h-200">
               {/* ===== RASTRO PARA PULAR ===== */}
               <motion.div
@@ -522,8 +587,7 @@ export function HuddleContent() {
                     y: yProximoCard,
                     opacity: opacidadeProximoCard,
                   }}
-                  className="pointer-events-none absolute inset-0 z-10 min-h-200 overflow-hidden rounded-3xl border border-fuchsia-blue-300/50 bg-fuchsia-blue-50/90 text-fuchsia-blue-950 shadow-[0_18px_50px_-28px_rgba(15,12,26,0.55)] dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"
-                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-10 min-h-200 overflow-hidden rounded-3xl border border-fuchsia-blue-300/50 bg-fuchsia-blue-50 text-fuchsia-blue-950 shadow-[0_18px_50px_-28px_rgba(15,12,26,0.55)] dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground" aria-hidden="true"
                 >
                   {/* Banner do próximo jogador */}
                   <div className="relative h-75 overflow-hidden bg-muted">
@@ -655,8 +719,7 @@ export function HuddleContent() {
                   whileDrag={{
                     cursor: "grabbing",
                   }}
-                  className="relative z-20 min-h-200 cursor-grab touch-pan-y overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/90 text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"
-                >
+className="relative z-20 min-h-200 cursor-grab touch-pan-y overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50 text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"                >
                   {/* ===== Indicador: PULAR ===== */}
                   <motion.div
                     style={{
@@ -1020,7 +1083,7 @@ export function HuddleContent() {
                           className={`pointer-events-none absolute inset-0 ${tierInfo.brilho}`}
                           aria-hidden="true"
                         />
-                        <span className={`${smfontClass} bg-linear-to-r ${tierInfo.tituloCor} bg-clip-text font-black uppercase tracking-[0.15em] text-transparent`}> SINERGIA </span> 
+                        <span className={`${smfontClass} bg-linear-to-r ${tierInfo.tituloCor} bg-clip-text font-black uppercase tracking-[0.15em] text-transparent`}> SINERGIA </span>
                         <Hexagon
                           className={`relative z-10 size-7 ${tierInfo.hexagono} ${tierInfo.fill}`}
                           aria-hidden="true"

@@ -3,14 +3,12 @@ import { ArrowDownCircle, CircleQuestionMark, CircleUserRound, LogOut, MessageCi
 
 import Link from "next/link";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Button } from "@/components/ui/button";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -81,19 +79,19 @@ export function AvatarDropdown({ apelido, onLogout, sizeClass = "size-9" }) {
           <>
             {/* ===== Usuário logado ===== */}
             <Link href={"/perfil"}>
-            <div className="mb-2 flex items-center gap-3 rounded-xl bg-fuchsia-blue-100/80 p-3 dark:bg-fuchsia-blue-600/10">
-              <div className="flex size-10 items-center justify-center rounded-full bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:bg-fuchsia-blue-600/20 dark:text-fuchsia-blue-300">
-                <CircleUserRound className="size-6" />
-              </div>
+              <div className="mb-2 flex items-center gap-3 rounded-xl bg-fuchsia-blue-100/80 p-3 dark:bg-fuchsia-blue-600/10">
+                <div className="flex size-10 items-center justify-center rounded-full bg-fuchsia-blue-600/15 text-fuchsia-blue-700 dark:bg-fuchsia-blue-600/20 dark:text-fuchsia-blue-300">
+                  <CircleUserRound className="size-6" />
+                </div>
 
-              <div className="min-w-0">
-                <p className="truncate text-sm font-bold">{apelido}</p>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-bold">{apelido}</p>
 
-                <p className="text-xs text-muted-foreground">
-                  Jogador conectado
-                </p>
+                  <p className="text-xs text-muted-foreground">
+                    Jogador conectado
+                  </p>
+                </div>
               </div>
-            </div>
             </Link>
 
             <DropdownMenuSeparator />

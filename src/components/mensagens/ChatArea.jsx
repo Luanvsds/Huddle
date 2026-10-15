@@ -6,9 +6,6 @@ import { MensagemInput } from "./MensagemInput";
 export function ChatArea({ conversa, onEnviarMensagem, onVoltar }) {
   const { smfontClass, lgfontClass, XlfontClass } = useFontSize();
 
-  // Segurança:
-  // se por algum motivo não existir conversa selecionada,
-  // não tentamos renderizar os dados dela.
   if (!conversa) {
     return null;
   }

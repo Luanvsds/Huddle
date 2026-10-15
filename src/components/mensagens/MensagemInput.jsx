@@ -9,20 +9,16 @@ export function MensagemInput({ onEnviarMensagem }) {
   const { lgfontClass } = useFontSize();
 
   // ===== TEXTO DIGITADO =====
-  // Guarda aquilo que está dentro do input.
   const [texto, setTexto] = useState("");
 
   // ===== ENVIAR =====
   function enviar() {
-    // Não envia se estiver vazio.
     if (!texto.trim()) {
       return;
     }
 
-    // Entrega o texto para o componente pai.
     onEnviarMensagem(texto);
 
-    // Depois de enviar, limpa o campo.
     setTexto("");
   }
 

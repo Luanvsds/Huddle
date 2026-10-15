@@ -30,7 +30,7 @@ export default function Footer() {
   } = useFontSize();
 
   const [logado, setLogado] = useState(false);
-  
+
 
   const idealizadores = [
     "Giovanna",

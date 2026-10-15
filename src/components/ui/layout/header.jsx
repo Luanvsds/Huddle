@@ -241,7 +241,6 @@ export default function Header() {
             href="/"
             className="ml-2 flex items-center gap-2 whitespace-nowrap"
           >
-            {console.log(offsetEsquerda)}
             <Image
               src="/header-pinguim.png"
               alt="Logo do Huddle"

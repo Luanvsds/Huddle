@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
+import { LineChart, Line, XAxis, YAxis } from "recharts";
 import {
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 import { useFontSize } from "./ui/layout/font-size";
 
@@ -17,11 +15,7 @@ const chartConfig = {
 };
 export default function CrescimentoHuddle() {
   const {
-    XlfontClass,
     Xl3fontClass,
-    Xl4fontClass,
-    Xl5fontClass,
-    Xl6fontClass,
     smfontClass,
     lgfontClass,
   } = useFontSize();

@@ -26,7 +26,6 @@ import {
 } from "@/components/ui/select";
 import { useFontSize } from "@/components/ui/layout/font-size";
 
-// Mesmas listas usadas no cadastro (ConecteSeContent)
 const games = [
     { id: 1, name: "The Legend of Zelda" },
     { id: 2, name: "Valorant" },
@@ -55,9 +54,9 @@ const HORARIOS_LABELS = [
 ];
 
 const PLATAFORMAS_LABELS = [
-    ["pc", "PC"],
-    ["console", "Console"],
-    ["mobile", "Mobile"],
+    ["PC", "PC"],
+    ["Console", "Console"],
+    ["Mobile", "Mobile"],
 ];
 
 const IDIOMAS_LABELS = [
@@ -75,10 +74,9 @@ const estiloSelectTrigger =
 const estiloCheckboxLabel =
     "flex items-center gap-3 rounded-2xl border border-fuchsia-blue-200 bg-fuchsia-blue-50 p-3 font-medium text-fuchsia-blue-950 dark:border-fuchsia-blue-900 dark:bg-fuchsia-blue-950/40 dark:text-fuchsia-blue-100";
 
-// Lê o estado atual salvo no localStorage e monta o formulário do modal
 function carregarEstadoInicial() {
     let horarios = { manha: false, tarde: false, noite: false, fimDeSemana: false };
-    let plataformas = { pc: false, console: false, mobile: false };
+    let plataformas = { PC: false, Console: false, Mobile: false };
     let idiomas = { PT: false, EN: false, ES: false };
 
     try {
@@ -113,7 +111,6 @@ export function EditarPerfilModal({ onSalvar }) {
 
     function abrirModal(estaAbrindo) {
         if (estaAbrindo) {
-            // sempre recarrega do localStorage pra abrir com os dados mais atuais
             setForm(carregarEstadoInicial());
         }
         setOpen(estaAbrindo);
@@ -133,7 +130,6 @@ export function EditarPerfilModal({ onSalvar }) {
     function handleSalvar() {
         localStorage.setItem("user_estilo", form.gameplay);
         localStorage.setItem("user_jogo", form.jogoSelecionado);
-        // só mantém o motivo se ainda houver um jogo selecionado
         localStorage.setItem("user_motivo_jogo", form.jogoSelecionado ? form.motivoJogo : "");
         localStorage.setItem("user_nome", form.nome);
         localStorage.setItem("user_cidade", form.cidade);
