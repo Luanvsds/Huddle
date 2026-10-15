@@ -43,6 +43,9 @@ export const QUICK_SUGGESTIONS = [
   },
 ]
 
+const CONNECTION_ERROR_MESSAGE =
+  "Problema de conectividade com a IA. Você pode usar as perguntas rápidas abaixo ou entrar em contato pelo e-mail huddle@huddle.com para dúvidas adicionais."
+
 function createId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`
 }
@@ -69,9 +72,11 @@ async function requestBotReply(message, history) {
 
   if (!response.ok) {
     const data = await response.json().catch(() => ({}))
-    throw new Error(
+    const requestError = new Error(
       data.error || "Não consegui responder agora. Tenta de novo em instantes."
     )
+    if (response.status >= 500) requestError.aiUnavailable = true
+    throw requestError
   }
 
   const data = await response.json()
@@ -155,6 +160,13 @@ export function HuddleChatProvider({ children }) {
             retryAfterSeconds: error.retryAfterSeconds,
             message: error.message,
           })
+        } else if (error.aiUnavailable || error.name === "TypeError") {
+          pushMessage({
+            role: "bot",
+            content: CONNECTION_ERROR_MESSAGE,
+            isError: true,
+            connectionError: true,
+          })
         } else {
           pushMessage({
             role: "bot",
@@ -196,7 +208,8 @@ export function HuddleChatProvider({ children }) {
   }, [])
 
   const showSuggestions =
-    messages.length === 1 && messages[0]?.id === "welcome" && !isLoading
+    (messages.length === 1 && messages[0]?.id === "welcome" && !isLoading) ||
+    (messages[messages.length - 1]?.connectionError === true && !isLoading)
 
   const value = useMemo(
     () => ({

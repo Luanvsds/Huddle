@@ -31,6 +31,54 @@ const jetBrainsMono = JetBrains_Mono({
 // ===== CONFIGURAÇÃO DA GERAÇÃO DE PERFIS =====
 const TEMA_GERACAO_PERFIS = "jogadores de games em geral";
 
+// Tempo máximo de espera pela IA antes de usar os perfis padrão (1 minuto).
+const TIMEOUT_GERACAO_PERFIS_MS = 60000;
+
+// ===== PERFIS PADRÃO (FALLBACK) =====
+// Usados somente quando não for possível gerar os perfis com a IA.
+// Mesma estrutura retornada por /api/gerar-perfis (banner = `/${jogo}.jpg`).
+const PERFIS_PADRAO = [
+  {
+    nome: "SombraTática",
+    jogo: "Valorant",
+    microfone: "Disponível",
+    gameplay: "Competitivo",
+    horario: "Noite",
+    plataforma: "PC",
+    idioma: "PT",
+    huddleReciproco: true,
+    mensagemInicial:
+      "Busco alguém focado e pontual para jogar ranqueada hoje à noite. Se curtiu meu perfil, bora combinar um horário?",
+    banner: "/Valorant.jpg",
+  },
+  {
+    nome: "PixelPipoca",
+    jogo: "League of Legends",
+    microfone: "Disponível",
+    gameplay: "Casual",
+    horario: "Fins de semana",
+    plataforma: "PC",
+    idioma: "PT",
+    huddleReciproco: false,
+    mensagemInicial:
+      "Prometo perder com estilo e rir de cada derrota. Bora jogar uma partida e ver quem erra mais feio?",
+    banner: "/League of Legends.jpg",
+  },
+  {
+    nome: "LunaQuest",
+    jogo: "The Legend of Zelda",
+    microfone: "Indisponível",
+    gameplay: "Gamer",
+    horario: "Tarde",
+    plataforma: "Console",
+    idioma: "PT",
+    huddleReciproco: true,
+    mensagemInicial:
+      "Aqui o respeito vem primeiro e todo estilo de jogo é bem-vindo. Quer explorar um mundo novo comigo, no seu ritmo?",
+    banner: "/The Legend of Zelda.jpg",
+  },
+];
+
 
 const SINERGIA_BASE = 10;
 const PESO_POR_CARACTERISTICA = 15;
@@ -165,6 +213,13 @@ export function HuddleContent() {
   useEffect(() => {
     const controller = new AbortController();
 
+    // Se a IA demorar demais, cancela a requisição e usa os perfis padrão.
+    let tempoEsgotado = false;
+    const timeoutId = setTimeout(() => {
+      tempoEsgotado = true;
+      controller.abort();
+    }, TIMEOUT_GERACAO_PERFIS_MS);
+
     async function buscarPerfis() {
       try {
         const res = await fetch("/api/gerar-perfis", {
@@ -177,15 +232,17 @@ export function HuddleContent() {
         if (!res.ok) throw new Error("Falha ao gerar perfis");
 
         const data = await res.json();
-        setPerfis(data.perfis ?? []);
+        const perfisGerados = data.perfis ?? [];
+        setPerfis(perfisGerados.length > 0 ? perfisGerados : PERFIS_PADRAO);
       } catch (err) {
-        if (err.name === "AbortError") {
+        if (err.name === "AbortError" && !tempoEsgotado) {
           return;
         }
-        console.error("Erro ao buscar perfis:", err);
-        setPerfis([]);
+        console.warn("Erro ao buscar perfis:", err);
+        setPerfis(PERFIS_PADRAO);
       } finally {
-        if (!controller.signal.aborted) {
+        clearTimeout(timeoutId);
+        if (!controller.signal.aborted || tempoEsgotado) {
           setCarregandoPerfis(false);
         }
       }
@@ -530,8 +587,7 @@ export function HuddleContent() {
                     y: yProximoCard,
                     opacity: opacidadeProximoCard,
                   }}
-                  className="pointer-events-none absolute inset-0 z-10 min-h-200 overflow-hidden rounded-3xl border border-fuchsia-blue-300/50 bg-fuchsia-blue-50/90 text-fuchsia-blue-950 shadow-[0_18px_50px_-28px_rgba(15,12,26,0.55)] dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"
-                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 z-10 min-h-200 overflow-hidden rounded-3xl border border-fuchsia-blue-300/50 bg-fuchsia-blue-50 text-fuchsia-blue-950 shadow-[0_18px_50px_-28px_rgba(15,12,26,0.55)] dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground" aria-hidden="true"
                 >
                   {/* Banner do próximo jogador */}
                   <div className="relative h-75 overflow-hidden bg-muted">
@@ -663,8 +719,7 @@ export function HuddleContent() {
                   whileDrag={{
                     cursor: "grabbing",
                   }}
-                  className="relative z-20 min-h-200 cursor-grab touch-pan-y overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50/90 text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"
-                >
+className="relative z-20 min-h-200 cursor-grab touch-pan-y overflow-hidden rounded-3xl border border-fuchsia-blue-200/80 bg-fuchsia-blue-50 text-fuchsia-blue-950 shadow-xl dark:border-fuchsia-blue-400/20 dark:bg-card dark:text-card-foreground"                >
                   {/* ===== Indicador: PULAR ===== */}
                   <motion.div
                     style={{
